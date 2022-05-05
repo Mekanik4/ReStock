@@ -25,4 +25,3 @@ public class ExampleInstrumentedTest {
     }
 }
 
-//kalhspera niko ti kaneis
