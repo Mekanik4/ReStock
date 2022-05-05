@@ -24,3 +24,5 @@ public class ExampleInstrumentedTest {
         assertEquals("com.example.restock", appContext.getPackageName());
     }
 }
+
+//kalhspera niko ti kaneis
