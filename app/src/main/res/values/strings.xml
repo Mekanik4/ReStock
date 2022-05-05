@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ReStock</string>
+    <string name="new_order">New Order</string>
 </resources>
