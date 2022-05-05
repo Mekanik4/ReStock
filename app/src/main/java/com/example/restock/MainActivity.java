@@ -11,8 +11,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
 
+        if(getIntent().getExtras() != null){
+            if(getIntent().getExtras().getBoolean("close")){
+                finish();
+            }
+        }
+        else{
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
     }
 }
