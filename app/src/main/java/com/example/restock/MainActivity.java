@@ -12,14 +12,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(getIntent().getExtras() != null){
-            if(getIntent().getExtras().getBoolean("close")){
-                finish();
-            }
-        }
-        else{
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+
+
     }
 }

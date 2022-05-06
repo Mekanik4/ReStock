@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">ReStock</string>
     <string name="category_title">Category Title</string>
-    <string name="new_order">New Order</string>
+    <string name="order_no">Order no. :</string>
     <string name="item_name">Item Name</string>
     <string name="item_s_price">Item\'s Price</string>
     <string name="remove">-</string>
     <string name="_0">0</string>
     <string name="add">+</string>
+    <string name="u20ac">€</string>
+    <string name="euro_0">0 €</string>
+    <string name="total">Total:</string>
+    <string name="_0001">0001</string>
+    <string name="new_order">New Order</string>
 </resources>

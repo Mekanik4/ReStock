@@ -1,5 +1,6 @@
 package com.example.restock.RecycleView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.restock.CreateOrder;
 import com.example.restock.R;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -19,14 +21,16 @@ import javax.security.auth.Subject;
 public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<CategoriesRecyclerAdapter.ViewHolder> {
     //Variables storing data to display for this example
     private String[] categories;
-
+    private int selectedPos = 0;
+    private final Context mContext;
     // Constructor
-    public CategoriesRecyclerAdapter(String[] list){
+    public CategoriesRecyclerAdapter(String[] list, Context context){
         this.categories = list;
+        this.mContext = context;
     }
 
     //Class that holds the items to be displayed (Views in card_layout)
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView categoryName;
 
@@ -37,9 +41,13 @@ public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<CategoriesRe
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     int position = getAdapterPosition();
+                    notifyItemChanged(selectedPos);
+                    selectedPos = getLayoutPosition();
+                    notifyItemChanged(selectedPos);
 
-                    Snackbar.make(v, "Click detected on item " + position,
-                            Snackbar.LENGTH_LONG).show();
+                    if (mContext instanceof CreateOrder) {
+                        ((CreateOrder)mContext).setSelectedCategory(selectedPos);
+                    }
                 }
             });
         }
@@ -57,6 +65,7 @@ public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<CategoriesRe
     @Override
     public void onBindViewHolder(CategoriesRecyclerAdapter.ViewHolder holder, int position) {
         holder.categoryName.setText(categories[position]);
+        holder.itemView.setSelected(selectedPos == position);
     }
 
     @Override
