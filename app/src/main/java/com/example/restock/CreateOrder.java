@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.restock.RecycleView.CategoriesRecyclerAdapter;
 import com.example.restock.RecycleView.ItemsRecyclerAdapter;
+import com.example.restock.objects.Item;
 
 public class CreateOrder extends AppCompatActivity {
 
@@ -20,10 +24,20 @@ public class CreateOrder extends AppCompatActivity {
     RecyclerView.Adapter<CategoriesRecyclerAdapter.ViewHolder> categoriesAdapter;
     RecyclerView itemsRecyclerView;
     LinearLayoutManager itemsLayoutManager;
-    RecyclerView.Adapter<ItemsRecyclerAdapter.ViewHolder> itemsAdapter1;
-    RecyclerView.Adapter<ItemsRecyclerAdapter.ViewHolder> itemsAdapter2;
+    RecyclerView.Adapter<ItemsRecyclerAdapter.ViewHolder> itemsAdapter;
+
+    Button save;
+    Button send;
     TextView total;
+    double totalPrice = 0;
+    int[] quantities1;
+    int[] quantities2;
     private int selectedCategory = 0;
+    String[] items1;
+    String[] prices1;
+    String[] items2;
+    String[] prices2;
+    Item[][] items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,27 +62,95 @@ public class CreateOrder extends AppCompatActivity {
         //Set the layout of the items in the RecyclerView
         itemsLayoutManager = new LinearLayoutManager(this);
         itemsRecyclerView.setLayoutManager(itemsLayoutManager);
+        items1 = new String[]{"kati", "kati allo", "oollllllleeeeedwdddddddddddddddddddddddddddddddddddddddddd", "kdkkakdad", "efsdfsdf", "sdfsgdg", "gardvvar", "seevargr", "segvatb", "nikos"};
+        prices1 = new String[]{"45", "6", "23", "8", "23", "7", "42", "24", "26", "21"};
+        items2 = new String[]{"nikos", "giorgos", "mpougias"};
+        prices2 = new String[]{"24.5", "26.7", "21"};
 
-        String[] items1 = {"kati", "kati allo", "oollllllleeeee", "kdkkakdad", "efsdfsdf", "sdfsgdg", "gardvvar", "seevargr", "segvatb", "nikos"};
-        String[] prices1 = {"45", "6", "23", "8", "23", "7", "42", "24", "26", "21"};
+        quantities1 = new int[items1.length];
 
-        String[] items2 = {"nikos", "giorgos", "mpougias"};
-        String[] prices2 = {"24", "26", "21"};
+        quantities2 = new int[items2.length];
 
-        itemsAdapter1 = new ItemsRecyclerAdapter(items1, prices1, this);
-        itemsAdapter2 = new ItemsRecyclerAdapter(items2, prices2, this);
-        itemsRecyclerView.setAdapter(itemsAdapter1);
+        items = new Item[2][];
+        items[0] = new Item[items1.length];
+        items[1] = new Item[items2.length];
+        for(int i=0; i<items1.length; i++){
+            items[0][i] = new Item();
+            items[0][i].setName(items1[i]);
+            items[0][i].setPrice(Double.parseDouble(prices1[i]));
+            items[0][i].setQuantity(quantities1[i]);
+        }
+        for(int i=0; i<items2.length; i++){
+            items[1][i] = new Item();
+            items[1][i].setName(items2[i]);
+            items[1][i].setPrice(Double.parseDouble(prices2[i]));
+            items[1][i].setQuantity(quantities2[i]);
+        }
+
+        Log.d("array",String.valueOf(items[1].length));
         setSelectedCategory(0);
+
         total = findViewById(R.id.totalPrice);
+        save = findViewById(R.id.save_order);
+        send = findViewById(R.id.send_order);
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
     }
 
-    public void setTotal(int total){
-        this.total.setText(String.valueOf(total));
+    public void setTotal(double total){
+        this.totalPrice = total;
+        this.total.setText(String.valueOf(totalPrice).concat("\u20ac"));
     }
 
     public void setSelectedCategory(int c){
-
+        itemsAdapter = new ItemsRecyclerAdapter(items, c, totalPrice, this);
+        itemsRecyclerView.setAdapter(itemsAdapter);
     }
 
+    public void setQuantity(int q, int category, int position){
+        items[category][position].setQuantity(q);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CreateOrder.this);
+
+        // Set the message show for the Alert time
+        builder.setMessage("If you exit, all progress will be lost\nDo you want to exit ?");
+
+        // Set Alert Title
+        builder.setTitle("Warning!");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                                CreateOrder.super.onBackPressed();
+                            }
+                        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                                // If user click no
+                                // then dialog box is canceled.
+                                dialog.cancel();
+                            }
+                        });
+        // Create the Alert dialog
+        AlertDialog alertDialog = builder.create();
+        // Show the Alert Dialog box
+        alertDialog.show();
+    }
 }

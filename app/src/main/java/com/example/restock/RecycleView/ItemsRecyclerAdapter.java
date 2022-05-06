@@ -2,6 +2,7 @@ package com.example.restock.RecycleView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.restock.CreateOrder;
 import com.example.restock.R;
 import com.google.android.material.snackbar.Snackbar;
+import com.example.restock.objects.Item;
 
 public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdapter.ViewHolder> {
-    //Variables storing data to display for this example
-    private String[] items;
-    private String[] prices;
-    public int total = 0;
+
+    Item[][] items;
+    public double total;
+    public int category;
     private final Context mContext;
+    int listLenght;
 
     // Constructor
-    public ItemsRecyclerAdapter(String[] nameList, String[] priceList, Context context){
-        this.items = nameList;
-        this.prices = priceList;
+    public ItemsRecyclerAdapter(Item[][] items, int category, double total, Context context){
+        this.items = items;
+        this.total = total;
+        this.category = category;
         this.mContext = context;
+        this.listLenght = items[category].length;
     }
 
     //Class that holds the items to be displayed (Views in card_layout)
@@ -46,7 +51,7 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
             remove = itemView.findViewById(R.id.remove);
             add = itemView.findViewById(R.id.add);
             quantity = itemView.findViewById(R.id.quantity);
-
+            Log.d("total", String.valueOf(total));
             add.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -55,9 +60,12 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
                     quant += 1;
                     quantity.setText(String.valueOf(quant));
                     int position = getAdapterPosition();
-                    total += Integer.parseInt(prices[position]);
+                    items[category][position].setQuantity(quant);
+                    total += items[category][position].getPrice();
+
                     if (mContext instanceof CreateOrder) {
                         ((CreateOrder)mContext).setTotal(total);
+                        ((CreateOrder)mContext).setQuantity(items[category][position].getQuantity(),category,position);
                     }
 
                 }
@@ -71,21 +79,20 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
                         quant -= 1;
                         quantity.setText(String.valueOf(quant));
                         int position = getAdapterPosition();
-                        total -= Integer.parseInt(prices[position]);
+                        items[category][position].setQuantity(quant);
+                        total -= items[category][position].getPrice();
                         if (mContext instanceof CreateOrder) {
                             ((CreateOrder)mContext).setTotal(total);
+                            ((CreateOrder)mContext).setQuantity(items[category][position].getQuantity(),category,position);
                         }
                     }
                 }
             });
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    int position = getAdapterPosition();
-
-                    Snackbar.make(v, "Click detected on item " + position,
-                            Snackbar.LENGTH_LONG).show();
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override public void onClick(View v) {
+//                    int position = getAdapterPosition();
+//                }
+//            });
         }
     }
 
@@ -101,16 +108,17 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ItemsRecyclerAdapter.ViewHolder holder, int position) {
-        holder.itemName.setText(items[position]);
-        holder.price.setText(prices[position].concat("\u20ac"));
+        holder.quantity.setText(String.valueOf(items[category][position].getQuantity()));
+        holder.itemName.setText(items[category][position].getName());
+        holder.price.setText((items[category][position].getPrice().toString()).concat("\u20ac"));
     }
 
     @Override
     public int getItemCount() {
-        return items.length;
+        return listLenght;
     }
 
-    public int getTotal(){
+    public double getTotal(){
         return total;
     }
 }

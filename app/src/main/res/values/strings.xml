@@ -12,4 +12,9 @@
     <string name="total">Total:</string>
     <string name="_0001">0001</string>
     <string name="new_order">New Order</string>
+    <string name="product_greek">Προϊόν</string>
+    <string name="price_greek">Τιμή</string>
+    <string name="quantity_greek">Ποσότητα</string>
+    <string name="save_greek">Αποθήκευση</string>
+    <string name="send_greek">Αποστολή</string>
 </resources>
