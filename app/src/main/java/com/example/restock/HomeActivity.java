@@ -22,7 +22,7 @@ public class HomeActivity extends AppCompatActivity {
 
         history = (Button) findViewById(R.id.history_button);
 
-        name = (TextView) findViewById(R.id.editTextTextPersonName4);
+        name = (TextView) findViewById(R.id.history_button);
 
 
         history.setOnClickListener(new View.OnClickListener() {
