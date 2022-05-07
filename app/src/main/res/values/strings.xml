@@ -28,5 +28,9 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="history">History</string>
+    <string name="titleOrderHistory">Ιστορικό Παραγγελιών</string>
+    <string name="orderNo">Αριθμός Παραγγελίας</string>
+    <string name="date">Ημερομηνία</string>
+    <string name="totalValue">Σύνολο</string>
 
 </resources>
