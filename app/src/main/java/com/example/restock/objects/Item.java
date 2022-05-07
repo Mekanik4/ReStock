@@ -11,7 +11,7 @@ public class Item {
         this.quantity = 0;
     }
 
-    public void Item(String name, Double price, int quantity){
+    public Item(String name, Double price, int quantity){
         this.name = name;
         this.price = price;
         this.quantity = quantity;

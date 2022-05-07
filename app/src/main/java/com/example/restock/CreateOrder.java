@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,9 @@ import android.widget.TextView;
 import com.example.restock.RecycleView.CategoriesRecyclerAdapter;
 import com.example.restock.RecycleView.ItemsRecyclerAdapter;
 import com.example.restock.objects.Item;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class CreateOrder extends AppCompatActivity {
 
@@ -71,6 +75,7 @@ public class CreateOrder extends AppCompatActivity {
 
         quantities2 = new int[items2.length];
 
+
         items = new Item[2][];
         items[0] = new Item[items1.length];
         items[1] = new Item[items2.length];
@@ -92,7 +97,7 @@ public class CreateOrder extends AppCompatActivity {
 
         total = findViewById(R.id.totalPrice);
         save = findViewById(R.id.save_order);
-        send = findViewById(R.id.send_order);
+        send = findViewById(R.id.complete_order);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override

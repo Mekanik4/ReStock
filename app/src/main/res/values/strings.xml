@@ -17,4 +17,5 @@
     <string name="quantity_greek">Ποσότητα</string>
     <string name="save_greek">Αποθήκευση</string>
     <string name="send_greek">Αποστολή</string>
+    <string name="complete_greek">Ολοκλήρωση</string>
 </resources>
