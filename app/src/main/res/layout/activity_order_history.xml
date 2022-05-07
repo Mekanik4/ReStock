@@ -11,24 +11,20 @@
         android:layout_height="wrap_content"
         android:theme="@style/Theme.ReStock.AppBarOverlay">
 
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="Ιστορικό Παραγγελιών"
-            android:textColorHighlight=""
-            android:textSize="30dp"
-            android:textStyle="bold" />
+<!--        <TextView-->
+<!--            android:id="@+id/toolbar_title"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Ιστορικό Παραγγελιών"-->
+<!--            android:textColorHighlight=""-->
+<!--            android:textSize="30dp"-->
+<!--            android:textStyle="bold" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin=""/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
