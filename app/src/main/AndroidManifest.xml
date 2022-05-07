@@ -12,6 +12,11 @@
         android:theme="@style/Theme.ReStock"
         tools:ignore="ExtraText">
         <activity
+            android:name=".OrderHistory"
+            android:exported="false"
+            android:label="@string/title_activity_order_history"
+            android:theme="@style/Theme.ReStock.NoActionBar" />
+        <activity
             android:name=".CreateOrder"
             android:exported="false" />
         <activity
