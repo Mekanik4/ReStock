@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -75,11 +76,20 @@ public class CreateOrder extends AppCompatActivity {
 
         quantities2 = new int[items2.length];
 
+        DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 3);
+        Item found = dbHandler.findProduct("Tsakiris Chips salted");
+        if(found != null)
+            Log.d("db","OKeiiiiiiii");
+        else
+            Log.d("db","NOtOK");
 
-        items = new Item[2][];
+
+        items = new Item[3][];
+        items[2] = new Item[dbHandler.getProducts("snacks").length];
+        items[2] = dbHandler.getProducts("snacks");
         items[0] = new Item[items1.length];
         items[1] = new Item[items2.length];
-        for(int i=0; i<items1.length; i++){
+        for(int i=0; i<items1.length; i++) {
             items[0][i] = new Item();
             items[0][i].setName(items1[i]);
             items[0][i].setPrice(Double.parseDouble(prices1[i]));
@@ -115,9 +125,10 @@ public class CreateOrder extends AppCompatActivity {
 
     }
 
+    @SuppressLint("DefaultLocale")
     public void setTotal(double total){
         this.totalPrice = total;
-        this.total.setText(String.valueOf(totalPrice).concat("\u20ac"));
+        this.total.setText(String.format("%.2f", totalPrice).concat("\u20ac"));
     }
 
     public void setSelectedCategory(int c){

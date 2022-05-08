@@ -1,12 +1,17 @@
 package com.example.restock.RecycleView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +28,7 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
     public double total;
     public int category;
     private final Context mContext;
-    int listLenght;
+
 
     // Constructor
     public ItemsRecyclerAdapter(Item[][] items, int category, double total, Context context){
@@ -31,7 +36,6 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
         this.total = total;
         this.category = category;
         this.mContext = context;
-        this.listLenght = items[category].length;
     }
 
     //Class that holds the items to be displayed (Views in card_layout)
@@ -41,7 +45,8 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
         TextView price;
         Button remove;
         Button add;
-        TextView quantity;
+        EditText quantity;
+        Boolean editTextLock = true;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -52,28 +57,84 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
             add = itemView.findViewById(R.id.add);
             quantity = itemView.findViewById(R.id.quantity);
             Log.d("total", String.valueOf(total));
+            quantity.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    int position = getAdapterPosition();
+                    if(editTextLock){
+                        try{
+                            if(s.length() != 0){
+                                items[category][position].setQuantity(Integer.parseInt(s.toString()));
+                                updateTotal();
+                                if (mContext instanceof CreateOrder) {
+                                    ((CreateOrder)mContext).setTotal(total);
+                                    ((CreateOrder)mContext).setQuantity(items[category][position].getQuantity(),category,position);
+                                }
+                            }
+                        }catch (Exception e){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+                            // Set the message show for the Alert time
+                            builder.setMessage("The number you entered is too big!\nPlease enter a smaller number.");
+
+                            // Set Alert Title
+                            builder.setTitle("Warning!");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which){
+                                    items[category][position].setQuantity(0);
+                                    quantity.setText(String.valueOf(0));
+                                    updateTotal();
+                                    if (mContext instanceof CreateOrder) {
+                                        ((CreateOrder)mContext).setTotal(total);
+                                        ((CreateOrder)mContext).setQuantity(items[category][position].getQuantity(),category,position);
+                                    }
+                                }
+                            });
+                            // Create the Alert dialog
+                            AlertDialog alertDialog = builder.create();
+                            // Show the Alert Dialog box
+                            alertDialog.show();
+                        }
+
+                    }
+                    Log.d("text",s.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
             add.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View view) {
+                    editTextLock = false;
                     int quant = Integer.parseInt(quantity.getText().toString());
                     quant += 1;
                     quantity.setText(String.valueOf(quant));
                     int position = getAdapterPosition();
                     items[category][position].setQuantity(quant);
                     total += items[category][position].getPrice();
-
                     if (mContext instanceof CreateOrder) {
                         ((CreateOrder)mContext).setTotal(total);
                         ((CreateOrder)mContext).setQuantity(items[category][position].getQuantity(),category,position);
                     }
-
+                    editTextLock = true;
                 }
             });
 
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    editTextLock = false;
                     int quant = Integer.parseInt(quantity.getText().toString());
                     if (quant != 0){
                         quant -= 1;
@@ -86,6 +147,7 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
                             ((CreateOrder)mContext).setQuantity(items[category][position].getQuantity(),category,position);
                         }
                     }
+                    editTextLock = true;
                 }
             });
 //            itemView.setOnClickListener(new View.OnClickListener() {
@@ -115,11 +177,24 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
 
     @Override
     public int getItemCount() {
-        return listLenght;
+        return items[category].length;
     }
 
     public double getTotal(){
         return total;
+    }
+
+    public void updateTotal(){
+        double tempTotal = 0;
+        Log.d("items",String.valueOf(items.length));
+        for(int i=0; i<items.length; i++){
+            Log.d("items",String.valueOf(i));
+            Log.d("items",String.valueOf(items[i].length));
+            for(int j=0; j<items[i].length; j++){
+                tempTotal += items[i][j].getQuantity() * items[i][j].getPrice();
+            }
+        }
+        total = tempTotal;
     }
 }
 
