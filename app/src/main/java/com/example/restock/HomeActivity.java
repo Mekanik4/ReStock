@@ -28,7 +28,8 @@ public class HomeActivity extends AppCompatActivity {
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(view.getContext(), OrderHistory.class);
+                startActivity(intent);
             }
         });
 
