@@ -16,9 +16,12 @@
     <string name="price_greek">Τιμή</string>
     <string name="quantity_greek">Ποσότητα</string>
     <string name="save_greek">Αποθήκευση</string>
+    <string name="edit_greek">Επεξεργασία</string>
     <string name="send_greek">Αποστολή</string>
     <string name="complete_greek">Ολοκλήρωση</string>
     <string name="title_activity_order_history">OrderHistory</string>
+    <string name="view_profile">View Profile</string>
+    <string name="owner_name">Μάκης Τσαλατάνος</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

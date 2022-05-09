@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class HomeActivity extends AppCompatActivity {
     private Button newOrder;
     private Button history;
+    private Button viewProfile;
     TextView name;
 
     @Override
@@ -23,6 +24,8 @@ public class HomeActivity extends AppCompatActivity {
         history = (Button) findViewById(R.id.history_button);
 
         name = (TextView) findViewById(R.id.history_button);
+
+        viewProfile = (Button) findViewById(R.id.viewProfile_button);
 
 
         history.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +44,17 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        viewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
     @Override
     public void onBackPressed() {
         finishAffinity();
