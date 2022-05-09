@@ -12,6 +12,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button newOrder;
     private Button history;
     private Button viewProfile;
+    private Button test;
     TextView name;
 
     @Override
@@ -27,6 +28,15 @@ public class HomeActivity extends AppCompatActivity {
 
         viewProfile = (Button) findViewById(R.id.viewProfile_button);
 
+        test = (Button)findViewById(R.id.testBtn);
+
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), testActivity.class);
+                startActivity(intent);
+            }
+        });
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +64,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     public void onBackPressed() {
         finishAffinity();

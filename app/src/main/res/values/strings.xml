@@ -21,7 +21,7 @@
     <string name="complete_greek">Ολοκλήρωση</string>
     <string name="title_activity_order_history">OrderHistory</string>
     <string name="view_profile">View Profile</string>
-    <string name="owner_name">Μάκης Τσαλατάνος</string>
+    <string name="owner_name">Μάκης Τσαρλατάνος</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -35,5 +35,10 @@
     <string name="orderNo">Αριθμός Παραγγελίας</string>
     <string name="date">Ημερομηνία</string>
     <string name="totalValue">Σύνολο</string>
+    <string name="send">Send</string>
+    <string name="emailAddressHint">Enter Recipient\'s Email Address</string>
+    <string name="emailBodySuggestion">Enter email body</string>
+    <string name="testTxt">Test</string>
+    <string name="emailSubjectSuggestion">Enter email subject</string>
 
 </resources>
