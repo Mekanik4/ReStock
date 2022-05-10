@@ -13,7 +13,6 @@ public class HomeActivity extends AppCompatActivity {
     private Button history;
     private Button viewProfile;
     private Button test;
-    TextView name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +22,6 @@ public class HomeActivity extends AppCompatActivity {
         newOrder = (Button) findViewById(R.id.newOrder);
 
         history = (Button) findViewById(R.id.history_button);
-
-        name = (TextView) findViewById(R.id.history_button);
 
         viewProfile = (Button) findViewById(R.id.viewProfile_button);
 

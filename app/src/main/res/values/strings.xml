@@ -22,6 +22,17 @@
     <string name="title_activity_order_history">OrderHistory</string>
     <string name="view_profile">View Profile</string>
     <string name="owner_name">Μάκης Τσαρλατάνος</string>
+    <string name="profile_greek">Προφίλ</string>
+
+    <!-- Strings used for hints -->
+    <string name="pass">Κωδικός</string>
+    <string name="passConfirm">Επαλήθευση Κωδικού</string>
+    <string name="email">E-mail</string>
+    <string name="afm">ΑΦΜ</string>
+    <string name="ownership">Επωνυμία</string>
+    <string name="phone">Τηλέφωνο</string>
+    <string name="address">Οδός</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
