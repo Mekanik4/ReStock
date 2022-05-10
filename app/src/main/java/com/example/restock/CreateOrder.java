@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +20,14 @@ import android.widget.TextView;
 import com.example.restock.RecycleView.CategoriesRecyclerAdapter;
 import com.example.restock.RecycleView.ItemsRecyclerAdapter;
 import com.example.restock.objects.Item;
+import com.example.restock.objects.Order;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CreateOrder extends AppCompatActivity {
 
@@ -34,6 +41,7 @@ public class CreateOrder extends AppCompatActivity {
     Button save;
     Button send;
     TextView total;
+    TextView orderNumber;
     double totalPrice = 0;
     int[] quantities1;
     int[] quantities2;
@@ -56,7 +64,7 @@ public class CreateOrder extends AppCompatActivity {
         categoriesLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoriesRecyclerView.setLayoutManager(categoriesLayoutManager);
 
-        String[] categories = {"Αναψυκτικά", "Αλκοολούχα Ποτά", "Σνακ", "Γλυκά", "Τσιγάρα"};
+        String[] categories = {"Αναψυκτικά", "Αλκοολούχα Ποτά", "Ενεργειακά Ποτά", "Χυμοί", "Νερά", "Σνακ", "Κρύα Σάντουιτς", "Γλυκά", "Τσιγάρα"};
 
         //Set my Adapter for the RecyclerView
         categoriesAdapter = new CategoriesRecyclerAdapter(categories,this);
@@ -76,33 +84,58 @@ public class CreateOrder extends AppCompatActivity {
 
         quantities2 = new int[items2.length];
 
-        DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 3);
-        Item found = dbHandler.findProduct("Tsakiris Chips salted");
-        if(found != null)
-            Log.d("db","OKeiiiiiiii");
-        else
-            Log.d("db","NOtOK");
+        DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
+
+        Order[] orders = dbHandler.getAllOrders();
+        //Log.d("orders",String.valueOf(orders.length));
+        int lastId = 0;
+        if(orders != null)
+            lastId = orders.length;
+        orderNumber = findViewById(R.id.order_number);
+        orderNumber.setText(String.valueOf(lastId+1));
 
 
-        items = new Item[3][];
-        items[2] = new Item[dbHandler.getProducts("snacks").length];
-        items[2] = dbHandler.getProducts("snacks");
-        items[0] = new Item[items1.length];
-        items[1] = new Item[items2.length];
+//        Order order = new Order(1,"13/3/1111",123.22,"dwdasdAWDf");
+//        dbHandler.addOrder(order);
+//        Order newOrder = dbHandler.getOrder(1);
+//        if(newOrder != null)
+//            Log.d("db","Order    OKeiiiiiiii");
+//        else
+//            Log.d("db","NOtOK");
+
+
+        items = new Item[9][];
+        items[0] = new Item[dbHandler.getProducts("Soft Drinks").length];
+        items[1] = new Item[dbHandler.getProducts("Alcoholic Drinks").length];
+        items[2] = new Item[dbHandler.getProducts("Energy Drinks").length];
+        items[3] = new Item[dbHandler.getProducts("Juices").length];
+        items[4] = new Item[dbHandler.getProducts("Waters").length];
+        items[5] = new Item[dbHandler.getProducts("snacks").length];
+        items[6] = new Item[dbHandler.getProducts("sandwich").length];
+        items[7] = new Item[items1.length];
+        items[8] = new Item[items2.length];
+
+        items[0] = dbHandler.getProducts("Soft Drinks");
+        items[1] = dbHandler.getProducts("Alcoholic Drinks");
+        items[2] = dbHandler.getProducts("Energy Drinks");
+        items[3] = dbHandler.getProducts("Juices");
+        items[4] = dbHandler.getProducts("Waters");
+        items[5] = dbHandler.getProducts("snacks");
+        items[6] = dbHandler.getProducts("sandwich");
         for(int i=0; i<items1.length; i++) {
-            items[0][i] = new Item();
-            items[0][i].setName(items1[i]);
-            items[0][i].setPrice(Double.parseDouble(prices1[i]));
-            items[0][i].setQuantity(quantities1[i]);
+            items[7][i] = new Item();
+            items[7][i].setName(items1[i]);
+            items[7][i].setPrice(Double.parseDouble(prices1[i]));
+            items[7][i].setQuantity(quantities1[i]);
         }
         for(int i=0; i<items2.length; i++){
-            items[1][i] = new Item();
-            items[1][i].setName(items2[i]);
-            items[1][i].setPrice(Double.parseDouble(prices2[i]));
-            items[1][i].setQuantity(quantities2[i]);
+            items[8][i] = new Item();
+            items[8][i].setName(items2[i]);
+            items[8][i].setPrice(Double.parseDouble(prices2[i]));
+            items[8][i].setQuantity(quantities2[i]);
         }
 
-        Log.d("array",String.valueOf(items[1].length));
+        //Log.d("array",String.valueOf(items[1].length));
         setSelectedCategory(0);
 
         total = findViewById(R.id.totalPrice);
@@ -112,6 +145,18 @@ public class CreateOrder extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Order order = dbHandler.getOrder(Integer.parseInt(orderNumber.getText().toString()));
+                @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                String today = dateFormat.format(date);
+                Order newOrder = new Order(Integer.parseInt(orderNumber.getText().toString()), today, totalPrice, items, "",false);
+                if(order == null){
+                    dbHandler.addOrder(newOrder);
+                }
+                else{
+                    Log.d("orders",String.valueOf(newOrder.getOrderNumber()));
+                    dbHandler.updateOrder(newOrder);
+                }
 
             }
         });
@@ -119,7 +164,20 @@ public class CreateOrder extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Order order = dbHandler.getOrder(Integer.parseInt(orderNumber.getText().toString()));
+                if(order == null){
+                    @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = new Date();
+                    String today = dateFormat.format(date);
+                    Order newOrder = new Order(Integer.parseInt(orderNumber.getText().toString()), today, totalPrice, items, "",false);
+                    if(dbHandler.addOrder(newOrder))
+                        Log.d("db", "mpikeeee");
+                    else
+                        Log.d("db", "den mpikeeee");
+                }
+                Intent intent = new Intent(view.getContext(), OrderPreview.class);
+                startActivity(intent);
+                finish();
             }
         });
 

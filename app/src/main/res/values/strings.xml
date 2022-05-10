@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ReStock</string>
     <string name="category_title">Category Title</string>
-    <string name="order_no">Order no. :</string>
+    <string name="order_no">Αριθμός\nΠαραγγελίας</string>
     <string name="item_name">Item Name</string>
     <string name="item_s_price">Item\'s Price</string>
     <string name="remove">-</string>
@@ -9,8 +9,7 @@
     <string name="add">+</string>
     <string name="u20ac">€</string>
     <string name="euro_0">0 €</string>
-    <string name="total">Total:</string>
-    <string name="_0001">0001</string>
+    <string name="total">Σύνολο:</string>
     <string name="new_order">New Order</string>
     <string name="product_greek">Προϊόν</string>
     <string name="price_greek">Τιμή</string>
@@ -23,6 +22,7 @@
     <string name="view_profile">View Profile</string>
     <string name="owner_name">Μάκης Τσαρλατάνος</string>
     <string name="profile_greek">Προφίλ</string>
+    <string name="send_button">Αποστολή</string>
 
     <!-- Strings used for hints -->
     <string name="pass">Κωδικός</string>

@@ -3,21 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Nikolas/StudioProjects/ReStock/app/src/main/res/layout/activity_create_order.xml" value="0.575" />
-        <entry key="..\:/Users/Nikolas/StudioProjects/ReStock/app/src/main/res/layout/activity_home.xml" value="0.42481884057971014" />
-        <entry key="..\:/Users/Nikolas/StudioProjects/ReStock/app/src/main/res/layout/activity_main.xml" value="0.575" />
-        <entry key="..\:/Users/Nikolas/StudioProjects/ReStock/app/src/main/res/layout/activity_profile.xml" value="0.5" />
-        <entry key="..\:/Users/Nikolas/StudioProjects/ReStock/app/src/main/res/layout/items_layout.xml" value="0.42481884057971014" />
-        <entry key="..\:/Users/Nikolas/StudioProjects/ReStock/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.33" />
-        <entry key="..\:/Users/Nikolas/StudioProjects/ReStock/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.33" />
+        <entry key="..\:/Users/gtsak/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_create_order.xml" value="0.25" />
+        <entry key="..\:/Users/gtsak/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_order_history.xml" value="0.2" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/card_stroke.xml" value="0.1715" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/selector.xml" value="0.2555" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/stroke.xml" value="0.2555" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout-v26/items_layout.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_create_order.xml" value="0.33" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_home.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_nikos.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_order_history.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_order_preview.xml" value="0.25" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/categories_layout.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/items_layout.xml" value="0.33" />
       </map>
