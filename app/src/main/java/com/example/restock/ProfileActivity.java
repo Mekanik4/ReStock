@@ -76,6 +76,8 @@ public class ProfileActivity extends AppCompatActivity{
             public void onClick(View view) {
                 save.setVisibility(View.GONE);
                 edit.setVisibility(View.VISIBLE);
+                pass.setVisibility(View.GONE);
+                passConfirm.setVisibility(View.GONE);
 
                 pass.setKeyListener(null);
                 passConfirm.setKeyListener(null);

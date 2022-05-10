@@ -8,143 +8,143 @@
 
     <Button
         android:id="@+id/edit_button"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="56dp"
         android:text="@string/edit_greek"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/save_button"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="56dp"
         android:text="@string/save_greek"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="290dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/pass"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPasswordConfirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress" />
 
     <EditText
         android:id="@+id/editTextPasswordConfirm"
         android:layout_width="290dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="132dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/passConfirm"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     <EditText
         android:id="@+id/editTextEmailAddress"
         android:layout_width="290dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/email"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
 
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="290dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/phone"
+        android:importantForAutofill="no"
         android:inputType="phone"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextAfm" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="290dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/ownership"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPostalAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/viewProfile" />
 
     <EditText
         android:id="@+id/editTextTextPostalAddress"
         android:layout_width="290dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/address"
+        android:importantForAutofill="no"
         android:inputType="textPostalAddress"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/editTextAfm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <EditText
         android:id="@+id/editTextAfm"
         android:layout_width="290dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/afm"
+        android:importantForAutofill="no"
         android:inputType="number"
         android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPostalAddress" />
 
     <TextView
         android:id="@+id/viewProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="@string/profile_greek"
-        android:textSize="30sp"
+        android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
-        android:textColor="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        android:text="@string/profile_greek"
+        android:textColor="#673AB7"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
