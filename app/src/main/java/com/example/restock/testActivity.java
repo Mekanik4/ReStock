@@ -62,7 +62,7 @@ public class testActivity extends AppCompatActivity {
                     } catch(Exception e){
                         e.printStackTrace();
                         Toast.makeText(testActivity.this, "Something went wrong with the creation of this file.", Toast.LENGTH_SHORT).show();
-                    } //axristo sxolio
+                    }
                     myPdf.close();
 
 //                    Intent intent = new Intent(Intent.ACTION_SEND);

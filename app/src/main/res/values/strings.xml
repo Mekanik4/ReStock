@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ReStock</string>
     <string name="category_title">Category Title</string>
-    <string name="order_no">Αριθμός\nΠαραγγελίας</string>
+    <string name="order_no">Order\nNo.</string>
     <string name="item_name">Item Name</string>
     <string name="item_s_price">Item\'s Price</string>
     <string name="remove">-</string>
@@ -9,29 +9,28 @@
     <string name="add">+</string>
     <string name="u20ac">€</string>
     <string name="euro_0">0 €</string>
-    <string name="total">Σύνολο:</string>
+    <string name="total">Total:</string>
     <string name="new_order">New Order</string>
-    <string name="product_greek">Προϊόν</string>
-    <string name="price_greek">Τιμή</string>
-    <string name="quantity_greek">Ποσότητα</string>
-    <string name="save_greek">Αποθήκευση</string>
-    <string name="edit_greek">Επεξεργασία</string>
-    <string name="send_greek">Αποστολή</string>
-    <string name="complete_greek">Ολοκλήρωση</string>
-    <string name="title_activity_order_history">OrderHistory</string>
+    <string name="product">Product</string>
+    <string name="price">Price</string>
+    <string name="quantity">Quantity</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="send">Send</string>
+    <string name="complete">Complete</string>
+    <string name="title_activity_order_history">Order\nHistory</string>
     <string name="view_profile">View Profile</string>
-    <string name="owner_name">Μάκης Τσαρλατάνος</string>
-    <string name="profile_greek">Προφίλ</string>
-    <string name="send_button">Αποστολή</string>
+    <string name="owner_name">Makis Tsarlatanos</string>
+    <string name="profile">Profile</string>
 
     <!-- Strings used for hints -->
-    <string name="pass">Κωδικός</string>
-    <string name="passConfirm">Επαλήθευση Κωδικού</string>
+    <string name="pass">Password</string>
+    <string name="passConfirm">Confirm Password</string>
     <string name="email">E-mail</string>
-    <string name="afm">ΑΦΜ</string>
-    <string name="ownership">Επωνυμία</string>
-    <string name="phone">Τηλέφωνο</string>
-    <string name="address">Οδός</string>
+    <string name="afm">Tax reg. number</string>
+    <string name="brand_name">Brand name</string>
+    <string name="phone">Phone Number</string>
+    <string name="address">Address</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -42,14 +41,12 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="history">History</string>
-    <string name="titleOrderHistory">Ιστορικό Παραγγελιών</string>
-    <string name="orderNo">Αριθμός Παραγγελίας</string>
-    <string name="date">Ημερομηνία</string>
-    <string name="totalValue">Σύνολο</string>
-    <string name="send">Send</string>
+    <string name="date">Date</string>
     <string name="emailAddressHint">Enter Recipient\'s Email Address</string>
     <string name="emailBodySuggestion">Enter email body</string>
     <string name="testTxt">Test</string>
     <string name="emailSubjectSuggestion">Enter email subject</string>
+    <string name="totalValue">Total</string>
+    <string name="title_order_history">Order History</string>
 
 </resources>

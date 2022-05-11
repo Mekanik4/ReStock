@@ -28,7 +28,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         android:background="?attr/colorPrimary"
-        android:text="@string/titleOrderHistory"
+        android:text="@string/title_order_history"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/titletToolbar"
@@ -43,8 +43,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:maxLines="2"
-        android:text="@string/orderNo"
-        android:textSize="10sp"
+        android:text="@string/order_no"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titletToolbar" />
 
@@ -55,7 +55,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/date"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/orderNoSortBtn"
         app:layout_constraintTop_toBottomOf="@+id/titletToolbar" />
 
