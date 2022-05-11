@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.restock.objects.Profile;
+
 public class HomeActivity extends AppCompatActivity {
     private Button newOrder;
     private Button history;
@@ -18,6 +20,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
+        Profile user = dbHandler.getUser(getIntent().getExtras().getInt("user_id"));
 
         newOrder = (Button) findViewById(R.id.newOrder);
 

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ReStock"
         tools:ignore="ExtraText">
         <activity
+            android:name=".SignInActivity"
+            android:exported="false" />
+        <activity
             android:name=".OrderPreview"
             android:exported="false" />
         <activity

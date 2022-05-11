@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.restock.objects.Item;
 import com.example.restock.objects.Order;
+import com.example.restock.objects.Profile;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -108,6 +109,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "  `email` varchar(100) NOT NULL,\n" +
                 "  `phone` varchar(10) NOT NULL,\n" +
                 "  `address` varchar(100) NOT NULL,\n" +
+                "  `signedIn` boolean NOT NULL,\n" +
                 "  PRIMARY KEY (`user_id`)\n" +
                 ")");
     }
@@ -326,5 +328,52 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.delete(TABLE_ORDER, "'order_id' = ?",
                 new String[] { String.valueOf(id) });
         db.close();
+    }
+
+    public Profile getSignedInUser(){
+        String query = "SELECT * FROM 'user' WHERE " +
+                "'signedIn' = true";
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            Profile user = new Profile();
+            user.setProfileID(cursor.getInt(0));
+            user.setPassword(cursor.getString(1));
+            user.setOwnership(cursor.getString(2));
+            user.setAfm(cursor.getString(3));
+            user.setEmail(cursor.getString(4));
+            user.setPhone(cursor.getString(5));
+            user.setAddress(cursor.getString(6));
+            user.setSignedIn(Boolean.parseBoolean(cursor.getString(7)));
+
+            return user;
+        }
+        else
+            return null;
+    }
+
+    public Profile getUser(int id){
+        String query = "SELECT * FROM 'user' WHERE " +
+                "'user_id' = ?";
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
+
+        if (cursor.moveToFirst()) {
+            Profile user = new Profile();
+            user.setProfileID(cursor.getInt(0));
+            user.setPassword(cursor.getString(1));
+            user.setOwnership(cursor.getString(2));
+            user.setAfm(cursor.getString(3));
+            user.setEmail(cursor.getString(4));
+            user.setPhone(cursor.getString(5));
+            user.setAddress(cursor.getString(6));
+            user.setSignedIn(Boolean.parseBoolean(cursor.getString(7)));
+            db.close();
+            return user;
+        } else {
+            return null;
+        }
     }
 }
