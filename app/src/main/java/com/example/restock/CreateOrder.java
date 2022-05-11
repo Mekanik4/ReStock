@@ -64,7 +64,7 @@ public class CreateOrder extends AppCompatActivity {
         categoriesLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoriesRecyclerView.setLayoutManager(categoriesLayoutManager);
 
-        String[] categories = {"Αναψυκτικά", "Αλκοολούχα Ποτά", "Ενεργειακά Ποτά", "Χυμοί", "Νερά", "Σνακ", "Κρύα Σάντουιτς", "Γλυκά", "Τσιγάρα"};
+        String[] categories = {"Soft Drinks", "Alcoholic Drinks", "Energy Drinks", "Juices", "Water", "Snacks", "Sandwich", "Chocolates", "Biscuits", "Croissant", "Cigars & Tobacco", "Tobacco Essentials"};
 
         //Set my Adapter for the RecyclerView
         categoriesAdapter = new CategoriesRecyclerAdapter(categories,this);
@@ -104,7 +104,7 @@ public class CreateOrder extends AppCompatActivity {
 //            Log.d("db","NOtOK");
 
 
-        items = new Item[9][];
+        items = new Item[12][];
         items[0] = new Item[dbHandler.getProducts("Soft Drinks").length];
         items[1] = new Item[dbHandler.getProducts("Alcoholic Drinks").length];
         items[2] = new Item[dbHandler.getProducts("Energy Drinks").length];
@@ -114,6 +114,9 @@ public class CreateOrder extends AppCompatActivity {
         items[6] = new Item[dbHandler.getProducts("sandwich").length];
         items[7] = new Item[items1.length];
         items[8] = new Item[items2.length];
+        items[9] = new Item[items2.length];
+        items[10] = new Item[dbHandler.getProducts("Cigars & Tobacco").length];
+        items[11] = new Item[dbHandler.getProducts("Tobacco Essentials").length];
 
         items[0] = dbHandler.getProducts("Soft Drinks");
         items[1] = dbHandler.getProducts("Alcoholic Drinks");
@@ -122,6 +125,9 @@ public class CreateOrder extends AppCompatActivity {
         items[4] = dbHandler.getProducts("Waters");
         items[5] = dbHandler.getProducts("snacks");
         items[6] = dbHandler.getProducts("sandwich");
+        items[10] = dbHandler.getProducts("Cigars & Tobacco");
+        items[11] = dbHandler.getProducts("Tobacco Essentials");
+
         for(int i=0; i<items1.length; i++) {
             items[7][i] = new Item();
             items[7][i].setName(items1[i]);
@@ -133,6 +139,12 @@ public class CreateOrder extends AppCompatActivity {
             items[8][i].setName(items2[i]);
             items[8][i].setPrice(Double.parseDouble(prices2[i]));
             items[8][i].setQuantity(quantities2[i]);
+        }
+        for(int i=0; i<items2.length; i++){
+            items[9][i] = new Item();
+            items[9][i].setName(items2[i]);
+            items[9][i].setPrice(Double.parseDouble(prices2[i]));
+            items[9][i].setQuantity(quantities2[i]);
         }
 
         //Log.d("array",String.valueOf(items[1].length));
