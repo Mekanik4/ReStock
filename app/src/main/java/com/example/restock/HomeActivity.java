@@ -19,7 +19,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
         newOrder = (Button) findViewById(R.id.newOrder);
 
         history = (Button) findViewById(R.id.history_button);
