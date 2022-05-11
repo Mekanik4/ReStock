@@ -43,13 +43,7 @@ public class CreateOrder extends AppCompatActivity {
     TextView total;
     TextView orderNumber;
     double totalPrice = 0;
-    int[] quantities1;
-    int[] quantities2;
     private int selectedCategory = 0;
-    String[] items1;
-    String[] prices1;
-    String[] items2;
-    String[] prices2;
     Item[][] items;
 
     @Override
@@ -64,7 +58,7 @@ public class CreateOrder extends AppCompatActivity {
         categoriesLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoriesRecyclerView.setLayoutManager(categoriesLayoutManager);
 
-        String[] categories = {"Soft Drinks", "Alcoholic Drinks", "Energy Drinks", "Juices", "Water", "Snacks", "Sandwich", "Chocolates", "Biscuits", "Croissant", "Cigars & Tobacco", "Tobacco Essentials"};
+        String[] categories = {"Soft Drinks", "Alcoholic Drinks", "Energy Drinks", "Juices", "Water", "Snacks", "Sandwich", "Chocolates", "Biscuits", "Croissants", "Ice Cream", "Cigars & Tobacco", "Tobacco Essentials"};
 
         //Set my Adapter for the RecyclerView
         categoriesAdapter = new CategoriesRecyclerAdapter(categories,this);
@@ -75,14 +69,6 @@ public class CreateOrder extends AppCompatActivity {
         //Set the layout of the items in the RecyclerView
         itemsLayoutManager = new LinearLayoutManager(this);
         itemsRecyclerView.setLayoutManager(itemsLayoutManager);
-        items1 = new String[]{"kati", "kati allo", "oollllllleeeeedwdddddddddddddddddddddddddddddddddddddddddd", "kdkkakdad", "efsdfsdf", "sdfsgdg", "gardvvar", "seevargr", "segvatb", "nikos"};
-        prices1 = new String[]{"45", "6", "23", "8", "23", "7", "42", "24", "26", "21"};
-        items2 = new String[]{"nikos", "giorgos", "mpougias"};
-        prices2 = new String[]{"24.5", "26.7", "21"};
-
-        quantities1 = new int[items1.length];
-
-        quantities2 = new int[items2.length];
 
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
 
@@ -94,58 +80,34 @@ public class CreateOrder extends AppCompatActivity {
         orderNumber = findViewById(R.id.order_number);
         orderNumber.setText(String.valueOf(lastId+1));
 
-
-//        Order order = new Order(1,"13/3/1111",123.22,"dwdasdAWDf");
-//        dbHandler.addOrder(order);
-//        Order newOrder = dbHandler.getOrder(1);
-//        if(newOrder != null)
-//            Log.d("db","Order    OKeiiiiiiii");
-//        else
-//            Log.d("db","NOtOK");
-
-
-        items = new Item[12][];
+        items = new Item[13][];
         items[0] = new Item[dbHandler.getProducts("Soft Drinks").length];
         items[1] = new Item[dbHandler.getProducts("Alcoholic Drinks").length];
         items[2] = new Item[dbHandler.getProducts("Energy Drinks").length];
         items[3] = new Item[dbHandler.getProducts("Juices").length];
         items[4] = new Item[dbHandler.getProducts("Waters").length];
-        items[5] = new Item[dbHandler.getProducts("snacks").length];
-        items[6] = new Item[dbHandler.getProducts("sandwich").length];
-        items[7] = new Item[items1.length];
-        items[8] = new Item[items2.length];
-        items[9] = new Item[items2.length];
-        items[10] = new Item[dbHandler.getProducts("Cigars & Tobacco").length];
-        items[11] = new Item[dbHandler.getProducts("Tobacco Essentials").length];
+        items[5] = new Item[dbHandler.getProducts("Snacks").length];
+        items[6] = new Item[dbHandler.getProducts("Sandwich").length];
+        items[7] = new Item[dbHandler.getProducts("Chocolates").length];
+        items[8] = new Item[dbHandler.getProducts("Biscuits").length];
+        items[9] = new Item[dbHandler.getProducts("Croissants").length];
+        items[10] = new Item[dbHandler.getProducts("Ice Cream").length];
+        items[11] = new Item[dbHandler.getProducts("Cigars & Tobacco").length];
+        items[12] = new Item[dbHandler.getProducts("Tobacco Essentials").length];
 
         items[0] = dbHandler.getProducts("Soft Drinks");
         items[1] = dbHandler.getProducts("Alcoholic Drinks");
         items[2] = dbHandler.getProducts("Energy Drinks");
         items[3] = dbHandler.getProducts("Juices");
         items[4] = dbHandler.getProducts("Waters");
-        items[5] = dbHandler.getProducts("snacks");
-        items[6] = dbHandler.getProducts("sandwich");
-        items[10] = dbHandler.getProducts("Cigars & Tobacco");
-        items[11] = dbHandler.getProducts("Tobacco Essentials");
-
-        for(int i=0; i<items1.length; i++) {
-            items[7][i] = new Item();
-            items[7][i].setName(items1[i]);
-            items[7][i].setPrice(Double.parseDouble(prices1[i]));
-            items[7][i].setQuantity(quantities1[i]);
-        }
-        for(int i=0; i<items2.length; i++){
-            items[8][i] = new Item();
-            items[8][i].setName(items2[i]);
-            items[8][i].setPrice(Double.parseDouble(prices2[i]));
-            items[8][i].setQuantity(quantities2[i]);
-        }
-        for(int i=0; i<items2.length; i++){
-            items[9][i] = new Item();
-            items[9][i].setName(items2[i]);
-            items[9][i].setPrice(Double.parseDouble(prices2[i]));
-            items[9][i].setQuantity(quantities2[i]);
-        }
+        items[5] = dbHandler.getProducts("Snacks");
+        items[6] = dbHandler.getProducts("Sandwich");
+        items[7] = dbHandler.getProducts("Chocolates");
+        items[8] = dbHandler.getProducts("Biscuits");
+        items[9] = dbHandler.getProducts("Croissants");
+        items[10] = dbHandler.getProducts("Ice Cream");
+        items[11] = dbHandler.getProducts("Cigars & Tobacco");
+        items[12] = dbHandler.getProducts("Tobacco Essentials");
 
         //Log.d("array",String.valueOf(items[1].length));
         setSelectedCategory(0);
