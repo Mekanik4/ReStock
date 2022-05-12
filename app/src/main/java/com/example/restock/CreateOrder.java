@@ -39,12 +39,14 @@ public class CreateOrder extends AppCompatActivity {
     RecyclerView.Adapter<ItemsRecyclerAdapter.ViewHolder> itemsAdapter;
 
     Button save;
-    Button send;
+    Button complete;
     TextView total;
     TextView orderNumber;
     double totalPrice = 0;
     private int selectedCategory = 0;
     Item[][] items;
+    Order order;
+    private boolean newOrderFlag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,29 +74,25 @@ public class CreateOrder extends AppCompatActivity {
 
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
 
-        Order[] orders = dbHandler.getAllOrders();
-        //Log.d("orders",String.valueOf(orders.length));
-        int lastId = 0;
-        if(orders != null)
-            lastId = orders.length;
         orderNumber = findViewById(R.id.order_number);
-        orderNumber.setText(String.valueOf(lastId+1));
+        total = findViewById(R.id.totalPrice);
+        save = findViewById(R.id.save_order);
+        complete = findViewById(R.id.complete_order);
 
         items = new Item[13][];
-        items[0] = new Item[dbHandler.getProducts("Soft Drinks").length];
-        items[1] = new Item[dbHandler.getProducts("Alcoholic Drinks").length];
-        items[2] = new Item[dbHandler.getProducts("Energy Drinks").length];
-        items[3] = new Item[dbHandler.getProducts("Juices").length];
-        items[4] = new Item[dbHandler.getProducts("Waters").length];
-        items[5] = new Item[dbHandler.getProducts("Snacks").length];
-        items[6] = new Item[dbHandler.getProducts("Sandwich").length];
-        items[7] = new Item[dbHandler.getProducts("Chocolates").length];
-        items[8] = new Item[dbHandler.getProducts("Biscuits").length];
-        items[9] = new Item[dbHandler.getProducts("Croissants").length];
-        items[10] = new Item[dbHandler.getProducts("Ice Cream").length];
-        items[11] = new Item[dbHandler.getProducts("Cigars & Tobacco").length];
-        items[12] = new Item[dbHandler.getProducts("Tobacco Essentials").length];
-
+//            items[0] = new Item[dbHandler.getProducts("Soft Drinks").length];
+//            items[1] = new Item[dbHandler.getProducts("Alcoholic Drinks").length];
+//            items[2] = new Item[dbHandler.getProducts("Energy Drinks").length];
+//            items[3] = new Item[dbHandler.getProducts("Juices").length];
+//            items[4] = new Item[dbHandler.getProducts("Waters").length];
+//            items[5] = new Item[dbHandler.getProducts("Snacks").length];
+//            items[6] = new Item[dbHandler.getProducts("Sandwich").length];
+//            items[7] = new Item[dbHandler.getProducts("Chocolates").length];
+//            items[8] = new Item[dbHandler.getProducts("Biscuits").length];
+//            items[9] = new Item[dbHandler.getProducts("Croissants").length];
+//            items[10] = new Item[dbHandler.getProducts("Ice Cream").length];
+//            items[11] = new Item[dbHandler.getProducts("Cigars & Tobacco").length];
+//            items[12] = new Item[dbHandler.getProducts("Tobacco Essentials").length];
         items[0] = dbHandler.getProducts("Soft Drinks");
         items[1] = dbHandler.getProducts("Alcoholic Drinks");
         items[2] = dbHandler.getProducts("Energy Drinks");
@@ -109,22 +107,36 @@ public class CreateOrder extends AppCompatActivity {
         items[11] = dbHandler.getProducts("Cigars & Tobacco");
         items[12] = dbHandler.getProducts("Tobacco Essentials");
 
+        Bundle data = getIntent().getExtras();
+        if(data != null){
+            newOrderFlag = false;
+            order = dbHandler.getOrder(data.getInt("order_id"));
+            int[][] quantities = dbHandler.getItems(order.getOrderNumber());
+            for(int i=0; i<quantities.length; i++){
+                int[] item = findItemById(quantities[i][0]);
+                items[item[0]][item[1]].setQuantity(quantities[i][1]);
+            }
+            orderNumber.setText(String.valueOf(order.getOrderNumber()));
+        }
+        else{
+            Order[] orders = dbHandler.getAllOrders();
+            int lastId = 0;
+            if(orders != null)
+                lastId = orders.length;
+            orderNumber.setText(String.valueOf(lastId+1));
+        }
+
         //Log.d("array",String.valueOf(items[1].length));
         setSelectedCategory(0);
-
-        total = findViewById(R.id.totalPrice);
-        save = findViewById(R.id.save_order);
-        send = findViewById(R.id.complete_order);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Order order = dbHandler.getOrder(Integer.parseInt(orderNumber.getText().toString()));
                 @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
                 String today = dateFormat.format(date);
                 Order newOrder = new Order(Integer.parseInt(orderNumber.getText().toString()), today, totalPrice, items, "",false);
-                if(order == null){
+                if(newOrderFlag){
                     dbHandler.addOrder(newOrder);
                 }
                 else{
@@ -135,21 +147,26 @@ public class CreateOrder extends AppCompatActivity {
             }
         });
 
-        send.setOnClickListener(new View.OnClickListener() {
+        complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Order order = dbHandler.getOrder(Integer.parseInt(orderNumber.getText().toString()));
+                Intent intent = new Intent(view.getContext(), OrderPreview.class);
+                order = dbHandler.getOrder(Integer.parseInt(orderNumber.getText().toString()));
+                @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                String today = dateFormat.format(date);
+                Order newOrder = new Order(Integer.parseInt(orderNumber.getText().toString()), today, totalPrice, items, "",false);
                 if(order == null){
-                    @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    Date date = new Date();
-                    String today = dateFormat.format(date);
-                    Order newOrder = new Order(Integer.parseInt(orderNumber.getText().toString()), today, totalPrice, items, "",false);
+                    intent.putExtra("order_id",newOrder.getOrderNumber());
                     if(dbHandler.addOrder(newOrder))
                         Log.d("db", "mpikeeee");
                     else
                         Log.d("db", "den mpikeeee");
                 }
-                Intent intent = new Intent(view.getContext(), OrderPreview.class);
+                else if(!newOrderFlag){
+                    dbHandler.updateOrder(newOrder);
+                    intent.putExtra("order_id",order.getOrderNumber());
+                }
                 startActivity(intent);
                 finish();
             }
@@ -170,6 +187,19 @@ public class CreateOrder extends AppCompatActivity {
 
     public void setQuantity(int q, int category, int position){
         items[category][position].setQuantity(q);
+    }
+
+    public int[] findItemById(int id){
+        int[] item = new int[2];
+        for(int i=0; i<items.length; i++){
+            for(int j=0; j<items[i].length; j++){
+                if(items[i][j].getId() == id){
+                    item[0] = i;
+                    item[1] = j;
+                }
+            }
+        }
+        return item;
     }
 
     @Override

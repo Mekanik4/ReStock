@@ -29,6 +29,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_ADDRESS = "address";
 
     public static final String TABLE_ORDER = "orders";
+    public static final String TABLE_ITEMS = "items";
     //Constructor
     public DatabaseHandler(Context context, String name,
                            SQLiteDatabase.CursorFactory factory, int version) {
@@ -112,6 +113,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "  `signedIn` boolean NOT NULL,\n" +
                 "  PRIMARY KEY (`user_id`)\n" +
                 ")");
+        db.execSQL("CREATE TABLE `items` (\n" +
+                "  `order_id` int NOT NULL,\n" +
+                "  `product_id` int NOT NULL,\n" +
+                "  `quantity` int NOT NULL,\n" +
+                "  PRIMARY KEY (`order_id`,`product_id`)\n" +
+                ")");
     }
 
     @Override
@@ -121,14 +128,91 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public Item findProduct(String productname) {
-        String query = "SELECT * FROM " + TABLE_PRODUCTS + " WHERE " +
-                COLUMN_PRODUCT_NAME + " = '" + productname + "'";
+    public void addItems(int order_id, Item[][] items){
         SQLiteDatabase db = this.getWritableDatabase();
-//        if(db != null)
-//            Log.d("db","OK");
-//        else
-//            Log.d("db","not OK");
+        for(int i=0; i<items.length; i++){
+            for(int j=0; j<items[i].length; j++){
+                if(items[i][j].getQuantity()>0){
+                    ContentValues values = new ContentValues();
+                    values.put("order_id", order_id);
+                    values.put("product_id",items[i][j].getId());
+                    values.put("quantity",items[i][j].getQuantity());
+                    db.insert("items", null , values);
+                }
+            }
+        }
+        db.close();
+    }
+
+    public void updateItems(int order_id, Item[][] items){
+        SQLiteDatabase db = this.getWritableDatabase();
+        for(int i=0; i<items.length; i++){
+            for(int j=0; j<items[i].length; j++){
+                if(items[i][j].getQuantity() > 0){
+                    if(findItem(order_id,items[i][j].getId())){
+                        ContentValues values = new ContentValues();
+                        values.put("quantity",items[i][j].getQuantity());
+                        long k = db.update("items", values , "order_id = ? and product_id = ?", new String[]{String.valueOf(order_id), String.valueOf(items[i][j].getId())});
+                        Log.d("db","         " + k);
+                    }
+                    else{
+                        ContentValues values = new ContentValues();
+                        values.put("order_id", order_id);
+                        values.put("product_id",items[i][j].getId());
+                        values.put("quantity",items[i][j].getQuantity());
+                        db.insert("items", null , values);
+                    }
+                }
+                else if(items[i][j].getQuantity() == 0){
+                    if(findItem(order_id,items[i][j].getId()))
+                        db.delete("items","order_id = ? and product_id = ?", new String[]{String.valueOf(order_id), String.valueOf(items[i][j].getId())});
+                }
+            }
+        }
+    }
+
+    public boolean findItem(int order_id, int product_id){
+
+        String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE " +
+                "order_id" + " = " + order_id + " and product_id = " + product_id;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor.moveToFirst();
+    }
+
+    public int[][] getItems(int order_id){
+
+        String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE " +
+                "order_id" + " = " + order_id ;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+        int[][] items = new int[cursor.getCount()][2];
+        if(cursor.moveToFirst()){
+            cursor.moveToFirst();
+            for(int i=0; i<cursor.getCount(); i++){
+                items[i][0] = cursor.getInt(1);
+                items[i][1] = cursor.getInt(2);
+                try{
+                    cursor.moveToNext();
+                }catch (Exception e){
+                    cursor.close();
+                }
+            }
+        } else {
+            items = null;
+            Log.d("db","not oooooooOK");
+        }
+        db.close();
+        return items;
+    }
+
+    public Item findProduct(int id) {
+        String query = "SELECT * FROM " + TABLE_PRODUCTS + " WHERE " +
+                COLUMN_PRODUCT_ID + " = " + id ;
+        SQLiteDatabase db = this.getWritableDatabase();
+
         Cursor cursor = db.rawQuery(query, null);
         Item product = new Item();
         if (cursor.moveToFirst()) {
@@ -148,10 +232,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_PRODUCTS + " WHERE " +
                 COLUMN_PRODUCT_FAMILY + " = '" + category + "'";
         SQLiteDatabase db = this.getWritableDatabase();
-//        if(db != null)
-//            Log.d("db","OK ddddddddd");
-//        else
-//            Log.d("db","not OK");
         Cursor cursor = db.rawQuery(query, null);
         Item[] products = new Item[cursor.getCount()];
         if (cursor.moveToFirst()) {
@@ -198,18 +278,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //        return product;
 //    }
 
-    public boolean deleteProduct(String productname) {
-        boolean result = false;
-        Item product = findProduct(productname);
-        if (product != null){
-            SQLiteDatabase db = this.getWritableDatabase();
-            db.delete(TABLE_PRODUCTS, COLUMN_PRODUCT_ID + " = ?",
-                    new String[] { String.valueOf(product.getId()) });
-            result = true;
-            db.close();
-        }
-        return result;
-    }
 
     public boolean addOrder(Order order) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -220,12 +288,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("document_path", order.getDocumentPath());
 
         long i = db.insert("orders", null , values);
-        //Log.d("db",  "oooooo");
         db.close();
-        if(i == -1)
-            return false;
-        else
-            return true;
+        addItems(order.getOrderNumber(), order.getItems());
+        return i != -1;
     }
 
     public void updateOrder(Order order) {
@@ -238,7 +303,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         db.update("orders", values , "order_id = ?", new String[]{String.valueOf(order.getOrderNumber())});
         Log.d("db", "update");
-        db.close();
+        updateItems(order.getOrderNumber(), order.getItems());
+        //db.close();
     }
     public Order getOrder(int id) {
         String query = "SELECT * FROM " + TABLE_ORDER+ " WHERE " +
@@ -264,7 +330,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public Order[] getAllOrders() {
-        String query = "SELECT * FROM " + TABLE_ORDER + " ORDER BY 'order_id' ASC";
+        String query = "SELECT * FROM " + TABLE_ORDER + " ORDER BY order_id ASC";
         SQLiteDatabase db = this.getWritableDatabase();
 //        if(db != null)
 //            Log.d("db","OK");
@@ -301,7 +367,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public Boolean findOrder(int id) {
         String query = "SELECT * FROM " + TABLE_ORDER + " WHERE " +
-                "'order_id'" + " = " + String.valueOf(id) + "";
+                "order_id" + " = " + id + "";
         SQLiteDatabase db = this.getWritableDatabase();
 //        if(db != null)
 //            Log.d("db","OK");
@@ -332,12 +398,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public Profile getSignedInUser(){
         String query = "SELECT * FROM 'user' WHERE " +
-                "'signedIn' = true";
+                "signedIn = true";
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
+        Profile user = new Profile();
         if(cursor.moveToFirst()){
-            Profile user = new Profile();
             user.setProfileID(cursor.getInt(0));
             user.setPassword(cursor.getString(1));
             user.setOwnership(cursor.getString(2));
@@ -346,16 +412,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             user.setPhone(cursor.getString(5));
             user.setAddress(cursor.getString(6));
             user.setSignedIn(Boolean.parseBoolean(cursor.getString(7)));
-
-            return user;
         }
         else
-            return null;
+            user = null;
+        db.close();
+        return user;
     }
 
     public Profile getUser(int id){
         String query = "SELECT * FROM 'user' WHERE " +
-                "'user_id' = ?";
+                "user_id = ?";
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
@@ -373,6 +439,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.close();
             return user;
         } else {
+            db.close();
             return null;
         }
     }
