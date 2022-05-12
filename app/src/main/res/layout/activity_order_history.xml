@@ -6,6 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".OrderHistory">
 
+    <Button
+        android:id="@+id/completedOrderBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:width="116dp"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/completed"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titletToolbar" />
+
+    <Button
+        android:id="@+id/priceSortBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:width="32dp"
+        android:text="@string/price"
+        app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
+        app:layout_constraintStart_toEndOf="@+id/orderNoSortBtn"
+        app:layout_constraintTop_toBottomOf="@+id/titletToolbar" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/titletToolbar"
         android:layout_width="match_parent"
@@ -36,46 +60,37 @@
         app:layout_constraintStart_toStartOf="@+id/titletToolbar"
         app:layout_constraintTop_toTopOf="@+id/titletToolbar" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orderHistoryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="616dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/orderNoSortBtn"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:maxLines="2"
-        android:text="@string/order_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:width="100dp"
+        android:insetTop="6dp"
+        android:text="@string/orderNo"
         android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titletToolbar" />
 
     <Button
         android:id="@+id/dateSortBtn"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:width="32dp"
         android:text="@string/date"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/orderNoSortBtn"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
+        app:layout_constraintEnd_toStartOf="@+id/completedOrderBtn"
         app:layout_constraintTop_toBottomOf="@+id/titletToolbar" />
-
-    <Button
-        android:id="@+id/totalSortBtn"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/totalValue"
-        app:layout_constraintStart_toEndOf="@+id/dateSortBtn"
-        app:layout_constraintTop_toBottomOf="@+id/titletToolbar" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="616dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateSortBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

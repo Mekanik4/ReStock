@@ -48,5 +48,7 @@
     <string name="emailSubjectSuggestion">Enter email subject</string>
     <string name="totalValue">Total</string>
     <string name="title_order_history">Order History</string>
+    <string name="completed">completed</string>
+    <string name="orderNo">Order No</string>
 
 </resources>
