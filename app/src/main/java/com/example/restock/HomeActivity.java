@@ -22,7 +22,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
-        Profile user = dbHandler.getUser(getIntent().getExtras().getInt("user_id"));
+        Bundle data = getIntent().getExtras();
+        Profile user = new Profile();
+        if(data != null)
+             user = dbHandler.getUser(data.getInt("user_id"));
 
         newOrder = (Button) findViewById(R.id.newOrder);
 

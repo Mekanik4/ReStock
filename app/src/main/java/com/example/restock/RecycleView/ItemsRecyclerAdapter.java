@@ -191,7 +191,7 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
             Log.d("items",String.valueOf(i));
             Log.d("items",String.valueOf(items[i].length));
             for(int j=0; j<items[i].length; j++){
-                tempTotal += items[i][j].getQuantity() * items[i][j].getPrice();
+                tempTotal += (double)items[i][j].getQuantity() * items[i][j].getPrice();
             }
         }
         total = tempTotal;
