@@ -7,20 +7,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.example.restock.RecycleView.ItemsRecyclerAdapter;
+import com.example.restock.RecycleView.OrdersRecyclerAdapter;
+import com.example.restock.objects.Order;
 
 public class OrderHistory extends AppCompatActivity {
     RecyclerView ordersRecyclerView;
     LinearLayoutManager linearLayoutManager;
-    RecyclerView.Adapter<ItemsRecyclerAdapter.ViewHolder> ordersAdapter;
+    RecyclerView.Adapter<OrdersRecyclerAdapter.ViewHolder> ordersAdapter;
+    Order orders[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
 
-        RecyclerView recyclerView = findViewById(R.id.orderHistoryRecyclerView);
+        ordersRecyclerView = findViewById(R.id.orderHistoryRecyclerView);
+
         linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        ordersRecyclerView.setLayoutManager(linearLayoutManager);
+
+        DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
+
+        orders = dbHandler.getAllOrders();
+
+        ordersAdapter = new OrdersRecyclerAdapter(orders, this);
+        ordersRecyclerView.setAdapter(ordersAdapter);
+
 
 
     }
