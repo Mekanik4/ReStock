@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restock.CreateOrder;
+import com.example.restock.OrderPreview;
 import com.example.restock.R;
+import com.example.restock.objects.Order;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -19,7 +21,6 @@ import javax.security.auth.Subject;
 
 
 public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<CategoriesRecyclerAdapter.ViewHolder> {
-    //Variables storing data to display for this example
     private String[] categories;
     private int selectedPos = 0;
     private final Context mContext;
@@ -29,7 +30,6 @@ public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<CategoriesRe
         this.mContext = context;
     }
 
-    //Class that holds the items to be displayed (Views in card_layout)
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView categoryName;
@@ -45,15 +45,15 @@ public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<CategoriesRe
                     selectedPos = getLayoutPosition();
                     notifyItemChanged(selectedPos);
 
-                    if (mContext instanceof CreateOrder) {
+                    if (mContext instanceof CreateOrder)
                         ((CreateOrder)mContext).setSelectedCategory(selectedPos);
-                    }
+                    else if(mContext instanceof OrderPreview)
+                        ((OrderPreview)mContext).setSelectedCategory(selectedPos);
                 }
             });
         }
     }
 
-    //Methods that must be implemented for a RecyclerView.Adapter
     @NonNull
     @Override
     public CategoriesRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

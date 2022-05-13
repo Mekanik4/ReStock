@@ -60,7 +60,7 @@ public class CreateOrder extends AppCompatActivity {
         categoriesLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoriesRecyclerView.setLayoutManager(categoriesLayoutManager);
 
-        String[] categories = {"Soft Drinks", "Alcoholic Drinks", "Energy Drinks", "Juices", "Water", "Snacks", "Sandwich", "Chocolates", "Biscuits", "Croissants", "Ice Cream", "Cigars & Tobacco", "Tobacco Essentials"};
+        String[] categories = {"Soft Drinks", "Alcoholic Drinks", "Energy Drinks", "Juices", "Waters", "Snacks", "Sandwich", "Chocolates", "Biscuits", "Croissants", "Ice Cream", "Cigars & Tobacco", "Tobacco Essentials"};
 
         //Set my Adapter for the RecyclerView
         categoriesAdapter = new CategoriesRecyclerAdapter(categories,this);
@@ -80,32 +80,8 @@ public class CreateOrder extends AppCompatActivity {
         complete = findViewById(R.id.complete_order);
 
         items = new Item[13][];
-//            items[0] = new Item[dbHandler.getProducts("Soft Drinks").length];
-//            items[1] = new Item[dbHandler.getProducts("Alcoholic Drinks").length];
-//            items[2] = new Item[dbHandler.getProducts("Energy Drinks").length];
-//            items[3] = new Item[dbHandler.getProducts("Juices").length];
-//            items[4] = new Item[dbHandler.getProducts("Waters").length];
-//            items[5] = new Item[dbHandler.getProducts("Snacks").length];
-//            items[6] = new Item[dbHandler.getProducts("Sandwich").length];
-//            items[7] = new Item[dbHandler.getProducts("Chocolates").length];
-//            items[8] = new Item[dbHandler.getProducts("Biscuits").length];
-//            items[9] = new Item[dbHandler.getProducts("Croissants").length];
-//            items[10] = new Item[dbHandler.getProducts("Ice Cream").length];
-//            items[11] = new Item[dbHandler.getProducts("Cigars & Tobacco").length];
-//            items[12] = new Item[dbHandler.getProducts("Tobacco Essentials").length];
-        items[0] = dbHandler.getProducts("Soft Drinks");
-        items[1] = dbHandler.getProducts("Alcoholic Drinks");
-        items[2] = dbHandler.getProducts("Energy Drinks");
-        items[3] = dbHandler.getProducts("Juices");
-        items[4] = dbHandler.getProducts("Waters");
-        items[5] = dbHandler.getProducts("Snacks");
-        items[6] = dbHandler.getProducts("Sandwich");
-        items[7] = dbHandler.getProducts("Chocolates");
-        items[8] = dbHandler.getProducts("Biscuits");
-        items[9] = dbHandler.getProducts("Croissants");
-        items[10] = dbHandler.getProducts("Ice Cream");
-        items[11] = dbHandler.getProducts("Cigars & Tobacco");
-        items[12] = dbHandler.getProducts("Tobacco Essentials");
+        for(int i=0; i<categories.length; i++)
+            items[i] = dbHandler.getProducts(categories[i]);
 
         Bundle data = getIntent().getExtras();
         if(data != null){
