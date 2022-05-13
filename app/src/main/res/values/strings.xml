@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ReStock</string>
     <string name="category_title">Category Title</string>
-    <string name="order_no">Order\nNo.</string>
+    <string name="order_no">Order No.</string>
     <string name="item_name">Item Name</string>
     <string name="item_s_price">Item\'s Price</string>
     <string name="remove">-</string>
@@ -41,7 +41,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="history">History</string>
-    <string name="date">Date</string>
+    <string name="date">Date:</string>
     <string name="emailAddressHint">Enter Recipient\'s Email Address</string>
     <string name="emailBodySuggestion">Enter email body</string>
     <string name="testTxt">Test</string>
