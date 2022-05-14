@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.restock.OrderPreview;
 import com.example.restock.R;
 import com.example.restock.objects.Order;
 
@@ -37,6 +39,8 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView orderId, date, total, status;
         ImageButton pdfBtn;
+        Button editOrder;
+        private Order order;
 
         public ViewHolder(View orderView) {
             super(orderView);
@@ -45,11 +49,12 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
             total = itemView.findViewById(R.id.historyTotalPrice);
             status = itemView.findViewById(R.id.historyStatus);
             pdfBtn = itemView.findViewById(R.id.historyPdfBtn);
+            editOrder = itemView.findViewById(R.id.editNotCompletedBtn);
 
             pdfBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    File pdf = new File(Environment.getExternalStorageDirectory(), "Downloads/govgr_document.pdf"); //change path
+                    File pdf = new File(Environment.getExternalStorageDirectory(), "/govgr_document.pdf"); //change path
                     Log.d("pdfFIle", "" + pdf);
 
                     Uri uriPdfPath = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".provider", pdf);
@@ -69,6 +74,15 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
                     }
                 }
             });
+
+            editOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), OrderPreview.class);
+                    intent.putExtra("order_id", order.getOrderNumber()); //change order to actual order
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 
@@ -86,7 +100,14 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
         holder.orderId.setText(String.valueOf(orders[position].getOrderNumber()));
         holder.date.setText(String.valueOf(orders[position].getDate()));
         holder.total.setText(String.valueOf(orders[position].getTotalPrice()).concat("\u20ac"));
-        holder.status.setText(String.valueOf(orders[position].isCompleted()));
+        if(orders[position].isCompleted()) {
+            holder.status.setText("Completed");
+            holder.editOrder.setVisibility(View.GONE);
+        }
+        else {
+            holder.status.setText("Pending");
+            holder.pdfBtn.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -41,7 +41,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="history">History</string>
-    <string name="date">Date:</string>
+    <string name="date">Date</string>
     <string name="emailAddressHint">Enter Recipient\'s Email Address</string>
     <string name="emailBodySuggestion">Enter email body</string>
     <string name="testTxt">Test</string>
@@ -54,5 +54,14 @@
     <string name="order_id">Order id</string>
     <string name="order_date">Order date</string>
     <string name="pdf_fbtn_content_desc">PDF file path</string>
+    <string name="sortingButtonDescription">SortingButton</string>
+    <string name="total_descending_button">Total descending button</string>
+    <string name="total_ascending_button">Total ascending button</string>
+    <string name="order_number_descending_button">Order number descending button</string>
 
+    <string-array name="sort_types">
+        <item>Order No. Desc.</item>
+        <item>Total Asc.</item>
+        <item>Total Desc.</item>
+    </string-array>
 </resources>

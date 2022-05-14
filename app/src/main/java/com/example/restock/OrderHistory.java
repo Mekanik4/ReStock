@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.restock.RecycleView.ItemsRecyclerAdapter;
 import com.example.restock.RecycleView.OrdersRecyclerAdapter;
 import com.example.restock.objects.Order;
 
@@ -29,11 +28,10 @@ public class OrderHistory extends AppCompatActivity {
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
 
         orders = dbHandler.getAllOrders();
+        orders[0].setCompleted(true); //to delete that
 
         ordersAdapter = new OrdersRecyclerAdapter(orders, this);
         ordersRecyclerView.setAdapter(ordersAdapter);
-
-
 
     }
 }
