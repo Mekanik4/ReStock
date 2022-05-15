@@ -58,6 +58,7 @@
     <string name="total_descending_button">Total descending button</string>
     <string name="total_ascending_button">Total ascending button</string>
     <string name="order_number_descending_button">Order number descending button</string>
+    <string name="order_number_ascending_button">Order number ascending button</string>
 
     <string-array name="sort_types">
         <item>Order No. Desc.</item>
