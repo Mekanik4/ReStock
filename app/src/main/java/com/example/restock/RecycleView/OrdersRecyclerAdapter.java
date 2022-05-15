@@ -54,32 +54,17 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
             pdfBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    File pdf = new File(Environment.getExternalStorageDirectory(), "/govgr_document.pdf"); //change path
-                    Log.d("pdfFIle", "" + pdf);
+                    int position = getAdapterPosition();
 
-                    Uri uriPdfPath = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".provider", pdf);
-                    Log.d("pdfPath", "" + uriPdfPath);
-
-                    Intent pdfOpenIntent = new Intent(Intent.ACTION_VIEW);
-                    pdfOpenIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    pdfOpenIntent.setClipData(ClipData.newRawUri("", uriPdfPath));
-                    pdfOpenIntent.setDataAndType(uriPdfPath, "application/pdf");
-                    pdfOpenIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION |  Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
-                    try {
-                        mContext.startActivity(pdfOpenIntent);
-                    } catch (ActivityNotFoundException activityNotFoundException) {
-                        Toast.makeText(mContext, "There is no app to load corresponding PDF", Toast.LENGTH_LONG).show();
-
-                    }
                 }
             });
 
             editOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int position = getAdapterPosition();
                     Intent intent = new Intent(v.getContext(), OrderPreview.class);
-                    intent.putExtra("order_id", order.getOrderNumber()); //change order to actual order
+                    intent.putExtra("order_id", orders[position].getOrderNumber());
                     v.getContext().startActivity(intent);
                 }
             });

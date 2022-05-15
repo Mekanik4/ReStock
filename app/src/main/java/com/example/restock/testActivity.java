@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -47,23 +48,6 @@ public class testActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!recipientEmail.getText().toString().isEmpty() && !subject.getText().toString().isEmpty() && !body.getText().toString().isEmpty()) {
                     ActivityCompat.requestPermissions(testActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
-                    PdfDocument myPdf = new PdfDocument();
-                    PdfDocument.PageInfo pgInf = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
-                    PdfDocument.Page pg1 = myPdf.startPage(pgInf);
-                    Paint pnt = new Paint();
-                    pg1.getCanvas().drawText(body.getText().toString(), 10, 25, pnt);
-                    myPdf.finishPage(pg1);
-                    String fpath = Environment.getExternalStorageDirectory().getPath();
-                    fpath = fpath + "/Downloads/testPDF.pdf";
-                    File myFile = new File(fpath);
-
-                    try {
-                        myPdf.writeTo(new FileOutputStream(myFile));
-                    } catch(Exception e){
-                        e.printStackTrace();
-                        Toast.makeText(testActivity.this, "Something went wrong with the creation of this file.", Toast.LENGTH_SHORT).show();
-                    }
-                    myPdf.close();
 
 //                    Intent intent = new Intent(Intent.ACTION_SEND);
 //                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{recipientEmail.getText().toString()});
