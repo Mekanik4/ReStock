@@ -398,4 +398,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             return null;
         }
     }
+
+    public int getNumberOfOrdersInDB() {
+        int orders = 0;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM orders", null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
 }

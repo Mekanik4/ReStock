@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 DatabaseHandler dbHandler = new DatabaseHandler(HomeActivity.this, null, null, 1);
-                if(false) //replace false with check for empty db
+                if(dbHandler.getNumberOfOrdersInDB() == 0)
                     Toast.makeText(HomeActivity.this, "There are no orders in the database.", Toast.LENGTH_SHORT).show();
                 else {
                     Intent intent = new Intent(view.getContext(), OrderHistory.class);
