@@ -52,7 +52,6 @@
     <string name="emailSubjectSuggestion">Enter email subject</string>
     <string name="totalValue">Total</string>
     <string name="title_order_history">Order History</string>
-    <string name="orderNo">Order No</string>
     <string name="status">Status</string>
     <string name="sort_by">Sort by:</string>
     <string name="order_id">Order id</string>
@@ -66,6 +65,8 @@
     <string name="supplier">Supplier</string>
     <string name="send_to_supplier">Send to supplier</string>
     <string name="finish">Finish</string>
+    <string name="order_nno">Order\nNo.</string>
+    <string name="refreshing_button_description">Refreshing button</string>
 
     <string-array name="sort_types">
         <item>Order No. Desc.</item>
