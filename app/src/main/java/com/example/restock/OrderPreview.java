@@ -13,14 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.restock.RecycleView.CategoriesRecyclerAdapter;
-import com.example.restock.RecycleView.ItemsRecyclerAdapter;
 import com.example.restock.RecycleView.ItemsReviewAdapter;
 import com.example.restock.objects.Item;
 import com.example.restock.objects.Order;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class OrderPreview extends AppCompatActivity {
 

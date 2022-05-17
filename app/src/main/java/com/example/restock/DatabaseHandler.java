@@ -62,14 +62,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 COLUMN_ADDRESS + " TEXT" + ")";
         db.execSQL(CREATE_SUPPLIERS_TABLE);
 
-//        String CREATE_ORDER_TABLE = "CREATE TABLE " +
-//                TABLE_ORDER + "(" +
-//                "order_id" + " INTEGER PRIMARY KEY," +
-//                "date" + " TEXT," +
-//                "total_price" + " TEXT," +
-//                "document_path" + " TEXT" + ")";
-//        db.execSQL(CREATE_ORDER_TABLE);
-
         db.execSQL("DROP TABLE IF EXISTS `product`");
         db.execSQL("CREATE TABLE `product` (\n" +
                 "  `product_id` int NOT NULL,\n" +
