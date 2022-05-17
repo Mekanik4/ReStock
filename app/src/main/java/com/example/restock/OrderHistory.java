@@ -26,7 +26,7 @@ public class OrderHistory extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     RecyclerView.Adapter<OrdersRecyclerAdapter.ViewHolder> ordersAdapterDef, ordersAdapterNoDesc, ordersAdapterTotAsc, ordersAdapterTotDesc;
     Order orders[];
-    FloatingActionButton totalAsc, totalDesc, orderNoAsc, orderNoDesc, sortBy;
+    FloatingActionButton totalAsc, totalDesc, orderNoAsc, orderNoDesc, sortBy, refresher;
     Animation fabOpen, fabClose, rotateForward, rotateBackward;
 
     boolean isOpen = false;
@@ -45,6 +45,7 @@ public class OrderHistory extends AppCompatActivity {
 
         orders = dbHandler.getAllOrders();
 
+        orders[0].setCompleted(false);
         ordersAdapterDef = new OrdersRecyclerAdapter(orders, this);
         ordersRecyclerView.setAdapter(ordersAdapterDef);
 
@@ -53,6 +54,7 @@ public class OrderHistory extends AppCompatActivity {
         orderNoAsc =  findViewById(R.id.orderNoAscendingBtn);
         orderNoDesc = findViewById(R.id.orderNoDescendingBtn);
         sortBy = findViewById(R.id.sortingFloatingBtn);
+        refresher = findViewById(R.id.refreshBtn);
 
         //animations
         fabOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open);
@@ -146,6 +148,14 @@ public class OrderHistory extends AppCompatActivity {
             }
         });
 
+        refresher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
         sortBy.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -182,6 +192,14 @@ public class OrderHistory extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 Toast.makeText(OrderHistory.this, "Order ascending", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
+        refresher.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(OrderHistory.this, "Refresh page", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

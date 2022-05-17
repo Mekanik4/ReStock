@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/order_no"
+        android:text="@string/order_nno"
         app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
@@ -59,7 +59,7 @@
         android:id="@+id/dateTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="24dp"
         android:text="@string/date"
         app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintStart_toEndOf="@+id/orderNoTxtView"
@@ -69,7 +69,7 @@
         android:id="@+id/totalTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="56dp"
         android:text="@string/totalValue"
         app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintStart_toEndOf="@+id/dateTxtView"
@@ -79,7 +79,7 @@
         android:id="@+id/statusTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="40dp"
         android:text="@string/status"
         app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintStart_toEndOf="@+id/totalTxtView"
@@ -172,6 +172,24 @@
         app:layout_constraintBottom_toBottomOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintEnd_toStartOf="@+id/orderNoDescendingBtn"
         app:srcCompat="@drawable/ic_sort_19" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/refreshBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:clickable="true"
+        android:contentDescription="@string/refreshing_button_description"
+        android:focusable="true"
+        android:tint="@color/white"
+        android:visibility="visible"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_refresh_black_24dp"
+        tools:ignore="RedundantDescriptionCheck"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
