@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/supplierTxtView"
+            android:id="@+id/supplierCardTxtView"
             android:layout_width="128dp"
             android:layout_height="32dp"
             android:layout_marginStart="64dp"
@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/sendCompletedToSupplierBtn"
+            android:id="@+id/supplierCardSendCompletedToSupplierBtn"
             android:layout_width="72dp"
             android:layout_height="48dp"
             android:layout_marginEnd="32dp"

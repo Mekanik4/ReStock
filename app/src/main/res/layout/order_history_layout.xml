@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/historyOrderId"
+            android:id="@+id/historyCardOrderIdTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -22,38 +22,38 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/historyDate"
+            android:id="@+id/historyCardDateTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/order_date"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/historyOrderId"
+            app:layout_constraintStart_toEndOf="@+id/historyCardOrderIdTxtView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/historyTotalPrice"
+            android:id="@+id/historyCardTotalPriceTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="@string/total"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/historyDate"
+            app:layout_constraintStart_toEndOf="@+id/historyCardDateTxtView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/historyStatus"
+            android:id="@+id/historyCardStatusTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/status"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/historyTotalPrice"
+            app:layout_constraintStart_toEndOf="@+id/historyCardTotalPriceTxtView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/historyPdfBtn"
+            android:id="@+id/historyCardPdfBtn"
             android:layout_width="56dp"
             android:layout_height="60dp"
             android:layout_marginEnd="8dp"
@@ -65,7 +65,7 @@
             app:srcCompat="@mipmap/pdf_logo" />
 
         <Button
-            android:id="@+id/sendCompletedToSupplierBtn"
+            android:id="@+id/historyCardEditPendingBtn"
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:layout_marginEnd="8dp"

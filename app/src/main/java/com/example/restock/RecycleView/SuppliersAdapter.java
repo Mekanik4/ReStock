@@ -35,8 +35,8 @@ public class SuppliersAdapter extends RecyclerView.Adapter<SuppliersAdapter.View
         public ViewHolder(View completedView) {
             super(completedView);
 
-            supplierTxtView = completedView.findViewById(R.id.supplierTxtView);
-            sendToSupplier = completedView.findViewById(R.id.sendCompletedToSupplierBtn);
+            supplierTxtView = completedView.findViewById(R.id.supplierCardTxtView);
+            sendToSupplier = completedView.findViewById(R.id.supplierCardSendCompletedToSupplierBtn);
 
             sendToSupplier.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -35,12 +35,12 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
 
         public ViewHolder(View orderView) {
             super(orderView);
-            orderId = itemView.findViewById(R.id.supplierTxtView);
-            date = itemView.findViewById(R.id.historyDate);
-            total = itemView.findViewById(R.id.historyTotalPrice);
-            status = itemView.findViewById(R.id.historyStatus);
-            pdfBtn = itemView.findViewById(R.id.historyPdfBtn);
-            editOrder = itemView.findViewById(R.id.sendCompletedToSupplierBtn);
+            orderId = itemView.findViewById(R.id.historyCardOrderIdTxtView);
+            date = itemView.findViewById(R.id.historyCardDateTxtView);
+            total = itemView.findViewById(R.id.historyCardTotalPriceTxtView);
+            status = itemView.findViewById(R.id.historyCardStatusTxtView);
+            pdfBtn = itemView.findViewById(R.id.historyCardPdfBtn);
+            editOrder = itemView.findViewById(R.id.historyCardEditPendingBtn);
 
             pdfBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

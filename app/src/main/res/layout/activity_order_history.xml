@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/orderNoTxtView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrderHistory">
@@ -47,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/orderNumTxtView"
+        android:id="@+id/orderNoTxtView"
         android:layout_width="64dp"
         android:layout_height="36dp"
         android:layout_marginStart="4dp"
@@ -57,23 +56,23 @@
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitle" />
 
     <TextView
-        android:id="@+id/priceTxtView"
+        android:id="@+id/dateTxtView"
         android:layout_width="48dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:text="@string/date"
         app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
-        app:layout_constraintStart_toEndOf="@+id/orderNumTxtView"
+        app:layout_constraintStart_toEndOf="@+id/orderNoTxtView"
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
 
     <TextView
-        android:id="@+id/dateTxtView"
+        android:id="@+id/totalTxtView"
         android:layout_width="48dp"
         android:layout_height="24dp"
         android:layout_marginStart="32dp"
         android:text="@string/totalValue"
         app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
-        app:layout_constraintStart_toEndOf="@+id/priceTxtView"
+        app:layout_constraintStart_toEndOf="@+id/dateTxtView"
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
 
     <TextView
@@ -83,7 +82,7 @@
         android:layout_marginStart="20dp"
         android:text="@string/status"
         app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
-        app:layout_constraintStart_toEndOf="@+id/dateTxtView"
+        app:layout_constraintStart_toEndOf="@+id/totalTxtView"
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -97,10 +96,10 @@
         android:contentDescription="@string/sortingButtonDescription"
         android:focusable="true"
         android:tint="@color/white"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_sort_24"
-        app:borderWidth="0dp"
         tools:ignore="ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -115,10 +114,10 @@
         android:focusable="true"
         android:tint="@color/white"
         android:visibility="invisible"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toTopOf="@+id/sortingFloatingBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_euro_descending"
-        app:borderWidth="0dp"
         tools:ignore="RedundantDescriptionCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -133,10 +132,10 @@
         android:focusable="true"
         android:tint="@color/white"
         android:visibility="invisible"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toTopOf="@+id/totalDescendingFloatingBtn"
         app:layout_constraintEnd_toEndOf="@+id/orderHistoryRecyclerView"
         app:srcCompat="@drawable/ic_euro_ascending"
-        app:borderWidth="0dp"
         tools:ignore="RedundantDescriptionCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -151,10 +150,10 @@
         android:focusable="true"
         android:tint="@color/white"
         android:visibility="invisible"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintEnd_toStartOf="@+id/sortingFloatingBtn"
         app:srcCompat="@drawable/ic_sort_91"
-        app:borderWidth="0dp"
         tools:ignore="RedundantDescriptionCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -169,9 +168,9 @@
         android:focusable="true"
         android:tint="@color/white"
         android:visibility="invisible"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintEnd_toStartOf="@+id/orderNoDescendingBtn"
-        app:borderWidth="0dp"
         app:srcCompat="@drawable/ic_sort_19" />
 
 
