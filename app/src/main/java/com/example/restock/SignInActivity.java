@@ -14,7 +14,6 @@ import android.widget.EditText;
 import com.example.restock.objects.Profile;
 
 public class SignInActivity extends AppCompatActivity {
-
     private Button signIn;
     private Button signUp;
     private Button bypass;
@@ -29,13 +28,13 @@ public class SignInActivity extends AppCompatActivity {
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
 
         Profile user;
-//        user = dbHandler.getSignedInUser();
-//        if(user != null){
-//            Intent intent = new Intent(this, HomeActivity.class);
-//            intent.putExtra("user_id", user.getProfileID());
-//            startActivity(intent);
-//            finish();
-//        }
+        user = dbHandler.getSignedInUser();
+        if(user != null){
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.putExtra("user_id", user.getProfileID());
+            startActivity(intent);
+            finish();
+        }
 
         email = (EditText) findViewById(R.id.editTextTextEmailAddress);
 
@@ -49,12 +48,16 @@ public class SignInActivity extends AppCompatActivity {
 
         signedIn = (CheckBox) findViewById(R.id.signedIn_signIn);
 
-        user = dbHandler.getSignedIn(email.getText().toString(), password.getText().toString());
         Profile finalUser = user;
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                if(signedIn.isChecked()) {
+//                    finalUser.setSignedIn(signedIn.isChecked());
+//                }
+//                finalUser = dbHandler.getSignedIn(email.getText().toString(), password.getText().toString());
+
                 if(finalUser != null) {
                     Intent intent = new Intent(view.getContext(), HomeActivity.class);
                     intent.putExtra("user_id", finalUser.getProfileID());
