@@ -23,7 +23,7 @@ public class EditProfileActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_edit_profile);
 
         DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
         Bundle data = getIntent().getExtras();
@@ -39,11 +39,11 @@ public class EditProfileActivity extends AppCompatActivity{
         ownership = (EditText) findViewById(R.id.editTextOwnership);
         address = (EditText) findViewById(R.id.editTextAddress);
 
-        afm.setHint(user.getAfm());
-        phone.setHint(user.getPhone());
-        ownership.setHint(user.getOwnership());
-        email.setHint(user.getEmail());
-        address.setHint(user.getAddress());
+//        afm.setHint(user.getAfm());
+//        phone.setHint(user.getPhone());
+//        ownership.setHint(user.getOwnership());
+//        email.setHint(user.getEmail());
+//        address.setHint(user.getAddress());
 
         email.setEnabled(false);
         phone.setEnabled(false);
@@ -121,5 +121,6 @@ public class EditProfileActivity extends AppCompatActivity{
             // Show the Alert Dialog box
             alertDialog.show();
         }
+        EditProfileActivity.super.onBackPressed();
     }
 }

@@ -29,13 +29,13 @@ public class SignInActivity extends AppCompatActivity {
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
 
         Profile user;
-        user = dbHandler.getSignedInUser();
-        if(user != null){
-            Intent intent = new Intent(this, HomeActivity.class);
-            intent.putExtra("user_id", user.getProfileID());
-            startActivity(intent);
-            finish();
-        }
+//        user = dbHandler.getSignedInUser();
+//        if(user != null){
+//            Intent intent = new Intent(this, HomeActivity.class);
+//            intent.putExtra("user_id", user.getProfileID());
+//            startActivity(intent);
+//            finish();
+//        }
 
         email = (EditText) findViewById(R.id.editTextTextEmailAddress);
 
