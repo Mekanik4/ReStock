@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ReStock</string>
     <string name="category_title">Category Title</string>
-    <string name="order_no">Order\nNo.</string>
+    <string name="order_no">Order No.</string>
     <string name="item_name">Item Name</string>
     <string name="item_s_price">Item\'s Price</string>
     <string name="remove">-</string>
@@ -52,7 +52,24 @@
     <string name="emailSubjectSuggestion">Enter email subject</string>
     <string name="totalValue">Total</string>
     <string name="title_order_history">Order History</string>
-    <string name="completed">completed</string>
     <string name="orderNo">Order No</string>
+    <string name="status">Status</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="order_id">Order id</string>
+    <string name="order_date">Order date</string>
+    <string name="pdf_fbtn_content_desc">PDF file path</string>
+    <string name="sortingButtonDescription">SortingButton</string>
+    <string name="total_descending_button">Total descending button</string>
+    <string name="total_ascending_button">Total ascending button</string>
+    <string name="order_number_descending_button">Order number descending button</string>
+    <string name="order_number_ascending_button">Order number ascending button</string>
+    <string name="supplier">Supplier</string>
+    <string name="send_to_supplier">Send to supplier</string>
+    <string name="finish">Finish</string>
 
+    <string-array name="sort_types">
+        <item>Order No. Desc.</item>
+        <item>Total Asc.</item>
+        <item>Total Desc.</item>
+    </string-array>
 </resources>

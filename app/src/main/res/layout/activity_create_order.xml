@@ -10,7 +10,7 @@
         android:id="@+id/order_no_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="22dp"
         android:text="@string/order_no"
         android:textColor="?android:textColorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,6 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/totalPrice"
-        app:layout_constraintStart_toEndOf="@+id/order_number"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -62,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/euro_0"
         android:textAlignment="center"
         android:textColor="?android:textColorPrimary"
@@ -75,8 +74,8 @@
         android:id="@+id/order_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="22dp"
         android:text="@string/_0"
         android:textColor="?android:textColorPrimary"
         app:layout_constraintStart_toEndOf="@+id/order_no_text"

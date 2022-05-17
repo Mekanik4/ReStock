@@ -1,7 +1,5 @@
 package com.example.restock.objects;
 
-import java.util.Date;
-
 public class Order {
     private int orderNumber;
     private String date;
@@ -52,8 +50,7 @@ public class Order {
         this.date = date;
     }
 
-    public int getOrderNumber() {return orderNumber;
-    }
+    public int getOrderNumber() {return orderNumber; }
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
     }
@@ -73,4 +70,5 @@ public class Order {
     public void setDocumentPath(String documentPath) {
         this.documentPath = documentPath;
     }
+
 }

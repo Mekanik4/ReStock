@@ -188,8 +188,6 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
         double tempTotal = 0;
         Log.d("items",String.valueOf(items.length));
         for(int i=0; i<items.length; i++){
-            Log.d("items",String.valueOf(i));
-            Log.d("items",String.valueOf(items[i].length));
             for(int j=0; j<items[i].length; j++){
                 tempTotal += (double)items[i][j].getQuantity() * items[i][j].getPrice();
             }
