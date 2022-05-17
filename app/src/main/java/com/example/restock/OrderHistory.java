@@ -46,11 +46,11 @@ public class OrderHistory extends AppCompatActivity {
         ordersAdapterDef = new OrdersRecyclerAdapter(orders, this);
         ordersRecyclerView.setAdapter(ordersAdapterDef);
 
-        totalAsc = (FloatingActionButton) findViewById(R.id.totalAscendingFloatingBtn);
-        totalDesc = (FloatingActionButton) findViewById(R.id.totalDescendingFloatingBtn);
-        orderNoAsc = (FloatingActionButton) findViewById(R.id.orderNoAscendingBtn);
-        orderNoDesc = (FloatingActionButton) findViewById(R.id.orderNoDescendingBtn);
-        sortBy = (FloatingActionButton) findViewById(R.id.sortingFloatingBtn);
+        totalAsc = findViewById(R.id.totalAscendingFloatingBtn);
+        totalDesc = findViewById(R.id.totalDescendingFloatingBtn);
+        orderNoAsc =  findViewById(R.id.orderNoAscendingBtn);
+        orderNoDesc = findViewById(R.id.orderNoDescendingBtn);
+        sortBy = findViewById(R.id.sortingFloatingBtn);
 
         //animations
         fabOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open);

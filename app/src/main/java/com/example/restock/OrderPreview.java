@@ -117,7 +117,10 @@ public class OrderPreview extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(view.getContext(), CompletedOrder.class);
+                intent.putExtra("order_id", order.getOrderNumber());
+                startActivity(intent);
+                finish();
             }
         });
     }

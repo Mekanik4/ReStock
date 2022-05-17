@@ -59,6 +59,9 @@
     <string name="total_ascending_button">Total ascending button</string>
     <string name="order_number_descending_button">Order number descending button</string>
     <string name="order_number_ascending_button">Order number ascending button</string>
+    <string name="supplier">Supplier</string>
+    <string name="send_to_supplier">Send to supplier</string>
+    <string name="finish">Finish</string>
 
     <string-array name="sort_types">
         <item>Order No. Desc.</item>

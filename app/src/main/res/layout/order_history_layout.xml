@@ -45,7 +45,7 @@
             android:id="@+id/historyStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="@string/status"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +65,7 @@
             app:srcCompat="@mipmap/pdf_logo" />
 
         <Button
-            android:id="@+id/editNotCompletedBtn"
+            android:id="@+id/sendCompletedToSupplierBtn"
             android:layout_width="64dp"
             android:layout_height="48dp"
             android:layout_marginEnd="8dp"

@@ -8,7 +8,7 @@
     tools:context=".OrderHistory">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/titleToolbar"
+        android:id="@+id/orderHistoryTitleToolbar"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="?attr/colorPrimary"
@@ -32,10 +32,10 @@
         android:text="@string/title_order_history"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/titleToolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/titleToolbar"
-        app:layout_constraintTop_toTopOf="@+id/titleToolbar" />
+        app:layout_constraintBottom_toBottomOf="@+id/orderHistoryTitleToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/orderHistoryTitleToolbar"
+        app:layout_constraintStart_toStartOf="@+id/orderHistoryTitleToolbar"
+        app:layout_constraintTop_toTopOf="@+id/orderHistoryTitleToolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderHistoryRecyclerView"
@@ -64,7 +64,7 @@
         android:text="@string/date"
         app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintStart_toEndOf="@+id/orderNumTxtView"
-        app:layout_constraintTop_toBottomOf="@+id/titleToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
 
     <TextView
         android:id="@+id/dateTxtView"
@@ -74,7 +74,7 @@
         android:text="@string/totalValue"
         app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintStart_toEndOf="@+id/priceTxtView"
-        app:layout_constraintTop_toBottomOf="@+id/titleToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
 
     <TextView
         android:id="@+id/statusTxtView"
@@ -84,7 +84,7 @@
         android:text="@string/status"
         app:layout_constraintBottom_toTopOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintStart_toEndOf="@+id/dateTxtView"
-        app:layout_constraintTop_toBottomOf="@+id/titleToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/sortingFloatingBtn"
@@ -100,6 +100,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_sort_24"
+        app:borderWidth="0dp"
         tools:ignore="ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -117,6 +118,7 @@
         app:layout_constraintBottom_toTopOf="@+id/sortingFloatingBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_euro_descending"
+        app:borderWidth="0dp"
         tools:ignore="RedundantDescriptionCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -134,6 +136,7 @@
         app:layout_constraintBottom_toTopOf="@+id/totalDescendingFloatingBtn"
         app:layout_constraintEnd_toEndOf="@+id/orderHistoryRecyclerView"
         app:srcCompat="@drawable/ic_euro_ascending"
+        app:borderWidth="0dp"
         tools:ignore="RedundantDescriptionCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -151,6 +154,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintEnd_toStartOf="@+id/sortingFloatingBtn"
         app:srcCompat="@drawable/ic_sort_91"
+        app:borderWidth="0dp"
         tools:ignore="RedundantDescriptionCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -167,6 +171,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/orderHistoryRecyclerView"
         app:layout_constraintEnd_toStartOf="@+id/orderNoDescendingBtn"
+        app:borderWidth="0dp"
         app:srcCompat="@drawable/ic_sort_19" />
 
 

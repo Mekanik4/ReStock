@@ -10,6 +10,13 @@ import android.util.Log;
 import com.example.restock.objects.Item;
 import com.example.restock.objects.Order;
 import com.example.restock.objects.Profile;
+import com.example.restock.objects.Supplier;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -186,8 +193,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public int[][] getItems(int order_id){
 
-        String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE " +
-                "order_id" + " = " + order_id ;
+        String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE order_id = " + order_id ;
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
@@ -400,10 +406,68 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public int getNumberOfOrdersInDB() {
-        int orders = 0;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM orders", null);
         cursor.moveToFirst();
+        db.close();
         return cursor.getInt(0);
+    }
+
+    public Supplier getSupplierFromCategoryId(int categoryId) {
+        Supplier supplier;
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Getting supplier_id from category_id
+        Cursor cursor = db.rawQuery("SELECT supplier_id FROM category WHERE category_id = " + String.valueOf(categoryId), null);
+        cursor.moveToFirst();
+        int supplierId = cursor.getInt(0);
+        ////Getting supplier object from supplier_id
+        cursor = db.rawQuery("SELECT * FROM suppliers WHERE supplier_id = " + String.valueOf(supplierId), null);
+        cursor.moveToFirst();
+        supplier = new Supplier(supplierId, cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+        //db isn't closed because this function will close the connection pool for at least one more query in another function
+        return supplier;
+    }
+
+    public int getCategoryIdFromProductId(int productId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Getting category name from product_id
+        Cursor cursor = db.rawQuery("SELECT product_family FROM product WHERE product_id = " + String.valueOf(productId), null);
+        cursor.moveToFirst();
+        String productFamily = "\"" +cursor.getString(0) + "\"";
+        // //Getting category_id from category name
+        cursor = db.rawQuery("SELECT category_id FROM category WHERE name = " + productFamily,null);
+        //db isn't closed because this function will close the connection pool for at least one more query in another function
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
+
+    public ArrayList<Supplier> getOrderSuppliers(int orderId) {
+        ArrayList<Integer> productIds = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Getting product_ids from order's list of items and putting them in a list
+        Cursor cursor = db.rawQuery("SELECT product_id FROM items WHERE order_id = " + String.valueOf(orderId), null);
+        cursor.moveToFirst();
+        for(int i = 0; i < cursor.getCount(); i++) {
+            productIds.add(cursor.getInt(0));
+            cursor.moveToNext();
+        }
+        //Getting category_ids from product_ids (with use of custom function) and putting them in a list
+        ArrayList<Integer> categoryIds = new ArrayList<>();
+        for(int i = 0; i < productIds.size(); i++)
+            categoryIds.add(getCategoryIdFromProductId(productIds.get(i)));
+        //Getting supplier_objects from category_ids (with use of custom function) and putting them in a list
+        ArrayList<Supplier> suppliers = new ArrayList<>();
+        boolean duplicate = false;
+        for(int i = 0; i < categoryIds.size(); i++) {
+            //Checking for  duplicate supplier entries
+            for (int j = 0; j < suppliers.size(); j++)
+                if (suppliers.get(j).getSupplierId() == getSupplierFromCategoryId(categoryIds.get(i)).getSupplierId())
+                    duplicate = true;
+                if(!duplicate)
+                    suppliers.add(getSupplierFromCategoryId(categoryIds.get(i))); //if the supplier isn't already in the list, add it
+                duplicate = false;
+        }
+        db.close();
+        return suppliers;
     }
 }

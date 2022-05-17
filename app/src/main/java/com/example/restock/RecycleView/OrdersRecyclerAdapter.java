@@ -1,30 +1,21 @@
 package com.example.restock.RecycleView;
 
 import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restock.OrderPreview;
 import com.example.restock.R;
 import com.example.restock.objects.Order;
-
-import java.io.File;
 
 public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAdapter.ViewHolder> {
 
@@ -44,12 +35,12 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
 
         public ViewHolder(View orderView) {
             super(orderView);
-            orderId = itemView.findViewById(R.id.historyOrderId);
+            orderId = itemView.findViewById(R.id.supplierTxtView);
             date = itemView.findViewById(R.id.historyDate);
             total = itemView.findViewById(R.id.historyTotalPrice);
             status = itemView.findViewById(R.id.historyStatus);
             pdfBtn = itemView.findViewById(R.id.historyPdfBtn);
-            editOrder = itemView.findViewById(R.id.editNotCompletedBtn);
+            editOrder = itemView.findViewById(R.id.sendCompletedToSupplierBtn);
 
             pdfBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
