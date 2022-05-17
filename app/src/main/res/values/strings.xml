@@ -22,6 +22,10 @@
     <string name="view_profile">View Profile</string>
     <string name="owner_name">Makis Tsarlatanos</string>
     <string name="profile">Profile</string>
+    <string name="profile_pg">Your Profile</string>
+    <string name="signIn">Sign In</string>
+    <string name="signUp">Sign Up</string>
+    <string name="signedIn">Keep me Signed In</string>
 
     <!-- Strings used for hints -->
     <string name="pass">Password</string>

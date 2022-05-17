@@ -1,5 +1,6 @@
 package com.example.restock;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -401,7 +402,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "signedIn = true";
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery(query, null);
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
         Profile user = new Profile();
         if(cursor.moveToFirst()){
             user.setProfileID(cursor.getInt(0));
@@ -424,7 +425,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "user_id = ?";
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
 
         if (cursor.moveToFirst()) {
             Profile user = new Profile();
@@ -441,6 +442,83 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } else {
             db.close();
             return null;
+        }
+    }
+
+    public Profile getSignedIn(String email, String password){
+        String query = "SELECT * FROM 'user' WHERE " +
+                "user_email" + " = " + email + " and user_password = " + password;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            Profile user = new Profile();
+            user.setProfileID(cursor.getInt(0));
+            user.setPassword(cursor.getString(1));
+            user.setOwnership(cursor.getString(2));
+            user.setAfm(cursor.getString(3));
+            user.setEmail(cursor.getString(4));
+            user.setPhone(cursor.getString(5));
+            user.setAddress(cursor.getString(6));
+            user.setSignedIn(Boolean.parseBoolean(cursor.getString(7)));
+            db.close();
+            return user;
+        } else {
+            db.close();
+            return null;
+        }
+    }
+
+    public boolean addProfile(Profile profile) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("profile_id", profile.getProfileID());
+        values.put("password", profile.getPassword());
+        values.put("ownership", profile.getOwnership());
+        values.put("afm", profile.getAfm());
+        values.put("email", profile.getEmail());
+        values.put("phone", profile.getPhone());
+        values.put("address", profile.getAddress());
+        values.put("signedIn", profile.isSignedIn());
+
+        long i = db.insert("user", null , values);
+        db.close();
+        return i != -1;
+    }
+
+    public void updateProfile(Profile profile) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("user_id", profile.getProfileID());
+        values.put("password", profile.getPassword());
+        values.put("name", profile.getOwnership());
+        values.put("VAT_number", profile.getAfm());
+        values.put("email", profile.getEmail());
+        values.put("phone", profile.getPhone());
+        values.put("address", profile.getAddress());
+        values.put("signedIn", profile.isSignedIn());
+
+        db.update("user", values, "profile_id = ?", new String[]{String.valueOf(profile.getProfileID())});
+        Log.d("db", "update");
+        db.close();
+    }
+
+    public int getNewID() {
+        String query = "SELECT * FROM 'user' ORDER BY 'user_id' DESC LIMIT 1";
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
+        int id;
+        if(cursor.moveToFirst()) {
+            id = cursor.getInt(0);
+            db.close();
+            return id;
+        } else {
+            db.close();
+            return 1;
         }
     }
 }

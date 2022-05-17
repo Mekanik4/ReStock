@@ -15,6 +15,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button history;
     private Button viewProfile;
     private Button test;
+    private TextView ownerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,10 @@ public class HomeActivity extends AppCompatActivity {
         viewProfile = (Button) findViewById(R.id.viewProfile_button);
 
         test = (Button)findViewById(R.id.testBtn);
+
+        ownerName = (TextView) findViewById(R.id.profile_name);
+
+        ownerName.setText(user.getOwnership());
 
         test.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +65,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
+        Profile finalUser = user;
         viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ProfileActivity.class);
+                Intent intent = new Intent(view.getContext(), EditProfileActivity.class);
+                intent.putExtra("user_id", finalUser.getProfileID());
                 startActivity(intent);
             }
         });
