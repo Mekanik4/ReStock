@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restock.R;
+import com.example.restock.objects.Item;
 import com.example.restock.objects.Order;
 import com.example.restock.objects.Supplier;
 
@@ -42,7 +43,7 @@ public class SuppliersAdapter extends RecyclerView.Adapter<SuppliersAdapter.View
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    //send email with text of products needed
+                    //send email with text of products needed, use startActivityForResult on intent for returning.
                 }
             });
         }
