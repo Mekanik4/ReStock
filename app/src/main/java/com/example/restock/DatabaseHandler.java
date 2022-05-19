@@ -428,8 +428,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         values.put("user_id", profile.getProfileID());
         values.put("password", profile.getPassword());
-        values.put("ownership", profile.getOwnership());
-        values.put("afm", profile.getAfm());
+        values.put("name", profile.getOwnership());
+        values.put("VAT_number", profile.getAfm());
         values.put("email", profile.getEmail());
         values.put("phone", profile.getPhone());
         values.put("address", profile.getAddress());
@@ -465,7 +465,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
         int id;
         if(cursor.moveToFirst()) {
-            id = cursor.getInt(0) + 1;
+            id = cursor.getInt(0) ;
             db.close();
             return id;
         } else {

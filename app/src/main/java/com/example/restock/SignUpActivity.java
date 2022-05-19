@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.restock.objects.Profile;
 
@@ -33,7 +35,6 @@ public class SignUpActivity extends AppCompatActivity{
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
 
         save = (Button) findViewById(R.id.save_button);
-    //    save.setVisibility(View.GONE);
 
         pass = (EditText) findViewById(R.id.editTextPassword);
         passConfirm = (EditText) findViewById(R.id.editTextPasswordConfirm);
@@ -45,22 +46,21 @@ public class SignUpActivity extends AppCompatActivity{
         signedIn = (CheckBox) findViewById(R.id.signedIn);
         id = dbHandler.getNewID() + 1;
 
-//        email.setKeyListener(null);
-//        phone.setKeyListener(null);
-//        afm.setKeyListener(null);
-//        ownership.setKeyListener(null);
-//        address.setKeyListener(null);
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pass.getText().toString() == passConfirm.getText().toString()) {
+                if(pass.getText().toString().equals(passConfirm.getText().toString())) {
                     Profile user = new Profile(id, ownership.getText().toString(), address.getText().toString(), email.getText().toString(),
                             phone.getText().toString(), afm.getText().toString(), pass.getText().toString(), signedIn.isChecked());
                     if (dbHandler.addProfile(user)) {
                         Log.d("db", "yas");
+                        Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                        intent.putExtra("user_id", user.getProfileID());
+                        startActivity(intent);
                     } else {
                         Log.d("db", "mpa");
+                        Toast toast = Toast.makeText(getApplicationContext(), "Process failed\nPlease try again", Toast.LENGTH_LONG);
+                        toast.show();
                     }
                 }
                 else{

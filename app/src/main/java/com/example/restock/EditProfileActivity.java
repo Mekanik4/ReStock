@@ -39,11 +39,11 @@ public class EditProfileActivity extends AppCompatActivity{
         ownership = (EditText) findViewById(R.id.editTextOwnership);
         address = (EditText) findViewById(R.id.editTextAddress);
 
-//        afm.setHint(user.getAfm());
-//        phone.setHint(user.getPhone());
-//        ownership.setHint(user.getOwnership());
-//        email.setHint(user.getEmail());
-//        address.setHint(user.getAddress());
+        afm.setText(user.getAfm());
+        phone.setText(user.getPhone());
+        ownership.setText(user.getOwnership());
+        email.setText(user.getEmail());
+        address.setText(user.getAddress());
 
         email.setEnabled(false);
         phone.setEnabled(false);
