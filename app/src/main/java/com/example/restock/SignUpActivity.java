@@ -43,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity{
         address = (EditText) findViewById(R.id.editTextTextPostalAddress);
         email = (EditText) findViewById(R.id.editTextEmailAddress);
         signedIn = (CheckBox) findViewById(R.id.signedIn);
-        id = dbHandler.getNewID();
+        id = dbHandler.getNewID() + 1;
 
 //        email.setKeyListener(null);
 //        phone.setKeyListener(null);
