@@ -352,7 +352,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public Profile getSignedInUser(){
         String query = "SELECT * FROM 'user' WHERE " +
-                "signedIn = true";
+                "signedIn = 1";
         SQLiteDatabase db = this.getWritableDatabase();
 
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);

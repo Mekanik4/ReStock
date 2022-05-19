@@ -54,7 +54,8 @@ public class SignUpActivity extends AppCompatActivity{
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pass == passConfirm) {
+                
+                if(pass.getText().toString() == passConfirm.getText().toString()) {
                     Profile user = new Profile(id, ownership.getText().toString(), address.getText().toString(), email.getText().toString(),
                             phone.getText().toString(), afm.getText().toString(), pass.getText().toString(), signedIn.isChecked());
                     if (dbHandler.addProfile(user)) {

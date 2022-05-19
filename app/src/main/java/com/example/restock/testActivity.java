@@ -117,7 +117,7 @@ public class testActivity extends AppCompatActivity {
             //close the document
             mDoc.close();
             //show message that file is saved, it will show file name and file path too
-            Toast.makeText(this, mFileName +".pdf\nis saved to\n"+ mFilePath, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, mFileName +".pdf\nis saved to\n"+ mFilePath, Toast.LENGTH_LONG).show();
         }
         catch (Exception e){
             //if any thing goes wrong causing exception, get and show exception message
