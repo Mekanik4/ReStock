@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.restock.RecycleView.SuppliersAdapter;
 import com.example.restock.objects.Order;
+import com.example.restock.objects.Profile;
 import com.example.restock.objects.Supplier;
 
 import java.util.ArrayList;
@@ -52,7 +53,10 @@ public class CompletedOrder extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Order pdf saved to directory.", Toast.LENGTH_SHORT).show();//maybe change directory to the actual directory
                 Intent intent = new Intent(v.getContext(), HomeActivity.class);
+                Profile user = dbHandler.getSignedInUser();
+                intent.putExtra("user_id", user.getProfileID());
                 startActivity(intent);
+                finish();
             }
         });
 

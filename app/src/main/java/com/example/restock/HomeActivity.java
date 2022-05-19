@@ -2,6 +2,9 @@ package com.example.restock;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +19,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button history;
     private Button viewProfile;
     private Button test;
+    private Button signOut;
     private TextView ownerName;
 
     @Override
@@ -38,6 +42,8 @@ public class HomeActivity extends AppCompatActivity {
         test = (Button)findViewById(R.id.testBtn);
 
         ownerName = (TextView) findViewById(R.id.profile_name);
+
+        signOut = findViewById(R.id.signOut);
 
         ownerName.setText(user.getOwnership());
 
@@ -79,6 +85,43 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), EditProfileActivity.class);
                 intent.putExtra("user_id", finalUser.getProfileID());
                 startActivity(intent);
+            }
+        });
+
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+
+                // Set the message show for the Alert time
+                builder.setMessage("Are you sure you want to sign out?");
+
+                // Set Alert Title
+                builder.setTitle("Caution!");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        finalUser.setSignedIn(false);
+                        dbHandler.updateProfile(finalUser);
+                        Intent intent = new Intent(view.getContext(), SignInActivity.class);
+                        Toast.makeText(HomeActivity.this,"Signed out successfully", Toast.LENGTH_LONG).show();
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        // If user click no
+                        // then dialog box is canceled.
+                        dialog.cancel();
+                    }
+                });
+                // Create the Alert dialog
+                AlertDialog alertDialog = builder.create();
+                // Show the Alert Dialog box
+                alertDialog.show();
             }
         });
     }
