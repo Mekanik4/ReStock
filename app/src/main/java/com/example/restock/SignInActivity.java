@@ -64,6 +64,8 @@ public class SignInActivity extends AppCompatActivity {
                     }
                     Intent intent = new Intent(view.getContext(), HomeActivity.class);
                     intent.putExtra("user_id", finalUser.getProfileID());
+                    finalUser.setSignedIn(true);
+                    dbHandler.updateProfile(finalUser);
                     startActivity(intent);
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
@@ -106,5 +108,8 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed(){
+        finishAffinity();
+    }
 }
