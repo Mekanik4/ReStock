@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.restock.objects.Profile;
 
@@ -55,12 +54,9 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Profile finalUser = dbHandler.getSignedIn(email.getText().toString(), password.getText().toString());
                 if(finalUser != null) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "OK 1", Toast.LENGTH_LONG);
-                    toast.show();
                     if(signedIn.isChecked()) {
                         finalUser.setSignedIn(signedIn.isChecked());
-                        toast = Toast.makeText(getApplicationContext(), "OK 2", Toast.LENGTH_LONG);
-                        toast.show();
+                        dbHandler.updateProfile(finalUser);
                     }
                     Intent intent = new Intent(view.getContext(), HomeActivity.class);
                     intent.putExtra("user_id", finalUser.getProfileID());
