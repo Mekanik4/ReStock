@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="@+id/completedOrderToolbar" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/supplierTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"

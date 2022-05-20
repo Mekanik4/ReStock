@@ -16,54 +16,49 @@
         tools:ignore="ExtraText" >
         <activity
             android:name=".CompletedOrder"
-            android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity"
+            android:exported="false" />
         <activity
             android:name=".SignInActivity"
-            android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity"
+            android:exported="false" />
         <activity
             android:name=".OrderPreview"
-            android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity
-            android:name=".testActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity"
+            android:exported="false"/>
         <activity
             android:name=".OrderHistory"
-            android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity"
+            android:exported="false"/>
         <activity
             android:name=".CreateOrder"
-            android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity"
+            android:exported="false"/>
         <activity
             android:name=".HomeActivity"
-            android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity"
+            android:exported="false" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity"
+            android:exported="false"/>
         <activity
             android:name=".EditProfileActivity"
-            android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
+            tools:ignore="LockedOrientationActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

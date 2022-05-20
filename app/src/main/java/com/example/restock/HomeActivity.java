@@ -2,7 +2,6 @@ package com.example.restock;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,7 +17,6 @@ public class HomeActivity extends AppCompatActivity {
     private Button newOrder;
     private Button history;
     private Button viewProfile;
-    private Button test;
     private Button signOut;
     private TextView ownerName;
 
@@ -39,21 +37,12 @@ public class HomeActivity extends AppCompatActivity {
 
         viewProfile = (Button) findViewById(R.id.viewProfile_button);
 
-        test = (Button)findViewById(R.id.testBtn);
-
         ownerName = (TextView) findViewById(R.id.profile_name);
 
-        signOut = findViewById(R.id.signOut);
+        signOut = findViewById(R.id.signOutBtn);
 
         ownerName.setText(user.getOwnership());
 
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), testActivity.class);
-                startActivity(intent);
-            }
-        });
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override

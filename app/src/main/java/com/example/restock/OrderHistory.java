@@ -45,7 +45,6 @@ public class OrderHistory extends AppCompatActivity {
 
         orders = dbHandler.getAllOrders();
 
-        orders[0].setCompleted(false);
         ordersAdapterDef = new OrdersRecyclerAdapter(orders, this);
         ordersRecyclerView.setAdapter(ordersAdapterDef);
 

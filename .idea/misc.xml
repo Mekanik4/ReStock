@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/gtsak/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_completed_order.xml" value="0.25" />
         <entry key="..\:/Users/gtsak/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_create_order.xml" value="0.25" />
         <entry key="..\:/Users/gtsak/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
         <entry key="..\:/Users/gtsak/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_home.xml" value="0.25" />
