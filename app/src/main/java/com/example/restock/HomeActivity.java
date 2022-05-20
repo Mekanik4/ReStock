@@ -44,8 +44,8 @@ public class HomeActivity extends AppCompatActivity {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), testActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(view.getContext(), testActivity.class); //repurpose test Activity to sign out
+//                startActivity(intent);
             }
         });
 

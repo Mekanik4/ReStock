@@ -540,4 +540,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return suppliers;
     }
+
+    public String getCategoryName(int categoryId) {
+        String name;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT name FROM category WHERE category_id = ?", new String[]{String.valueOf(categoryId)});
+        if(cursor.moveToFirst()) {
+            name = cursor.getString(0);
+            db.close();
+            return name;
+        }
+        else {
+            db.close();
+            return null;
+        }
+    }
 }

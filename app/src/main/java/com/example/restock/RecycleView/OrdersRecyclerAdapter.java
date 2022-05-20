@@ -31,7 +31,6 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
         TextView orderId, date, total, status;
         ImageButton pdfBtn;
         Button editOrder;
-        private Order order;
 
         public ViewHolder(View orderView) {
             super(orderView);
@@ -42,23 +41,6 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
             pdfBtn = orderView.findViewById(R.id.historyCardPdfBtn);
             editOrder = orderView.findViewById(R.id.historyCardEditPendingBtn);
 
-            pdfBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-
-                }
-            });
-
-            editOrder.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    Intent intent = new Intent(v.getContext(), OrderPreview.class);
-                    intent.putExtra("order_id", orders[position].getOrderNumber());
-                    v.getContext().startActivity(intent);
-                }
-            });
         }
     }
 
@@ -72,10 +54,26 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(OrdersRecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(OrdersRecyclerAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.orderId.setText(String.valueOf(orders[position].getOrderNumber()));
         holder.date.setText(String.valueOf(orders[position].getDate()));
         holder.total.setText(String.valueOf(orders[position].getTotalPrice()).concat("\u20ac"));
+        holder.editOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), OrderPreview.class);
+                intent.putExtra("order_id", orders[position].getOrderNumber());
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        holder.pdfBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open pdf of orders[position].getDocumentPath()
+            }
+        });
+
         if(orders[position].isCompleted()) {
             holder.status.setText("Completed");
             holder.editOrder.setVisibility(View.GONE);
