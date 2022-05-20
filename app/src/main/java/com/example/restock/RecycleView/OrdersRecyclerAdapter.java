@@ -3,6 +3,7 @@ package com.example.restock.RecycleView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.restock.OrderPreview;
 import com.example.restock.R;
 import com.example.restock.objects.Order;
+
+import java.io.File;
 
 public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAdapter.ViewHolder> {
 
@@ -71,6 +74,11 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
             @Override
             public void onClick(View v) {
                 //open pdf of orders[position].getDocumentPath()
+                File file = new File(orders[position].getDocumentPath());
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(file), "application/pdf");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                mContext.startActivity(intent);
             }
         });
 

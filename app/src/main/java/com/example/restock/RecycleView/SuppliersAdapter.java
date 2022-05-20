@@ -66,12 +66,11 @@ public class SuppliersAdapter extends RecyclerView.Adapter<SuppliersAdapter.View
                         if(dbHandler.getSupplierFromCategoryId(category + 1).getSupplierId() == suppliersNeeded.get(position).getSupplierId() && order.getItems()[category][pos] != null)
                             body += order.getItems()[category][pos].getName() + " : " + order.getItems()[category][pos].getQuantity() + "\n";
 
-//                    body += "Thank you in advance,\n" + dbHandler.getSignedInUser().getOwnership() + "\n" + dbHandler.getSignedInUser().getAddress() + ", "
-//                            + dbHandler.getSignedInUser().getPhone() + "\nTax reg. number: " +dbHandler.getSignedInUser().getAfm());
-                body += "Thank you,in advance\n Gtsaki out";
+                    body += "Thank you in advance,\n" + dbHandler.getSignedInUser().getOwnership() + "\n" + dbHandler.getSignedInUser().getAddress() + ", "
+                            + dbHandler.getSignedInUser().getPhone() + "\nTax reg. number: " +dbHandler.getSignedInUser().getAfm();
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"georgetsak1999@gmail.com"}); //replace 2nd filed with new String[]{suppliersNeeded.get(position).getEmail()}
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Order submission for: gtsaki"); //add to string:  dbHandler.getSignedInUser().getOwnership()
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Order submission for: " + dbHandler.getSignedInUser().getOwnership());
                 intent.putExtra(Intent.EXTRA_TEXT, body);
                 intent.setType("message/rfc822");
                 if(intent.resolveActivity(mContext.getPackageManager()) != null) {

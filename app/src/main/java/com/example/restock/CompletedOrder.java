@@ -101,6 +101,8 @@ public class CompletedOrder extends AppCompatActivity {
                     //system OS < Marshmallow, call save pdf method
                     savePdf();
                 }
+                        order.setCompleted(true);
+                        dbHandler.updateOrder(order);
                         Intent intent = new Intent(v.getContext(), HomeActivity.class);
                         startActivity(intent);
                     }
@@ -154,14 +156,12 @@ public class CompletedOrder extends AppCompatActivity {
             //get text from EditText i.e. mTextEt
             String mText = "Summary for order no. : " + String.valueOf(order.getOrderNumber()) + "at : " + order.getDate();
 
-            //add title to pdf
-            mDoc.addTitle(mText);
-
             //add items to pdf
 
-            mText = "";
+            mText = "\n\n";
             for(int cat = 0; cat < order.getItems().length; cat++) {
                 mText += dbHandler.getCategoryName(cat + 1);
+                mText += "\n";
                 for (int pos = 0; pos < order.getItems().length; pos++) {
                     mText += "\t\t";
                     mText += order.getItems()[cat][pos].getName();
@@ -177,6 +177,7 @@ public class CompletedOrder extends AppCompatActivity {
             mDoc.close();
             //show message that file is saved, it will show file name and file path too
             Toast.makeText(this, mFileName +".pdf\nis saved to\n"+ mFilePath, Toast.LENGTH_SHORT).show();
+            order.setDocumentPath(mFilePath);
         }
         catch (Exception e){
             //if any thing goes wrong causing exception, get and show exception message
