@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +47,50 @@ public class SignUpActivity extends AppCompatActivity{
         email = (EditText) findViewById(R.id.editTextEmailAddress);
         signedIn = (CheckBox) findViewById(R.id.signedIn);
         id = dbHandler.getNewID() + 1;
+
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int length = phone.getText().length();
+                if (length < 10){
+                    save.setEnabled(false);
+                } else {
+                    save.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        afm.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int length = afm.getText().length();
+                if (length < 9){
+                    save.setEnabled(false);
+                } else {
+                    save.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
