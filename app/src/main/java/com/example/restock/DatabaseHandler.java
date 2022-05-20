@@ -93,6 +93,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "  `date` varchar(50) NOT NULL,\n" +
                 "  `total_price` float NOT NULL,\n" +
                 "  `document_path` varchar(150) NOT NULL,\n" +
+                "  `completed` boolean NOT NULL,\n" +
                 "  PRIMARY KEY (`order_id`)\n" +
                 ")");
 
@@ -276,6 +277,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("date", order.getDate());
         values.put("total_price", order.getTotalPrice());
         values.put("document_path", order.getDocumentPath());
+        if(order.isCompleted())
+            values.put("completed", 1);
+        else
+            values.put("completed", 0);
 
         long i = db.insert("orders", null , values);
         db.close();
@@ -290,7 +295,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("date", order.getDate().toString());
         values.put("total_price", order.getTotalPrice());
         values.put("document_path", order.getDocumentPath());
+        if(order.isCompleted())
+            values.put("completed", 1);
+        else
+            values.put("completed", 0);
 
+        Log.d("orders",""+order.isCompleted());
         db.update("orders", values , "order_id = ?", new String[]{String.valueOf(order.getOrderNumber())});
         Log.d("db", "orders have been updated");
         updateItems(order.getOrderNumber(), order.getItems());
@@ -308,6 +318,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             order.setDate(cursor.getString(1));
             order.setTotalPrice(Double.parseDouble(cursor.getString(2)));
             order.setDocumentPath(cursor.getString(3));
+            order.setCompleted(Boolean.parseBoolean(cursor.getString(4)));
         } else {
             order = null;
         }
@@ -328,6 +339,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 orders[i].setDate(cursor.getString(1));
                 orders[i].setTotalPrice(Double.parseDouble(cursor.getString(2)));
                 orders[i].setDocumentPath(cursor.getString(3));
+                Log.d("orders","      "+Boolean.parseBoolean(cursor.getString(4)));
+                orders[i].setCompleted(Boolean.parseBoolean(cursor.getString(4)));
                 try{
                     cursor.moveToNext();
                 }catch (Exception e){

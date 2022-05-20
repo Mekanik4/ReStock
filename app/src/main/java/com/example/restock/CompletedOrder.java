@@ -53,11 +53,36 @@ public class CompletedOrder extends AppCompatActivity {
             order = dbHandler.getOrder(data.getInt("order_id"));
         }
 
-        for(int ids = 0; ids < dbHandler.getItems(order.getOrderNumber()).length; ids++) {
-            Item item = dbHandler.findProduct(dbHandler.getItems(order.getOrderNumber())[ids][0]);
-            item.setQuantity(dbHandler.getItems(order.getOrderNumber())[ids][1]);
-            order.addItem(item);
+//        for(int ids = 0; ids < dbHandler.getItems(order.getOrderNumber()).length; ids++) {
+//            Item item = dbHandler.findProduct(dbHandler.getItems(order.getOrderNumber())[ids][0]);
+//            item.setQuantity(dbHandler.getItems(order.getOrderNumber())[ids][1]);
+//            order.addItem(item);
+//        }
+
+        int[][] quantities = dbHandler.getItems(order.getOrderNumber());
+        int[] numberOfItemsPerCategory = new int[13];
+        for(int j=0; j<quantities.length; j++){
+            Item item = dbHandler.findProduct(quantities[j][0]);
+            numberOfItemsPerCategory[item.getCategory_id()] += 1;
         }
+        Item[][] items = new Item[13][];
+        for(int k=0; k<numberOfItemsPerCategory.length; k++){
+            items[k] = new Item[numberOfItemsPerCategory[k]];
+            for(int p=0; p<numberOfItemsPerCategory[k]; p++)
+                items[k][p] = new Item();
+        }
+
+        for(int i=0; i<quantities.length; i++){
+            Item item = dbHandler.findProduct(quantities[i][0]);
+            item.setQuantity(quantities[i][1]);
+            for(int p=0; p<items[item.getCategory_id()].length; p++){
+                if(items[item.getCategory_id()][p].getQuantity() == 0){
+                    items[item.getCategory_id()][p] = item;
+                    break;
+                }
+            }
+        }
+        order.setItems(items);
 
         suppliersNeeded = dbHandler.getOrderSuppliers(data.getInt("order_id"));
 
@@ -104,6 +129,7 @@ public class CompletedOrder extends AppCompatActivity {
                         order.setCompleted(true);
                         dbHandler.updateOrder(order);
                         Intent intent = new Intent(v.getContext(), HomeActivity.class);
+                        intent.putExtra("user_id",dbHandler.getSignedInUser().getProfileID());
                         startActivity(intent);
                     }
                 });
@@ -162,12 +188,14 @@ public class CompletedOrder extends AppCompatActivity {
             for(int cat = 0; cat < order.getItems().length; cat++) {
                 mText += dbHandler.getCategoryName(cat + 1);
                 mText += "\n";
-                for (int pos = 0; pos < order.getItems().length; pos++) {
-                    mText += "\t\t";
-                    mText += order.getItems()[cat][pos].getName();
-                    mText += " : ";
-                    mText += String.valueOf(order.getItems()[cat][pos].getQuantity());
-                    mText += "\n";
+                for (int pos = 0; pos < order.getItems()[cat].length; pos++) {
+                    if(order.getItems()[cat][pos] != null){
+                        mText += "\t\t";
+                        mText += order.getItems()[cat][pos].getName();
+                        mText += " : ";
+                        mText += String.valueOf(order.getItems()[cat][pos].getQuantity());
+                        mText += "\n";
+                    }
                 }
             }
             //add paragraph to the document
