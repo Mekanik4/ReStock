@@ -121,6 +121,8 @@ public class EditProfileActivity extends AppCompatActivity{
             // Show the Alert Dialog box
             alertDialog.show();
         }
-        EditProfileActivity.super.onBackPressed();
+        if(edit.getVisibility() == View.VISIBLE) {
+            EditProfileActivity.super.onBackPressed();
+        }
     }
 }
