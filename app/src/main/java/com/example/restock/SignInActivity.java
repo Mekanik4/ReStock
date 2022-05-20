@@ -48,17 +48,16 @@ public class SignInActivity extends AppCompatActivity {
 
         signedIn = (CheckBox) findViewById(R.id.signedIn_signIn);
 
-        Profile finalUser = user;
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(signedIn.isChecked()) {
-//                    finalUser.setSignedIn(signedIn.isChecked());
-//                }
-//                finalUser = dbHandler.getSignedIn(email.getText().toString(), password.getText().toString());
-
+                Profile finalUser = dbHandler.getSignedIn(email.getText().toString(), password.getText().toString());
                 if(finalUser != null) {
+                    if(signedIn.isChecked()) {
+                        finalUser.setSignedIn(signedIn.isChecked());
+                        dbHandler.updateProfile(finalUser);
+                    }
                     Intent intent = new Intent(view.getContext(), HomeActivity.class);
                     intent.putExtra("user_id", finalUser.getProfileID());
                     startActivity(intent);
@@ -103,5 +102,8 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed(){
+        finishAffinity();
+    }
 }

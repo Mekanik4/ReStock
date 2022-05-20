@@ -65,8 +65,9 @@
     <string name="supplier">Supplier</string>
     <string name="send_to_supplier">Send to supplier</string>
     <string name="finish">Finish</string>
-    <string name="order_nno">Order\nNo.</string>
+    <string name="order_nno">Order No.</string>
     <string name="refreshing_button_description">Refreshing button</string>
+    <string name="sign_out">Sign Out</string>
 
     <string-array name="sort_types">
         <item>Order No. Desc.</item>
