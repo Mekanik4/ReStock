@@ -2,6 +2,7 @@ package com.example.restock;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,8 +13,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 import com.example.restock.RecycleView.SuppliersAdapter;
 import com.example.restock.objects.Item;
 import com.example.restock.objects.Order;
-import com.example.restock.objects.Profile;
 import com.example.restock.objects.Supplier;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
@@ -180,7 +178,8 @@ public class CompletedOrder extends AppCompatActivity {
             //open the document for writing
             mDoc.open();
             //get text from EditText i.e. mTextEt
-            String mText = "Summary for order no. : " + String.valueOf(order.getOrderNumber()) + "at : " + order.getDate();
+            String mText = "Summary for order no. : " + String.valueOf(order.getOrderNumber()) + "\nat : " + order.getDate();
+            mDoc.add(new Paragraph(mText));
 
             //add items to pdf
 

@@ -84,7 +84,7 @@ public class OrderHistory extends AppCompatActivity {
                     }
                 });
                 ordersAdapterTotAsc = new OrdersRecyclerAdapter(ordersTemp, OrderHistory.this);
-                ordersRecyclerView.swapAdapter(ordersAdapterTotAsc, false);
+                ordersRecyclerView.swapAdapter(ordersAdapterTotAsc, true);
             }
         });
 
@@ -104,7 +104,7 @@ public class OrderHistory extends AppCompatActivity {
                     }
                 });
                 ordersAdapterTotDesc = new OrdersRecyclerAdapter(ordersTemp, OrderHistory.this);
-                ordersRecyclerView.swapAdapter(ordersAdapterTotDesc, false);
+                ordersRecyclerView.swapAdapter(ordersAdapterTotDesc, true);
             }
         });
 
@@ -123,7 +123,7 @@ public class OrderHistory extends AppCompatActivity {
                     }
                 });
                 ordersAdapterDef = new OrdersRecyclerAdapter(orders, OrderHistory.this);
-                ordersRecyclerView.swapAdapter(ordersAdapterDef, false);
+                ordersRecyclerView.swapAdapter(ordersAdapterDef, true);
             }
         });
 
@@ -143,7 +143,7 @@ public class OrderHistory extends AppCompatActivity {
                     }
                 });
                 ordersAdapterNoDesc = new OrdersRecyclerAdapter(ordersTemp, OrderHistory.this);
-                ordersRecyclerView.swapAdapter(ordersAdapterNoDesc, false);
+                ordersRecyclerView.swapAdapter(ordersAdapterNoDesc, true);
             }
         });
 

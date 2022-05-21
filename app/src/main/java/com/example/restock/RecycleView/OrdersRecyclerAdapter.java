@@ -85,10 +85,12 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
         if(orders[position].isCompleted()) {
             holder.status.setText("Completed");
             holder.editOrder.setVisibility(View.GONE);
+            holder.pdfBtn.setVisibility(View.VISIBLE);
         }
         else {
             holder.status.setText("Pending");
             holder.pdfBtn.setVisibility(View.GONE);
+            holder.editOrder.setVisibility(View.VISIBLE);
         }
     }
 
