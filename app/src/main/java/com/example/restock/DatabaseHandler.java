@@ -93,7 +93,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "  `date` varchar(50) NOT NULL,\n" +
                 "  `total_price` float NOT NULL,\n" +
                 "  `document_path` varchar(150) NOT NULL,\n" +
-                "  `completed` boolean NOT NULL,\n" +
+                "  `completed` varchar NOT NULL,\n" +
                 "  PRIMARY KEY (`order_id`)\n" +
                 ")");
 
@@ -114,7 +114,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "  `email` varchar(100) NOT NULL,\n" +
                 "  `phone` varchar(10) NOT NULL,\n" +
                 "  `address` varchar(100) NOT NULL,\n" +
-                "  `signedIn` boolean NOT NULL,\n" +
+                "  `signedIn` varchar NOT NULL,\n" +
                 "  PRIMARY KEY (`user_id`)\n" +
                 ")");
 
@@ -277,10 +277,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("date", order.getDate());
         values.put("total_price", order.getTotalPrice());
         values.put("document_path", order.getDocumentPath());
-        if(order.isCompleted())
-            values.put("completed", 1);
-        else
-            values.put("completed", 0);
+        values.put("completed", String.valueOf(order.isCompleted()));
 
         long i = db.insert("orders", null , values);
         db.close();
@@ -295,14 +292,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("date", order.getDate().toString());
         values.put("total_price", order.getTotalPrice());
         values.put("document_path", order.getDocumentPath());
-        if(order.isCompleted())
-            values.put("completed", 1);
-        else
-            values.put("completed", 0);
-
+        values.put("completed", String.valueOf(order.isCompleted()));
         Log.d("orders",""+order.isCompleted());
-        db.update("orders", values , "order_id = ?", new String[]{String.valueOf(order.getOrderNumber())});
-        Log.d("db", "orders have been updated");
+        long i = db.update("orders", values , "order_id = "+order.getOrderNumber(), null);
+        Log.d("db", ""+i);
         updateItems(order.getOrderNumber(), order.getItems());
         //db.close();
     }
@@ -365,7 +358,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public Profile getSignedInUser(){
         String query = "SELECT * FROM 'user' WHERE " +
-                "signedIn = 1";
+                "signedIn = 'true'";
         SQLiteDatabase db = this.getWritableDatabase();
 
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
@@ -446,7 +439,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("email", profile.getEmail());
         values.put("phone", profile.getPhone());
         values.put("address", profile.getAddress());
-        values.put("signedIn", profile.isSignedIn());
+        values.put("signedIn", String.valueOf(profile.isSignedIn()));
 
         long i = db.insert("user", null , values);
         db.close();
@@ -464,7 +457,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("email", profile.getEmail());
         values.put("phone", profile.getPhone());
         values.put("address", profile.getAddress());
-        values.put("signedIn", profile.isSignedIn());
+        values.put("signedIn", String.valueOf(profile.isSignedIn()));
 
         db.update("user", values, "user_id = ?", new String[]{String.valueOf(profile.getProfileID())});
         Log.d("db", "update");
