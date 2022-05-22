@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.example.restock.objects.Profile;
 
 public class SignUpActivity extends AppCompatActivity{
-    private Button save;
+    private Button signUp;
     private EditText pass;
     private EditText passConfirm;
     private EditText afm;
@@ -36,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity{
 
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
 
-        save = (Button) findViewById(R.id.save_button);
+        signUp = (Button) findViewById(R.id.signUp_btn);
 
         pass = (EditText) findViewById(R.id.editTextPassword);
         passConfirm = (EditText) findViewById(R.id.editTextPasswordConfirm);
@@ -48,6 +48,7 @@ public class SignUpActivity extends AppCompatActivity{
         signedIn = (CheckBox) findViewById(R.id.signedIn);
         id = dbHandler.getNewID() + 1;
 
+        // Validating if current input is a phone
         phone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -56,20 +57,29 @@ public class SignUpActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                int length = phone.getText().length();
-                if (length < 10){
-                    save.setEnabled(false);
-                } else {
-                    save.setEnabled(true);
-                }
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                int length = phone.getText().length();
+                String regexStr = "^[+]?[0-9]{10,13}$";
+                String number = phone.getText().toString();
 
+                if(!number.matches(regexStr)) {
+//                    Toast.makeText(getApplicationContext(), "Please enter valid phone number", Toast.LENGTH_SHORT).show();
+                    phone.setError("Invalid phone number");
+                    signUp.setEnabled(false);
+                } else if (length < 10){
+                    phone.setError("Invalid phone number");
+                    signUp.setEnabled(false);
+                } else {
+                    signUp.setEnabled(true);
+                }
             }
         });
 
+        // Validating if current input is a VAT number
         afm.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -78,33 +88,155 @@ public class SignUpActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
                 int length = afm.getText().length();
                 if (length < 9){
-                    save.setEnabled(false);
+                    afm.setError("Invalid VAT number");
+                    signUp.setEnabled(false);
                 } else {
-                    save.setEnabled(true);
+                    signUp.setEnabled(true);
                 }
+            }
+        });
+
+        // Validating if current input is a email
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
 
+                boolean valid = android.util.Patterns.EMAIL_ADDRESS.
+                        matcher(email.getText().toString()).matches();
+                if (email.getText().toString().equals(null)) {
+                    email.setError("Invalid Email Address");
+                    signUp.setEnabled(false);
+                } else if (!valid) {
+                    email.setError("Invalid Email Address");
+                    signUp.setEnabled(false);
+                } else {
+                    signUp.setEnabled(true);
+                }
             }
         });
 
-        save.setOnClickListener(new View.OnClickListener() {
+        // Validating if current ownership input is empty
+        ownership.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (ownership.getText().toString().isEmpty()){
+                    ownership.setError("Invalid VAT number");
+                    signUp.setEnabled(false);
+                } else {
+                    signUp.setEnabled(true);
+                }
+            }
+        });
+
+        // Validating if current address input is empty
+        address.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (address.getText().toString().isEmpty()){
+                    address.setError("Invalid VAT number");
+                    signUp.setEnabled(false);
+                } else {
+                    signUp.setEnabled(true);
+                }
+            }
+        });
+
+        // Validating if current password input is empty
+        pass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (pass.getText().toString().isEmpty()){
+                    pass.setError("Password field is empty");
+                    signUp.setEnabled(false);
+                } else {
+                    signUp.setEnabled(true);
+                }
+            }
+        });
+
+        // Validating if current confirm password input is empty
+        passConfirm.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (passConfirm.getText().toString().isEmpty()){
+                    passConfirm.setError("Confirm Password is empty");
+                    signUp.setEnabled(false);
+                } else {
+                    signUp.setEnabled(true);
+                }
+            }
+        });
+
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Checking if passwords match
                 if(pass.getText().toString().equals(passConfirm.getText().toString())) {
                     Profile user = new Profile(id, ownership.getText().toString(), address.getText().toString(), email.getText().toString(),
                             phone.getText().toString(), afm.getText().toString(), pass.getText().toString(), signedIn.isChecked());
                     if (dbHandler.addProfile(user)) {
-                        Log.d("db", "yas");
                         Intent intent = new Intent(view.getContext(), HomeActivity.class);
                         intent.putExtra("user_id", user.getProfileID());
                         startActivity(intent);
                     } else {
-                        Log.d("db", "mpa");
                         Toast toast = Toast.makeText(getApplicationContext(), "Process failed\nPlease try again", Toast.LENGTH_LONG);
                         toast.show();
                     }

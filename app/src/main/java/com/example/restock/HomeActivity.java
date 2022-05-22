@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Getting extras from intent
         DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
         Bundle data = getIntent().getExtras();
         Profile user = new Profile();
@@ -32,15 +33,11 @@ public class HomeActivity extends AppCompatActivity {
              user = dbHandler.getUser(data.getInt("user_id"));
 
         newOrder = (Button) findViewById(R.id.newOrder);
-
         history = (Button) findViewById(R.id.history_button);
-
         viewProfile = (Button) findViewById(R.id.viewProfile_button);
+        signOut = (Button) findViewById(R.id.signOutBtn);
 
         ownerName = (TextView) findViewById(R.id.profile_name);
-
-        signOut = findViewById(R.id.signOutBtn);
-
         ownerName.setText(user.getOwnership());
 
 

@@ -350,6 +350,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    // This function searches for an already signed in user and returns said user
     public Profile getSignedInUser(){
         String query = "SELECT * FROM 'user' WHERE " +
                 "signedIn = 1";
@@ -373,6 +374,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return user;
     }
 
+    // This function finds and returns a user searched by his id
     public Profile getUser(int id){
         String query = "SELECT * FROM 'user' WHERE " +
                 "user_id = ?";
@@ -398,6 +400,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    // This function finds if there is a user with the given password and email and returns said user
     public Profile getSignedIn(String email, String password){
         String query = "SELECT * FROM 'user' WHERE email = '" + email + "' and password = '" + password + "'";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -422,6 +425,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    // This function adds a new user in the db, it returns a true or false statement
     public boolean addProfile(Profile profile) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -440,6 +444,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return i != -1;
     }
 
+    // This function updates the user's information
     public void updateProfile(Profile profile) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -458,6 +463,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    // This function finds and returns the new ID number for the newly signed up user
     public int getNewID() {
         String query = "SELECT * FROM 'user' ORDER BY 'user_id' DESC LIMIT 1";
         SQLiteDatabase db = this.getWritableDatabase();

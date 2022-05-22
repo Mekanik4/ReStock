@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,8 +27,9 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
 
+        // // Getting if there is a "Keep me signed in" user
+        DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
         Profile user;
         user = dbHandler.getSignedInUser();
         if(user != null){
@@ -48,6 +51,33 @@ public class SignInActivity extends AppCompatActivity {
 
         signedIn = (CheckBox) findViewById(R.id.signedIn_signIn);
 
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                boolean valid = android.util.Patterns.EMAIL_ADDRESS.
+                        matcher(email.getText().toString()).matches();
+                if (email.getText().toString().equals(null)) {
+                    email.setError("Invalid Email Address");
+                    signIn.setEnabled(false);
+                } else if (!valid) {
+                    email.setError("Invalid Email Address");
+                    signIn.setEnabled(false);
+                } else {
+                    signIn.setEnabled(true);
+                }
+            }
+        });
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
