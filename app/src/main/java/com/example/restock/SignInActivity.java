@@ -36,17 +36,17 @@ public class SignInActivity extends AppCompatActivity {
             finish();
         }
 
-        email = (EditText) findViewById(R.id.editTextTextEmailAddress);
+        email = findViewById(R.id.editTextTextEmailAddress);
 
-        password = (EditText) findViewById(R.id.editTextTextPassword);
+        password = findViewById(R.id.editTextTextPassword);
 
-        signIn = (Button) findViewById(R.id.signIn_button);
+        signIn = findViewById(R.id.signIn_button);
 
-        signUp = (Button) findViewById(R.id.signUp_button);
+        signUp = findViewById(R.id.signUp_button);
 
-        bypass = (Button) findViewById(R.id.bypass_button);
+        bypass = findViewById(R.id.bypass_button);
 
-        signedIn = (CheckBox) findViewById(R.id.signedIn_signIn);
+        signedIn = findViewById(R.id.signedIn_signIn);
 
 
         signIn.setOnClickListener(new View.OnClickListener() {

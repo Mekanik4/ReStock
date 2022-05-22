@@ -65,7 +65,6 @@ public class SuppliersAdapter extends RecyclerView.Adapter<SuppliersAdapter.View
                     for(int pos = 0; pos < order.getItems()[category].length; pos++)
                         if(dbHandler.getSupplierFromCategoryId(category + 1).getSupplierId() == suppliersNeeded.get(position).getSupplierId() && order.getItems()[category][pos] != null)
                             body += order.getItems()[category][pos].getName() + " : " + order.getItems()[category][pos].getQuantity() + "\n";
-
                     body += "Thank you in advance,\n" + dbHandler.getSignedInUser().getOwnership() + "\n" + dbHandler.getSignedInUser().getAddress() + ", "
                             + dbHandler.getSignedInUser().getPhone() + "\nTax reg. number: " +dbHandler.getSignedInUser().getAfm();
                 Intent intent = new Intent(Intent.ACTION_SEND);

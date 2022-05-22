@@ -8,10 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +19,8 @@ import com.example.restock.RecycleView.ItemsRecyclerAdapter;
 import com.example.restock.objects.Item;
 import com.example.restock.objects.Order;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class CreateOrder extends AppCompatActivity {
@@ -101,8 +95,6 @@ public class CreateOrder extends AppCompatActivity {
                 lastId = orders.length;
             orderNumber.setText(String.valueOf(lastId+1));
         }
-
-        //Log.d("array",String.valueOf(items[1].length));
         setSelectedCategory(0);
 
         save.setOnClickListener(new View.OnClickListener() {

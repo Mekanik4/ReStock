@@ -36,16 +36,16 @@ public class SignUpActivity extends AppCompatActivity{
 
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
 
-        save = (Button) findViewById(R.id.save_button);
+        save = findViewById(R.id.save_button);
 
-        pass = (EditText) findViewById(R.id.editTextPassword);
-        passConfirm = (EditText) findViewById(R.id.editTextPasswordConfirm);
-        afm = (EditText) findViewById(R.id.editTextAfm);
-        phone = (EditText) findViewById(R.id.editTextPhone);
-        ownership = (EditText) findViewById(R.id.editTextTextPersonName);
-        address = (EditText) findViewById(R.id.editTextTextPostalAddress);
-        email = (EditText) findViewById(R.id.editTextEmailAddress);
-        signedIn = (CheckBox) findViewById(R.id.signedIn);
+        pass = findViewById(R.id.editTextPassword);
+        passConfirm = findViewById(R.id.editTextPasswordConfirm);
+        afm = findViewById(R.id.editTextAfm);
+        phone = findViewById(R.id.editTextPhone);
+        ownership = findViewById(R.id.editTextTextPersonName);
+        address = findViewById(R.id.editTextTextPostalAddress);
+        email = findViewById(R.id.editTextEmailAddress);
+        signedIn = findViewById(R.id.signedIn);
         id = dbHandler.getNewID() + 1;
 
         phone.addTextChangedListener(new TextWatcher() {

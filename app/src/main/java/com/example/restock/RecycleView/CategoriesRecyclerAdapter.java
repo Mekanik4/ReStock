@@ -12,12 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.restock.CreateOrder;
 import com.example.restock.OrderPreview;
 import com.example.restock.R;
-import com.example.restock.objects.Order;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-
-import javax.security.auth.Subject;
 
 
 public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<CategoriesRecyclerAdapter.ViewHolder> {

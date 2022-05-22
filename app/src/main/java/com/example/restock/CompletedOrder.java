@@ -2,7 +2,6 @@ package com.example.restock;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -157,6 +156,7 @@ public class CompletedOrder extends AppCompatActivity {
             }
         }
     }
+
     private void savePdf() {
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
         //create object of Document class
@@ -176,14 +176,15 @@ public class CompletedOrder extends AppCompatActivity {
             mDoc.add(new Paragraph(mText));
 
             //add items to pdf
-
             mText = "\n\n";
             for(int cat = 0; cat < order.getItems().length; cat++) {
                 mText += dbHandler.getCategoryName(cat + 1);
                 mText += "\n";
+                if(order.getItems()[cat].length == 0)
+                    mText += "  -\n";
                 for (int pos = 0; pos < order.getItems()[cat].length; pos++) {
-                    if(order.getItems()[cat][pos] != null){
-                        mText += "\t\t";
+                    if(order.getItems()[cat][pos] != null && order.getItems()[cat][pos].getQuantity() != 0){
+                        mText += "  ";
                         mText += order.getItems()[cat][pos].getName();
                         mText += " : ";
                         mText += String.valueOf(order.getItems()[cat][pos].getQuantity());

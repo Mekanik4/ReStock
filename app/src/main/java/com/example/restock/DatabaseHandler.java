@@ -297,8 +297,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         long i = db.update("orders", values , "order_id = "+order.getOrderNumber(), null);
         Log.d("db", ""+i);
         updateItems(order.getOrderNumber(), order.getItems());
-        //db.close();
     }
+
     public Order getOrder(int id) {
         String query = "SELECT * FROM " + TABLE_ORDER+ " WHERE " +
                 "order_id" + " = ?";

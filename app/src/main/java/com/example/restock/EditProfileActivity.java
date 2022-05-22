@@ -33,13 +33,13 @@ public class EditProfileActivity extends AppCompatActivity{
         if(data != null)
             user = dbHandler.getUser(data.getInt("user_id"));
 
-        save = (Button) findViewById(R.id.editPG_save_button);
-        edit = (Button) findViewById(R.id.editPG_edit_button);
-        afm = (EditText) findViewById(R.id.editAfm);
-        phone = (EditText) findViewById(R.id.editPhone);
-        email = (EditText) findViewById(R.id.editTextEmail);
-        ownership = (EditText) findViewById(R.id.editTextOwnership);
-        address = (EditText) findViewById(R.id.editTextAddress);
+        save = findViewById(R.id.editPG_save_button);
+        edit = findViewById(R.id.editPG_edit_button);
+        afm = findViewById(R.id.editAfm);
+        phone = findViewById(R.id.editPhone);
+        email = findViewById(R.id.editTextEmail);
+        ownership = findViewById(R.id.editTextOwnership);
+        address = findViewById(R.id.editTextAddress);
 
         afm.setText(user.getAfm());
         phone.setText(user.getPhone());
