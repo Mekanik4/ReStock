@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restock.CreateOrder;
 import com.example.restock.R;
-import com.google.android.material.snackbar.Snackbar;
 import com.example.restock.objects.Item;
 
 public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdapter.ViewHolder> {
@@ -150,11 +149,6 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
                     editTextLock = true;
                 }
             });
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override public void onClick(View v) {
-//                    int position = getAdapterPosition();
-//                }
-//            });
         }
     }
 

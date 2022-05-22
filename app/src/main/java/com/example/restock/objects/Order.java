@@ -71,23 +71,4 @@ public class Order {
         this.documentPath = documentPath;
     }
 
-    public void addItem(Item i) { //
-        if(this.getItems() == null){
-           Item[][] temp = new Item[i.getCategory_id() + 1][1];
-           temp[i.getCategory_id()][0] = i;
-           this.setItems(temp);
-        }
-        else {
-            Item[][] temp = new Item[this.getItems().length][this.getItems()[0].length + 1];
-            for (int cat = 0; cat < this.getItems().length; cat++)
-                for (int pos = 0; pos < this.getItems()[0].length; pos++)
-                    temp[cat][pos] = this.getItems()[cat][pos];
-
-            for (int cat = 0; cat < temp.length; cat++)
-                if (i.getCategory_id() == cat + 1)
-                    temp[cat][temp[cat].length - 1] = i;
-            this.setItems(temp);
-        }
-    }
-
 }

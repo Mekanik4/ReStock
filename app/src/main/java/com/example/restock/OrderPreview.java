@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +40,7 @@ public class OrderPreview extends AppCompatActivity {
         setContentView(R.layout.activity_order_preview);
         DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
         Bundle data = getIntent().getExtras();
+        Log.d("order",""+data.getInt("order_id"));
         order = new Order();
         if(data != null)
             order = dbHandler.getOrder(data.getInt("order_id"));

@@ -19,6 +19,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button viewProfile;
     private Button signOut;
     private TextView ownerName;
+    Profile user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         // Getting extras from intent
         DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
         Bundle data = getIntent().getExtras();
-        Profile user = new Profile();
+        user = new Profile();
         if(data != null)
              user = dbHandler.getUser(data.getInt("user_id"));
 
@@ -64,12 +65,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        Profile finalUser = user;
         viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), EditProfileActivity.class);
-                intent.putExtra("user_id", finalUser.getProfileID());
+                intent.putExtra("user_id", user.getProfileID());
                 startActivity(intent);
             }
         });
@@ -88,8 +88,8 @@ public class HomeActivity extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which){
-                        finalUser.setSignedIn(false);
-                        dbHandler.updateProfile(finalUser);
+                        user.setSignedIn(false);
+                        dbHandler.updateProfile(user);
                         Intent intent = new Intent(view.getContext(), SignInActivity.class);
                         Toast.makeText(HomeActivity.this,"Signed out successfully", Toast.LENGTH_LONG).show();
                         startActivity(intent);
@@ -111,6 +111,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
+        user = dbHandler.getSignedInUser();
+        ownerName.setText(user.getOwnership());
+    }
+
     @Override
     public void onBackPressed() {
         finishAffinity();

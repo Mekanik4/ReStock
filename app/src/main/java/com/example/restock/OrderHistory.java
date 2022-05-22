@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,9 +14,7 @@ import com.example.restock.RecycleView.OrdersRecyclerAdapter;
 import com.example.restock.objects.Order;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class OrderHistory extends AppCompatActivity {
@@ -26,7 +22,7 @@ public class OrderHistory extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     RecyclerView.Adapter<OrdersRecyclerAdapter.ViewHolder> ordersAdapterDef, ordersAdapterNoDesc, ordersAdapterTotAsc, ordersAdapterTotDesc;
     Order orders[];
-    FloatingActionButton totalAsc, totalDesc, orderNoAsc, orderNoDesc, sortBy, refresher;
+    FloatingActionButton totalAsc, totalDesc, orderNoAsc, orderNoDesc, sortBy;
     Animation fabOpen, fabClose, rotateForward, rotateBackward;
 
     boolean isOpen = false;
@@ -53,7 +49,6 @@ public class OrderHistory extends AppCompatActivity {
         orderNoAsc =  findViewById(R.id.orderNoAscendingBtn);
         orderNoDesc = findViewById(R.id.orderNoDescendingBtn);
         sortBy = findViewById(R.id.sortingFloatingBtn);
-        refresher = findViewById(R.id.refreshBtn);
 
         //animations
         fabOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open);
@@ -84,7 +79,7 @@ public class OrderHistory extends AppCompatActivity {
                     }
                 });
                 ordersAdapterTotAsc = new OrdersRecyclerAdapter(ordersTemp, OrderHistory.this);
-                ordersRecyclerView.swapAdapter(ordersAdapterTotAsc, false);
+                ordersRecyclerView.swapAdapter(ordersAdapterTotAsc, true);
             }
         });
 
@@ -104,7 +99,7 @@ public class OrderHistory extends AppCompatActivity {
                     }
                 });
                 ordersAdapterTotDesc = new OrdersRecyclerAdapter(ordersTemp, OrderHistory.this);
-                ordersRecyclerView.swapAdapter(ordersAdapterTotDesc, false);
+                ordersRecyclerView.swapAdapter(ordersAdapterTotDesc, true);
             }
         });
 
@@ -123,7 +118,7 @@ public class OrderHistory extends AppCompatActivity {
                     }
                 });
                 ordersAdapterDef = new OrdersRecyclerAdapter(orders, OrderHistory.this);
-                ordersRecyclerView.swapAdapter(ordersAdapterDef, false);
+                ordersRecyclerView.swapAdapter(ordersAdapterDef, true);
             }
         });
 
@@ -143,15 +138,7 @@ public class OrderHistory extends AppCompatActivity {
                     }
                 });
                 ordersAdapterNoDesc = new OrdersRecyclerAdapter(ordersTemp, OrderHistory.this);
-                ordersRecyclerView.swapAdapter(ordersAdapterNoDesc, false);
-            }
-        });
-
-        refresher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                startActivity(getIntent());
+                ordersRecyclerView.swapAdapter(ordersAdapterNoDesc, true);
             }
         });
 
@@ -194,16 +181,7 @@ public class OrderHistory extends AppCompatActivity {
                 return true;
             }
         });
-
-        refresher.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(OrderHistory.this, "Refresh page", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
     }
-
 
     private void animateFab() {
         if(isOpen) {
