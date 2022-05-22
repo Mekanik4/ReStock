@@ -40,7 +40,7 @@
         android:id="@+id/orderHistoryRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/refreshBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,14 +87,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="?attr/colorPrimary"
         android:clickable="true"
         android:contentDescription="@string/sortingButtonDescription"
         android:focusable="true"
         android:tint="@color/white"
         app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderHistoryRecyclerView"
         app:srcCompat="@drawable/ic_baseline_sort_24"
         tools:ignore="ImageContrastCheck" />
 
@@ -139,6 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="?attr/colorPrimary"
         android:clickable="false"
         android:contentDescription="@string/order_number_descending_button"
@@ -146,8 +148,8 @@
         android:tint="@color/white"
         android:visibility="invisible"
         app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sortingFloatingBtn"
-        app:layout_constraintTop_toBottomOf="@+id/orderHistoryRecyclerView"
         app:srcCompat="@drawable/ic_sort_91"
         tools:ignore="RedundantDescriptionCheck" />
 
@@ -156,6 +158,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="?attr/colorPrimary"
         android:clickable="false"
         android:contentDescription="@string/order_number_ascending_button"
@@ -163,27 +166,9 @@
         android:tint="@color/white"
         android:visibility="invisible"
         app:borderWidth="0dp"
-        app:layout_constraintEnd_toStartOf="@+id/orderNoDescendingBtn"
-        app:layout_constraintTop_toBottomOf="@+id/orderHistoryRecyclerView"
-        app:srcCompat="@drawable/ic_sort_19" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/refreshBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="?attr/colorPrimary"
-        android:clickable="true"
-        android:contentDescription="@string/refreshing_button_description"
-        android:focusable="true"
-        android:tint="@color/white"
-        android:visibility="visible"
-        app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_refresh_black_24dp"
-        tools:ignore="RedundantDescriptionCheck"/>
+        app:layout_constraintEnd_toStartOf="@+id/orderNoDescendingBtn"
+        app:srcCompat="@drawable/ic_sort_19" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,12 +51,6 @@ public class CompletedOrder extends AppCompatActivity {
             order = dbHandler.getOrder(data.getInt("order_id"));
         }
 
-//        for(int ids = 0; ids < dbHandler.getItems(order.getOrderNumber()).length; ids++) {
-//            Item item = dbHandler.findProduct(dbHandler.getItems(order.getOrderNumber())[ids][0]);
-//            item.setQuantity(dbHandler.getItems(order.getOrderNumber())[ids][1]);
-//            order.addItem(item);
-//        }
-
         int[][] quantities = dbHandler.getItems(order.getOrderNumber());
         int[] numberOfItemsPerCategory = new int[13];
         for(int j=0; j<quantities.length; j++){

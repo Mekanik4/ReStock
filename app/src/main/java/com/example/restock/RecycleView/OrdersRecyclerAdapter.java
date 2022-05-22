@@ -1,6 +1,7 @@
 package com.example.restock.RecycleView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restock.OrderPreview;
@@ -66,6 +68,7 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), OrderPreview.class);
                 intent.putExtra("order_id", orders[position].getOrderNumber());
+                ((Activity) mContext).finish();
                 v.getContext().startActivity(intent);
             }
         });
@@ -76,8 +79,9 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
                 //open pdf of orders[position].getDocumentPath()
                 File file = new File(orders[position].getDocumentPath());
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.fromFile(file), "application/pdf");
+                intent.setDataAndType(FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".provider", file), "application/pdf");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 mContext.startActivity(intent);
             }
         });
