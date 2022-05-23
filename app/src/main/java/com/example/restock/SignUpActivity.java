@@ -46,7 +46,10 @@ public class SignUpActivity extends AppCompatActivity{
         address = (EditText) findViewById(R.id.editTextTextPostalAddress);
         email = (EditText) findViewById(R.id.editTextEmailAddress);
         signedIn = (CheckBox) findViewById(R.id.signedIn);
-        id = dbHandler.getNewID() + 1;
+        id = dbHandler.getNewID();
+
+        // Preset as disabled because the fields are empty
+        signUp.setEnabled(false);
 
         // Validating if current input is a phone
         phone.addTextChangedListener(new TextWatcher() {
@@ -63,18 +66,16 @@ public class SignUpActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable editable) {
                 int length = phone.getText().length();
-                String regexStr = "^[+]?[0-9]{10,13}$";
                 String number = phone.getText().toString();
 
-                if(!number.matches(regexStr)) {
-//                    Toast.makeText(getApplicationContext(), "Please enter valid phone number", Toast.LENGTH_SHORT).show();
+                if(length < 10) {
                     phone.setError("Invalid phone number");
                     signUp.setEnabled(false);
-                } else if (length < 10){
-                    phone.setError("Invalid phone number");
-                    signUp.setEnabled(false);
-                } else {
+                } else if ((number.matches("(2310|2311|69).*"))){
                     signUp.setEnabled(true);
+                } else {
+                    phone.setError("Invalid phone number");
+                    signUp.setEnabled(false);
                 }
             }
         });
@@ -147,7 +148,7 @@ public class SignUpActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable editable) {
                 if (ownership.getText().toString().isEmpty()){
-                    ownership.setError("Invalid VAT number");
+                    ownership.setError("Invalid name");
                     signUp.setEnabled(false);
                 } else {
                     signUp.setEnabled(true);
@@ -170,7 +171,7 @@ public class SignUpActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable editable) {
                 if (address.getText().toString().isEmpty()){
-                    address.setError("Invalid VAT number");
+                    address.setError("Invalid address");
                     signUp.setEnabled(false);
                 } else {
                     signUp.setEnabled(true);
@@ -224,10 +225,10 @@ public class SignUpActivity extends AppCompatActivity{
             }
         });
 
+
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 // Checking if passwords match
                 if(pass.getText().toString().equals(passConfirm.getText().toString())) {
                     Profile user = new Profile(id, ownership.getText().toString(), address.getText().toString(), email.getText().toString(),

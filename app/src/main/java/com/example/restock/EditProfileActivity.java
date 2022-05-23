@@ -66,18 +66,16 @@ public class EditProfileActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable editable) {
                 int length = phone.getText().length();
-                String regexStr = "^[+]?[0-9]{10,13}$";
                 String number = phone.getText().toString();
 
-                if(!number.matches(regexStr)) {
-//                    Toast.makeText(getApplicationContext(), "Please enter valid phone number", Toast.LENGTH_SHORT).show();
+                if(length < 10) {
                     phone.setError("Invalid phone number");
                     save.setEnabled(false);
-                } else if (length < 10){
-                    phone.setError("Invalid phone number");
-                    save.setEnabled(false);
-                } else {
+                } else if ((number.matches("(2310|2311|69).*"))){
                     save.setEnabled(true);
+                } else {
+                    phone.setError("Invalid phone number");
+                    save.setEnabled(false);
                 }
             }
         });
@@ -150,7 +148,7 @@ public class EditProfileActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable editable) {
                 if (ownership.getText().toString().isEmpty()){
-                    ownership.setError("Invalid VAT number");
+                    ownership.setError("Invalid name");
                     save.setEnabled(false);
                 } else {
                     save.setEnabled(true);
@@ -173,7 +171,7 @@ public class EditProfileActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable editable) {
                 if (address.getText().toString().isEmpty()){
-                    address.setError("Invalid VAT number");
+                    address.setError("Invalid address");
                     save.setEnabled(false);
                 } else {
                     save.setEnabled(true);
