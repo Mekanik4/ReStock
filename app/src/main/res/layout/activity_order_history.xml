@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="@string/order_nno"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
 
@@ -62,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="@string/date"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/orderNoTxtView"
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
 
@@ -71,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:text="@string/totalValue"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/dateTxtView"
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
 
@@ -80,6 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:text="@string/status"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/totalTxtView"
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitleToolbar" />
 
@@ -93,7 +97,7 @@
         android:clickable="true"
         android:contentDescription="@string/sortingButtonDescription"
         android:focusable="true"
-        android:tint="@color/white"
+        app:tint="@color/white"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +114,7 @@
         android:clickable="false"
         android:contentDescription="@string/total_descending_button"
         android:focusable="true"
-        android:tint="@color/white"
+        app:tint="@color/white"
         android:visibility="invisible"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toTopOf="@+id/sortingFloatingBtn"
@@ -128,7 +132,7 @@
         android:clickable="false"
         android:contentDescription="@string/total_ascending_button"
         android:focusable="true"
-        android:tint="@color/white"
+        app:tint="@color/white"
         android:visibility="invisible"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toTopOf="@+id/totalDescendingFloatingBtn"
@@ -146,7 +150,7 @@
         android:clickable="false"
         android:contentDescription="@string/order_number_descending_button"
         android:focusable="true"
-        android:tint="@color/white"
+        app:tint="@color/white"
         android:visibility="invisible"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -164,7 +168,7 @@
         android:clickable="false"
         android:contentDescription="@string/order_number_ascending_button"
         android:focusable="true"
-        android:tint="@color/white"
+        app:tint="@color/white"
         android:visibility="invisible"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

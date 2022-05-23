@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -105,17 +107,42 @@ public class OrderPreview extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), CreateOrder.class);
                 intent.putExtra("order_id", order.getOrderNumber());
                 startActivity(intent);
-                finish();
             }
         });
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CompletedOrder.class);
-                intent.putExtra("order_id", order.getOrderNumber());
-                startActivity(intent);
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(OrderPreview.this);
+
+                // Set the message show for the Alert time
+                builder.setMessage("Are you sure you want to send your order?");
+
+                // Set Alert Title
+                builder.setTitle("Caution.");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        Intent intent = new Intent(view.getContext(), CompletedOrder.class);
+                        intent.putExtra("order_id", order.getOrderNumber());
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        // If user click no
+                        // then dialog box is canceled.
+                        dialog.cancel();
+                    }
+                });
+                // Create the Alert dialog
+                AlertDialog alertDialog = builder.create();
+                // Show the Alert Dialog box
+                alertDialog.show();
+
             }
         });
     }

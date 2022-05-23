@@ -34,7 +34,7 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView orderId, date, total, status;
         ImageButton pdfBtn;
-        Button editOrder;
+        ImageButton editOrder;
 
         public ViewHolder(View orderView) {
             super(orderView);
@@ -67,7 +67,6 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), OrderPreview.class);
                 intent.putExtra("order_id", orders[position].getOrderNumber());
-                ((Activity) mContext).finish();
                 v.getContext().startActivity(intent);
             }
         });

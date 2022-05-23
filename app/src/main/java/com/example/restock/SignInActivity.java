@@ -18,7 +18,6 @@ import com.example.restock.objects.Profile;
 public class SignInActivity extends AppCompatActivity {
     private Button signIn;
     private Button signUp;
-    private Button bypass;
     private EditText email;
     private EditText password;
     private CheckBox signedIn;
@@ -46,8 +45,6 @@ public class SignInActivity extends AppCompatActivity {
         signIn = findViewById(R.id.signIn_button);
 
         signUp = findViewById(R.id.signUp_button);
-
-        bypass = findViewById(R.id.bypass_button);
 
         signedIn = findViewById(R.id.signedIn_signIn);
 
@@ -91,6 +88,7 @@ public class SignInActivity extends AppCompatActivity {
                     Intent intent = new Intent(view.getContext(), HomeActivity.class);
                     intent.putExtra("user_id", finalUser.getProfileID());
                     startActivity(intent);
+                    finish();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
 
@@ -120,14 +118,7 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View view){
                 Intent intent = new Intent(view.getContext(), SignUpActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        bypass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(view.getContext(), HomeActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
