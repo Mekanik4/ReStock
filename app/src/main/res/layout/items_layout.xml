@@ -45,27 +45,29 @@
             android:id="@+id/remove"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@color/purple_200"
+            android:background="@color/light_grey"
             android:text="@string/remove"
             android:textAlignment="center"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="@color/white"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toStartOf="@+id/quantity"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/add"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@color/purple_200"
+            android:background="@color/light_grey"
             android:text="@string/add"
             android:textAlignment="center"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="@color/white"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/quantity"

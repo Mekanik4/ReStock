@@ -12,18 +12,31 @@
         <entry key="..\:/Users/gtsak/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_profile.xml" value="0.25" />
         <entry key="..\:/Users/gtsak/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_sign_in.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/gtsak/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_test.xml" value="0.10989583333333333" />
-        <entry key="..\:/Users/gtsak/AndroidStudioProjects/ReStock/app/src/main/res/xml/provider_paths.xml" value="0.20923913043478262" />
         <entry key="..\:/Users/nikbo/StudioProjects/ReStock/app/src/main/res/layout/activity_edit_profile.xml" value="0.264" />
         <entry key="..\:/Users/nikbo/StudioProjects/ReStock/app/src/main/res/layout/activity_home.xml" value="0.24547101449275363" />
         <entry key="..\:/Users/nikbo/StudioProjects/ReStock/app/src/main/res/layout/activity_profile.xml" value="0.1265625" />
         <entry key="..\:/Users/nikbo/StudioProjects/ReStock/app/src/main/res/layout/activity_sign_in.xml" value="0.264" />
         <entry key="..\:/Users/nikbo/StudioProjects/ReStock/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/account_circle_48px.xml" value="0.198" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/add_48px.xml" value="0.198" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/alert_dialog.xml" value="0.1745" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/card_stroke.xml" value="0.1715" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/edit_48px.xml" value="0.198" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/history_edu_48px.xml" value="0.198" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/ic_baseline_sort_24.xml" value="0.198" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/ic_euro_ascending.xml" value="0.198" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/ic_euro_descending.xml" value="0.179" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/ic_refresh_black_24dp.xml" value="0.176" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/ic_sort_19.xml" value="0.176" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/ic_sort_91.xml" value="0.176" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/logout_48px.xml" value="0.198" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/save_48px.xml" value="0.198" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/selector.xml" value="0.2555" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/drawable/stroke.xml" value="0.2555" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout-v26/items_layout.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_completed_order.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_create_order.xml" value="0.25" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_edit_profile.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_home.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_nikos.xml" value="0.27291666666666664" />
@@ -34,9 +47,10 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/activity_test.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/categories_layout.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/complete_order_layout.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/items_layout.xml" value="0.33" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/order_history_layout.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/items_layout.xml" value="0.25" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/order_history_layout.xml" value="0.33" />
         <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/layout/review_items_layout.xml" value="0.271875" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/ReStock/app/src/main/res/xml/alert_dialog.xml" value="0.271875" />
       </map>
     </option>
   </component>

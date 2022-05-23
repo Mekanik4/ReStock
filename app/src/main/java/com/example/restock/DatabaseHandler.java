@@ -280,6 +280,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("completed", String.valueOf(order.isCompleted()));
 
         long i = db.insert("orders", null , values);
+        Log.d("orders", "       "+i);
         db.close();
         addItems(order.getOrderNumber(), order.getItems());
         return i != -1;

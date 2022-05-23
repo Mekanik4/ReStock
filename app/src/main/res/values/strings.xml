@@ -44,7 +44,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="history">History</string>
+    <string name="history">Orders\' History</string>
     <string name="date">Date</string>
     <string name="emailAddressHint">Enter Recipient\'s Email Address</string>
     <string name="emailBodySuggestion">Enter email body</string>
@@ -69,6 +69,7 @@
     <string name="refreshing_button_description">Refreshing button</string>
     <string name="sign_out">Sign Out</string>
     <string name="app_s_logo">App\'s logo</string>
+    <string name="if_you_don_t_have_an_account_please_sign_up">If you don\'t have an account, please sign up.</string>
 
     <string-array name="sort_types">
         <item>Order No. Desc.</item>

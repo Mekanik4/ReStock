@@ -178,18 +178,19 @@ public class CompletedOrder extends AppCompatActivity {
             //add items to pdf
             mText = "\n\n";
             for(int cat = 0; cat < order.getItems().length; cat++) {
-                mText += dbHandler.getCategoryName(cat + 1);
-                mText += "\n";
-                if(order.getItems()[cat].length == 0)
-                    mText += "  -\n";
-                for (int pos = 0; pos < order.getItems()[cat].length; pos++) {
-                    if(order.getItems()[cat][pos] != null && order.getItems()[cat][pos].getQuantity() != 0){
-                        mText += "  ";
-                        mText += order.getItems()[cat][pos].getName();
-                        mText += " : ";
-                        mText += String.valueOf(order.getItems()[cat][pos].getQuantity());
-                        mText += "\n";
+                if(order.getItems()[cat].length != 0){
+                    mText += dbHandler.getCategoryName(cat + 1);
+                    mText += "\n";
+                    for (int pos = 0; pos < order.getItems()[cat].length; pos++) {
+                        if(order.getItems()[cat][pos] != null && order.getItems()[cat][pos].getQuantity() != 0){
+                            mText += "  ";
+                            mText += order.getItems()[cat][pos].getName();
+                            mText += " : ";
+                            mText += String.valueOf(order.getItems()[cat][pos].getQuantity());
+                            mText += "\n";
+                        }
                     }
+                    mText += "\n";
                 }
             }
             //add paragraph to the document

@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="rotten_red">#c62828</color>
+    <color name="dark_red">#9a0007</color>
+    <color name="light_grey">#e0e0e0</color>
+    <color name="dirty_white">#fff2dd</color>
 </resources>

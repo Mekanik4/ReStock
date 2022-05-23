@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="56dp"
-        android:background="@color/purple_200"
+        android:background="@color/rotten_red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="54dp"
+        android:layout_marginEnd="65dp"
         android:text="@string/price"
         android:textColor="?android:textColorPrimary"
         android:textStyle="bold"
@@ -125,9 +125,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="16dp"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/complete_order"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

@@ -8,11 +8,14 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.restock.RecycleView.CategoriesRecyclerAdapter;
 import com.example.restock.RecycleView.ItemsRecyclerAdapter;
@@ -105,6 +108,7 @@ public class CreateOrder extends AppCompatActivity {
                 String today = dateFormat.format(date);
                 Order newOrder = new Order(Integer.parseInt(orderNumber.getText().toString()), today, totalPrice, items, "",false);
                 if(newOrderFlag){
+                    newOrderFlag = false;
                     dbHandler.addOrder(newOrder);
                 }
                 else{
@@ -118,25 +122,32 @@ public class CreateOrder extends AppCompatActivity {
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), OrderPreview.class);
-                order = dbHandler.getOrder(Integer.parseInt(orderNumber.getText().toString()));
-                @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date date = new Date();
-                String today = dateFormat.format(date);
-                Order newOrder = new Order(Integer.parseInt(orderNumber.getText().toString()), today, totalPrice, items, "",false);
-                if(order == null){
-                    intent.putExtra("order_id",newOrder.getOrderNumber());
-                    if(dbHandler.addOrder(newOrder))
-                        Log.d("db", "mpikeeee");
-                    else
-                        Log.d("db", "den mpikeeee");
+                if(itemsCheck(items)){
+                    Intent intent = new Intent(view.getContext(), OrderPreview.class);
+                    order = dbHandler.getOrder(Integer.parseInt(orderNumber.getText().toString()));
+                    @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = new Date();
+                    String today = dateFormat.format(date);
+                    Order newOrder = new Order(Integer.parseInt(orderNumber.getText().toString()), today, totalPrice, items, "",false);
+                    if(order == null){
+                        intent.putExtra("order_id",newOrder.getOrderNumber());
+                        if(dbHandler.addOrder(newOrder))
+                            Log.d("db", "mpikeeee");
+                        else
+                            Log.d("db", "den mpikeeee");
+                    }
+                    else if(!newOrderFlag){
+                        Log.d("orders","trxei");
+                        dbHandler.updateOrder(newOrder);
+                        intent.putExtra("order_id",order.getOrderNumber());
+                    }
+                    startActivity(intent);
+                    finish();
                 }
-                else if(!newOrderFlag){
-                    dbHandler.updateOrder(newOrder);
-                    intent.putExtra("order_id",order.getOrderNumber());
+                else{
+                    Toast.makeText(CreateOrder.this, "Warning!\nThe order is empty!", Toast.LENGTH_LONG).show();
                 }
-                startActivity(intent);
-                finish();
+
             }
         });
 
@@ -170,12 +181,23 @@ public class CreateOrder extends AppCompatActivity {
         return item;
     }
 
+    public boolean itemsCheck(Item[][] items){
+        for(int i=0; i<items.length; i++){
+            for(int j=0; j<items[i].length; j++){
+                if(items[i][j].getQuantity() != 0){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CreateOrder.this);
 
         // Set the message show for the Alert time
-        builder.setMessage("If you exit, all progress will be lost\nDo you want to exit ?");
+        builder.setMessage("If you exit, all unsaved progress will be lost!\nDo you want to exit?");
 
         // Set Alert Title
         builder.setTitle("Warning!");
