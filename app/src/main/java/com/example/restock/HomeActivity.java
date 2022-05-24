@@ -33,12 +33,12 @@ public class HomeActivity extends AppCompatActivity {
         if(data != null)
              user = dbHandler.getUser(data.getInt("user_id"));
 
-        newOrder = (Button) findViewById(R.id.newOrder);
-        history = (Button) findViewById(R.id.history_button);
-        viewProfile = (Button) findViewById(R.id.viewProfile_button);
-        signOut = (Button) findViewById(R.id.signOutBtn);
+        newOrder = findViewById(R.id.newOrder);
+        history = findViewById(R.id.history_button);
+        viewProfile = findViewById(R.id.viewProfile_button);
+        signOut = findViewById(R.id.signOutBtn);
 
-        ownerName = (TextView) findViewById(R.id.profile_name);
+        ownerName = findViewById(R.id.profile_name);
         ownerName.setText(user.getOwnership());
 
 

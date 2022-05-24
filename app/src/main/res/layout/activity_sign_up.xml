@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signedIn" />
+        app:layout_constraintTop_toBottomOf="@+id/signedIn"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -133,7 +134,7 @@
         android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
         android:text="@string/signUp"
-        android:textColor="#673AB7"
+        android:textColor="?android:textColorPrimary"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

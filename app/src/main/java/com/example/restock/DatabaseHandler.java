@@ -478,7 +478,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
         int id;
         if(cursor.moveToFirst()) {
-            id = cursor.getInt(0) ;
+            id = cursor.getInt(0) + 1;
             db.close();
             return id;
         } else {
