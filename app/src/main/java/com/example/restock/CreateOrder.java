@@ -84,10 +84,10 @@ public class CreateOrder extends AppCompatActivity {
 
         //Old order for edit
         Bundle data = getIntent().getExtras();
-        if(data != null){
+        if(data != null && data.getInt("order_id") != 0){
             newOrderFlag = false;
-            order = dbHandler.getOrder(data.getInt("order_id"));
-            int[][] quantities = dbHandler.getItems(order.getOrderNumber());
+            order = dbHandler.getOrder(data.getInt("order_id"), data.getInt("user_id"));
+            int[][] quantities = dbHandler.getItems(order.getOrderNumber(), data.getInt("user_id"));
             for(int i=0; i<quantities.length; i++){
                 int[] item = findItemById(quantities[i][0]);
                 items[item[0]][item[1]].setQuantity(quantities[i][1]);
@@ -96,7 +96,7 @@ public class CreateOrder extends AppCompatActivity {
         }
         //New order
         else{
-            Order[] orders = dbHandler.getAllOrders();
+            Order[] orders = dbHandler.getAllOrders(data.getInt("user_id"));
             int lastId = 0;
             if(orders != null)
                 lastId = orders.length;
@@ -114,12 +114,12 @@ public class CreateOrder extends AppCompatActivity {
                 //add new order in database
                 if(newOrderFlag){
                     newOrderFlag = false;
-                    dbHandler.addOrder(newOrder);
+                    dbHandler.addOrder(newOrder, data.getInt("user_id"));
                 }
                 //update order
                 else{
                     Log.d("orders",String.valueOf(newOrder.getOrderNumber()));
-                    dbHandler.updateOrder(newOrder);
+                    dbHandler.updateOrder(newOrder, data.getInt("user_id"));
                 }
 
             }
@@ -130,7 +130,8 @@ public class CreateOrder extends AppCompatActivity {
             public void onClick(View view) {
                 if(itemsCheck(items)){
                     Intent intent = new Intent(view.getContext(), OrderPreview.class);
-                    order = dbHandler.getOrder(Integer.parseInt(orderNumber.getText().toString()));
+                    intent.putExtra("user_id", data.getInt("user_id"));
+                    order = dbHandler.getOrder(Integer.parseInt(orderNumber.getText().toString()), data.getInt("user_id"));
                     @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
                     String today = dateFormat.format(date);
@@ -138,7 +139,7 @@ public class CreateOrder extends AppCompatActivity {
                     //create new order in database
                     if(order == null){
                         intent.putExtra("order_id",newOrder.getOrderNumber());
-                        if(dbHandler.addOrder(newOrder))
+                        if(dbHandler.addOrder(newOrder, data.getInt("user_id")))
                             Log.d("db", "added new order");
                         else
                             Log.d("db", "error adding new order");
@@ -146,7 +147,7 @@ public class CreateOrder extends AppCompatActivity {
                     //update order
                     else if(!newOrderFlag){
                         Log.d("orders","order updated on complete clicked");
-                        dbHandler.updateOrder(newOrder);
+                        dbHandler.updateOrder(newOrder, data.getInt("user_id"));
                         intent.putExtra("order_id",order.getOrderNumber());
                     }
                     startActivity(intent);

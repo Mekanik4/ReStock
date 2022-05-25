@@ -185,8 +185,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.moveToFirst();
     }
 
-    public int[][] getItems(int id){
-        int user_id = getSignedInUser().getProfileID();
+    public int[][] getItems(int id, int user_id){
         int order_id = (user_id * 1000000) + id;
 
         String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE order_id = " + order_id ;
@@ -273,8 +272,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public boolean addOrder(Order order) {
-        int user_id = getSignedInUser().getProfileID();
+    public boolean addOrder(Order order, int user_id) {
         int order_id = (user_id * 1000000) + order.getOrderNumber();
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -290,8 +288,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return i != -1;
     }
 
-    public void updateOrder(Order order) {
-        int user_id = getSignedInUser().getProfileID();
+    public void updateOrder(Order order, int user_id) {
         int order_id = (user_id * 1000000) + order.getOrderNumber();
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -306,11 +303,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         updateItems(order_id, order.getItems());
     }
 
-    public Order getOrder(int id) {
+    public Order getOrder(int id, int user_id) {
         String query = "SELECT * FROM " + TABLE_ORDER+ " WHERE " +
                 "order_id" + " = ?";
-
-        int user_id = getSignedInUser().getProfileID();
         int order_id = (user_id * 1000000) + id;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(order_id)});
@@ -328,8 +323,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return order;
     }
 
-    public Order[] getAllOrders() {
-        int user_id = getSignedInUser().getProfileID();
+    public Order[] getAllOrders(int user_id) {
         String query = "SELECT * FROM " + TABLE_ORDER + " WHERE order_id LIKE '" + user_id + "%' ORDER BY order_id ASC";
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -487,8 +481,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    public int getNumberOfOrdersInDB() {
-        int user_id = getSignedInUser().getProfileID();
+    public int getNumberOfOrdersInDB(int user_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM orders WHERE order_id LIKE '" + user_id + "%'", null);
         cursor.moveToFirst();
@@ -524,9 +517,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getInt(0);
     }
 
-    public ArrayList<Supplier> getOrderSuppliers(int id) {
+    public ArrayList<Supplier> getOrderSuppliers(int id, int user_id) {
         ArrayList<Integer> productIds = new ArrayList<>();
-        int user_id = getSignedInUser().getProfileID();
         int orderId = (user_id * 1000000) + id;
         SQLiteDatabase db = this.getWritableDatabase();
         //Getting product_ids from order's list of items and putting them in a list

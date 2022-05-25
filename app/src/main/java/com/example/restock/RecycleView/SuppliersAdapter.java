@@ -3,10 +3,12 @@ package com.example.restock.RecycleView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,16 +26,18 @@ public class SuppliersAdapter extends RecyclerView.Adapter<SuppliersAdapter.View
     private ArrayList<Supplier> suppliersNeeded;
     private Order order;
     private final Context mContext;
+    Bundle data;
 
-    public SuppliersAdapter(ArrayList<Supplier> suppliersNeeded, Order order, Context mContext) {
+    public SuppliersAdapter(ArrayList<Supplier> suppliersNeeded, Order order, Context mContext, Bundle data) {
         this.suppliersNeeded = suppliersNeeded;
         this.order = order;
         this.mContext = mContext;
+        this.data = data;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView supplierTxtView;
-        Button sendToSupplier;
+        ImageButton sendToSupplier;
 
         public ViewHolder(View completedView) {
             super(completedView);
@@ -65,11 +69,11 @@ public class SuppliersAdapter extends RecyclerView.Adapter<SuppliersAdapter.View
                     for(int pos = 0; pos < order.getItems()[category].length; pos++)
                         if(dbHandler.getSupplierFromCategoryId(category + 1).getSupplierId() == suppliersNeeded.get(position).getSupplierId() && order.getItems()[category][pos] != null)
                             body += order.getItems()[category][pos].getName() + " : " + order.getItems()[category][pos].getQuantity() + "\n";
-                    body += "Thank you in advance,\n" + dbHandler.getSignedInUser().getOwnership() + "\n" + dbHandler.getSignedInUser().getAddress() + ", "
-                            + dbHandler.getSignedInUser().getPhone() + "\nTax reg. number: " +dbHandler.getSignedInUser().getAfm();
+                    body += "Thank you in advance,\n" + dbHandler.getUser(data.getInt("user_id")).getOwnership() + "\n" + dbHandler.getUser(data.getInt("user_id")).getAddress() + ", "
+                            + dbHandler.getUser(data.getInt("user_id")).getPhone() + "\nTax reg. number: " +dbHandler.getUser(data.getInt("user_id")).getAfm();
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"georgetsak1999@gmail.com"}); //replace 2nd filed with new String[]{suppliersNeeded.get(position).getEmail()}
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Order submission for: " + dbHandler.getSignedInUser().getOwnership());
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Order submission for: " + dbHandler.getUser(data.getInt("user_id")).getOwnership());
                 intent.putExtra(Intent.EXTRA_TEXT, body);
                 intent.setType("message/rfc822");
                 if(intent.resolveActivity(mContext.getPackageManager()) != null) {

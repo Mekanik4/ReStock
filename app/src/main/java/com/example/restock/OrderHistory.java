@@ -24,6 +24,7 @@ public class OrderHistory extends AppCompatActivity {
     Order orders[];
     FloatingActionButton totalAsc, totalDesc, orderNoAsc, orderNoDesc, sortBy;
     Animation fabOpen, fabClose, rotateForward, rotateBackward;
+    Bundle data;
 
     boolean isOpen = false;
 
@@ -32,6 +33,7 @@ public class OrderHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
 
+        data = getIntent().getExtras();
         ordersRecyclerView = findViewById(R.id.orderHistoryRecyclerView);
 
         linearLayoutManager = new LinearLayoutManager(this);
@@ -39,9 +41,9 @@ public class OrderHistory extends AppCompatActivity {
 
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
 
-        orders = dbHandler.getAllOrders();
+        orders = dbHandler.getAllOrders(data.getInt("user_id"));
 
-        ordersAdapterDef = new OrdersRecyclerAdapter(orders, this);
+        ordersAdapterDef = new OrdersRecyclerAdapter(orders, data, this);
         ordersRecyclerView.setAdapter(ordersAdapterDef);
 
         totalAsc = findViewById(R.id.totalAscendingFloatingBtn);
@@ -78,7 +80,7 @@ public class OrderHistory extends AppCompatActivity {
                             return 0;
                     }
                 });
-                ordersAdapterTotAsc = new OrdersRecyclerAdapter(ordersTemp, OrderHistory.this);
+                ordersAdapterTotAsc = new OrdersRecyclerAdapter(ordersTemp, data,OrderHistory.this);
                 ordersRecyclerView.swapAdapter(ordersAdapterTotAsc, true);
             }
         });
@@ -98,7 +100,7 @@ public class OrderHistory extends AppCompatActivity {
                             return 0;
                     }
                 });
-                ordersAdapterTotDesc = new OrdersRecyclerAdapter(ordersTemp, OrderHistory.this);
+                ordersAdapterTotDesc = new OrdersRecyclerAdapter(ordersTemp, data, OrderHistory.this);
                 ordersRecyclerView.swapAdapter(ordersAdapterTotDesc, true);
             }
         });
@@ -117,7 +119,7 @@ public class OrderHistory extends AppCompatActivity {
                             return 0;
                     }
                 });
-                ordersAdapterDef = new OrdersRecyclerAdapter(orders, OrderHistory.this);
+                ordersAdapterDef = new OrdersRecyclerAdapter(orders, data, OrderHistory.this);
                 ordersRecyclerView.swapAdapter(ordersAdapterDef, true);
             }
         });
@@ -137,7 +139,7 @@ public class OrderHistory extends AppCompatActivity {
                             return 0;
                     }
                 });
-                ordersAdapterNoDesc = new OrdersRecyclerAdapter(ordersTemp, OrderHistory.this);
+                ordersAdapterNoDesc = new OrdersRecyclerAdapter(ordersTemp, data, OrderHistory.this);
                 ordersRecyclerView.swapAdapter(ordersAdapterNoDesc, true);
             }
         });

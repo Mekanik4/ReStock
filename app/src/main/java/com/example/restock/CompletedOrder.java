@@ -34,6 +34,7 @@ public class CompletedOrder extends AppCompatActivity {
     RecyclerView suppliersRecyclerView;
     LinearLayoutManager linearLayoutManager;
     RecyclerView.Adapter<SuppliersAdapter.ViewHolder> suppliersAdapter;
+    Bundle data;
 
     private ArrayList<Supplier> suppliersNeeded;
     private Order order;
@@ -45,13 +46,13 @@ public class CompletedOrder extends AppCompatActivity {
 
         suppliersRecyclerView = findViewById(R.id.suppliersRecyclerView);
 
-        Bundle data = getIntent().getExtras();
+        data = getIntent().getExtras();
         DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
         if(data != null) {
-            order = dbHandler.getOrder(data.getInt("order_id"));
+            order = dbHandler.getOrder(data.getInt("order_id"), data.getInt("user_id"));
         }
 
-        int[][] quantities = dbHandler.getItems(order.getOrderNumber());
+        int[][] quantities = dbHandler.getItems(order.getOrderNumber(), data.getInt("user_id"));
         int[] numberOfItemsPerCategory = new int[13];
         for(int j=0; j<quantities.length; j++){
             Item item = dbHandler.findProduct(quantities[j][0]);
@@ -76,12 +77,12 @@ public class CompletedOrder extends AppCompatActivity {
         }
         order.setItems(items);
 
-        suppliersNeeded = dbHandler.getOrderSuppliers(data.getInt("order_id"));
+        suppliersNeeded = dbHandler.getOrderSuppliers(data.getInt("order_id"), data.getInt("user_id"));
 
         linearLayoutManager = new LinearLayoutManager(this);
         suppliersRecyclerView.setLayoutManager(linearLayoutManager);
 
-        suppliersAdapter = new SuppliersAdapter(suppliersNeeded, order, this);
+        suppliersAdapter = new SuppliersAdapter(suppliersNeeded, order, this, data);
         suppliersRecyclerView.setAdapter(suppliersAdapter);
 
         finishOrderButton = findViewById(R.id.finishOrderBtn);
@@ -119,9 +120,10 @@ public class CompletedOrder extends AppCompatActivity {
                     savePdf();
                 }
                         order.setCompleted(true);
-                        dbHandler.updateOrder(order);
+                        dbHandler.updateOrder(order, data.getInt("user_id"));
                         Intent intent = new Intent(v.getContext(), HomeActivity.class);
-                        intent.putExtra("user_id",dbHandler.getSignedInUser().getProfileID());
+                        intent.putExtra("user_id", data.getInt("user_id"));
+//                        intent.putExtra("user_id",dbHandler.getSignedInUser().getProfileID());
                         startActivity(intent);
                     }
                 });
@@ -164,7 +166,8 @@ public class CompletedOrder extends AppCompatActivity {
         Document mDoc = new Document();
         //pdf file name
         Log.d("db","order no : "+ order.getOrderNumber());
-        String mFileName = "Order no. : " + (dbHandler.getSignedInUser().getProfileID() * 1000000+ (order.getOrderNumber()));
+//        String mFileName = "Order no. : " + (dbHandler.getSignedInUser().getProfileID() * 1000000+ (order.getOrderNumber()));
+        String mFileName = "Order no. : " + (data.getInt("user_id") * 1000000 + order.getOrderNumber());
         //pdf file path
         String mFilePath = this.getExternalFilesDir("Orders") + "/" + mFileName + ".pdf";
 

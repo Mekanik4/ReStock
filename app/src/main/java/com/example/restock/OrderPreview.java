@@ -42,12 +42,12 @@ public class OrderPreview extends AppCompatActivity {
         setContentView(R.layout.activity_order_preview);
         DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
         Bundle data = getIntent().getExtras();
-        Log.d("order",""+data.getInt("order_id"));
+        Log.d("order","" + data.getInt("order_id"));
         order = new Order();
         //get order to review
         if(data != null)
-            order = dbHandler.getOrder(data.getInt("order_id"));
-        int[][] quantities = dbHandler.getItems(order.getOrderNumber());
+            order = dbHandler.getOrder(data.getInt("order_id"), data.getInt("user_id"));
+        int[][] quantities = dbHandler.getItems(order.getOrderNumber(), data.getInt("user_id"));
         int[] numberOfItemsPerCategory = new int[13];
 
         //find number of items in each category
@@ -112,6 +112,7 @@ public class OrderPreview extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), CreateOrder.class);
                 intent.putExtra("order_id", order.getOrderNumber());
+                intent.putExtra("user_id", data.getInt("user_id"));
                 startActivity(intent);
             }
         });
@@ -132,6 +133,7 @@ public class OrderPreview extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which){
                         Intent intent = new Intent(view.getContext(), CompletedOrder.class);
                         intent.putExtra("order_id", order.getOrderNumber());
+                        intent.putExtra("user_id", data.getInt("user_id"));
                         Log.d("db","    "+ order.getOrderNumber());
                         startActivity(intent);
                         finish();

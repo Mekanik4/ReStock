@@ -21,12 +21,14 @@ public class SignInActivity extends AppCompatActivity {
     private EditText email;
     private EditText password;
     private CheckBox signedIn;
+    Bundle data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        data = getIntent().getExtras();
         // Getting if there is a "Keep me signed in" user
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
         Profile user;

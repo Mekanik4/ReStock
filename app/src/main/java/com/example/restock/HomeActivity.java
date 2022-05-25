@@ -54,10 +54,11 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 DatabaseHandler dbHandler = new DatabaseHandler(HomeActivity.this, null, null, 1);
-                if(dbHandler.getNumberOfOrdersInDB() == 0)
+                if(dbHandler.getNumberOfOrdersInDB(data.getInt("user_id")) == 0)
                     Toast.makeText(HomeActivity.this, "There are no orders in the database.", Toast.LENGTH_SHORT).show();
                 else {
                     Intent intent = new Intent(view.getContext(), OrderHistory.class);
+                    intent.putExtra("user_id", data.getInt("user_id"));
                     startActivity(intent);
                 }
             }
@@ -68,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), CreateOrder.class);
+                intent.putExtra("user_id", user.getProfileID());
                 startActivity(intent);
             }
         });
@@ -98,6 +100,7 @@ public class HomeActivity extends AppCompatActivity {
                         user.setSignedIn(false);
                         dbHandler.updateProfile(user);
                         Intent intent = new Intent(view.getContext(), SignInActivity.class);
+//                        intent.putExtra("user_id", user.getProfileID());
                         Toast.makeText(HomeActivity.this,"Signed out successfully", Toast.LENGTH_LONG).show();
                         startActivity(intent);
                         finish();
@@ -123,7 +126,8 @@ public class HomeActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
-        user = dbHandler.getSignedInUser();
+//        user = dbHandler.getSignedInUser();
+        user = dbHandler.getUser(data.getInt("user_id"));
         ownerName.setText(user.getOwnership());
     }
 

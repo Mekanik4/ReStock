@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,13 @@ import java.io.File;
 public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAdapter.ViewHolder> {
 
     Order[] orders;
+    Bundle data;
     private final Context mContext;
 
-    public OrdersRecyclerAdapter(Order[] orders, Context context) {
+    public OrdersRecyclerAdapter(Order[] orders, Bundle data, Context mContext) {
         this.orders = orders;
-        this.mContext = context;
+        this.data = data;
+        this.mContext = mContext;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -67,6 +70,7 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), OrderPreview.class);
+                intent.putExtra("user_id", data.getInt("user_id"));
                 intent.putExtra("order_id", orders[position].getOrderNumber());
                 v.getContext().startActivity(intent);
             }
