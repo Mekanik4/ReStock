@@ -126,6 +126,7 @@ public class OrderPreview extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which){
                         Intent intent = new Intent(view.getContext(), CompletedOrder.class);
                         intent.putExtra("order_id", order.getOrderNumber());
+                        Log.d("db","    "+ order.getOrderNumber());
                         startActivity(intent);
                         finish();
                     }

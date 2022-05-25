@@ -20,11 +20,13 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="5dp"
             android:text="@string/item_name"
             android:textAlignment="viewStart"
             android:textColor="?android:textColorPrimary"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toStartOf="@+id/price"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 

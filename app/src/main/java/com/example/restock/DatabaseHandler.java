@@ -185,7 +185,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.moveToFirst();
     }
 
-    public int[][] getItems(int order_id){
+    public int[][] getItems(int id){
+        int user_id = getSignedInUser().getProfileID();
+        int order_id = (user_id * 1000000) + id;
 
         String query = "SELECT * FROM " + TABLE_ITEMS + " WHERE order_id = " + order_id ;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -193,6 +195,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         int[][] items = new int[cursor.getCount()][2];
         if(cursor.moveToFirst()){
+            Log.d("db","items in getItems is not null");
             cursor.moveToFirst();
             for(int i=0; i<cursor.getCount(); i++){
                 items[i][0] = cursor.getInt(1);
@@ -271,9 +274,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public boolean addOrder(Order order) {
+        int user_id = getSignedInUser().getProfileID();
+        int order_id = (user_id * 1000000) + order.getOrderNumber();
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("order_id", order.getOrderNumber());
+        values.put("order_id", order_id);
         values.put("date", order.getDate());
         values.put("total_price", order.getTotalPrice());
         values.put("document_path", order.getDocumentPath());
@@ -282,14 +287,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         long i = db.insert("orders", null , values);
         Log.d("orders", "       "+i);
         db.close();
-        addItems(order.getOrderNumber(), order.getItems());
+        addItems(order_id, order.getItems());
         return i != -1;
     }
 
     public void updateOrder(Order order) {
+        int user_id = getSignedInUser().getProfileID();
+        int order_id = (user_id * 1000000) + order.getOrderNumber();
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("order_id", order.getOrderNumber());
+        values.put("order_id", order_id);
         values.put("date", order.getDate().toString());
         values.put("total_price", order.getTotalPrice());
         values.put("document_path", order.getDocumentPath());
@@ -297,18 +304,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.d("orders",""+order.isCompleted());
         long i = db.update("orders", values , "order_id = "+order.getOrderNumber(), null);
         Log.d("db", ""+i);
-        updateItems(order.getOrderNumber(), order.getItems());
+        updateItems(order_id, order.getItems());
     }
 
     public Order getOrder(int id) {
         String query = "SELECT * FROM " + TABLE_ORDER+ " WHERE " +
                 "order_id" + " = ?";
+
+        int user_id = getSignedInUser().getProfileID();
+        int order_id = (user_id * 1000000) + id;
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(order_id)});
         Order order = new Order();
         if (cursor.moveToFirst()) {
             Log.d("db",String.valueOf(cursor.getCount()));
-            order.setOrderNumber(cursor.getInt(0));
+            order.setOrderNumber(cursor.getInt(0) - (user_id * 1000000));
             order.setDate(cursor.getString(1));
             order.setTotalPrice(Double.parseDouble(cursor.getString(2)));
             order.setDocumentPath(cursor.getString(3));
@@ -321,7 +331,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public Order[] getAllOrders() {
-        String query = "SELECT * FROM " + TABLE_ORDER + " ORDER BY order_id ASC";
+        int user_id = getSignedInUser().getProfileID();
+        String query = "SELECT * FROM " + TABLE_ORDER + " WHERE order_id LIKE '" + user_id + "%' ORDER BY order_id ASC";
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
@@ -329,11 +340,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             for(int i=0; i<cursor.getCount(); i++){
                 orders[i] = new Order();
-                orders[i].setOrderNumber(cursor.getInt(0));
+                orders[i].setOrderNumber(cursor.getInt(0) - (user_id * 1000000));
                 orders[i].setDate(cursor.getString(1));
                 orders[i].setTotalPrice(Double.parseDouble(cursor.getString(2)));
                 orders[i].setDocumentPath(cursor.getString(3));
-                Log.d("orders","      "+Boolean.parseBoolean(cursor.getString(4)));
+                Log.d("db","      "+(cursor.getInt(0)));
                 orders[i].setCompleted(Boolean.parseBoolean(cursor.getString(4)));
                 try{
                     cursor.moveToNext();
@@ -350,12 +361,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return orders;
     }
 
-    public void deleteOrder(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_ORDER, "'order_id' = ?",
-                new String[] { String.valueOf(id) });
-        db.close();
-    }
 
     // This function searches for an already signed in user and returns said user
     public Profile getSignedInUser(){
@@ -488,8 +493,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public int getNumberOfOrdersInDB() {
+        int user_id = getSignedInUser().getProfileID();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM orders", null);
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM orders WHERE order_id LIKE '" + user_id + "%'", null);
         cursor.moveToFirst();
         db.close();
         return cursor.getInt(0);
@@ -523,8 +529,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getInt(0);
     }
 
-    public ArrayList<Supplier> getOrderSuppliers(int orderId) {
+    public ArrayList<Supplier> getOrderSuppliers(int id) {
         ArrayList<Integer> productIds = new ArrayList<>();
+        int user_id = getSignedInUser().getProfileID();
+        int orderId = (user_id * 1000000) + id;
         SQLiteDatabase db = this.getWritableDatabase();
         //Getting product_ids from order's list of items and putting them in a list
         Cursor cursor = db.rawQuery("SELECT product_id FROM items WHERE order_id = " + String.valueOf(orderId), null);

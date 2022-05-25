@@ -81,11 +81,14 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Profile finalUser = dbHandler.getSignedIn(email.getText().toString(), password.getText().toString());
                 if(finalUser != null) {
+                    Intent intent = new Intent(view.getContext(), HomeActivity.class);
                     if(signedIn.isChecked()) {
                         finalUser.setSignedIn(signedIn.isChecked());
                         dbHandler.updateProfile(finalUser);
+                        intent.putExtra("check", true);
                     }
-                    Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                    else
+                        intent.putExtra("check",false);
                     intent.putExtra("user_id", finalUser.getProfileID());
                     startActivity(intent);
                     finish();

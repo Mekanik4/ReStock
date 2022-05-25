@@ -20,6 +20,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button signOut;
     private TextView ownerName;
     Profile user;
+    Bundle data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +29,16 @@ public class HomeActivity extends AppCompatActivity {
 
         // Getting extras from intent
         DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
-        Bundle data = getIntent().getExtras();
+        data = getIntent().getExtras();
         user = new Profile();
-        if(data != null)
-             user = dbHandler.getUser(data.getInt("user_id"));
+        if(data != null){
+            user = dbHandler.getUser(data.getInt("user_id"));
+            if(!data.getBoolean("check")){
+                user.setSignedIn(true);
+                dbHandler.updateProfile(user);
+            }
+        }
+
 
         newOrder = findViewById(R.id.newOrder);
         history = findViewById(R.id.history_button);
@@ -122,6 +129,11 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if(!data.getBoolean("check")){
+            DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
+            user.setSignedIn(false);
+            dbHandler.updateProfile(user);
+        }
         finishAffinity();
     }
 }

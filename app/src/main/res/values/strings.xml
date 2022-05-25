@@ -70,6 +70,7 @@
     <string name="sign_out">Sign Out</string>
     <string name="app_s_logo">App\'s logo</string>
     <string name="if_you_don_t_have_an_account_please_sign_up">If you don\'t have an account, please sign up.</string>
+    <string name="send_email">Send Email</string>
 
     <string-array name="sort_types">
         <item>Order No. Desc.</item>
