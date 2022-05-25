@@ -23,7 +23,7 @@ public class Order {
         this.totalPrice = totalPrice;
         this.items = items;
         this.documentPath = documentPath;
-        this.completed = false;
+        this.completed = completed;
     }
 
     public boolean isCompleted() {

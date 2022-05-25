@@ -13,11 +13,7 @@ import com.example.restock.objects.Order;
 import com.example.restock.objects.Profile;
 import com.example.restock.objects.Supplier;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -157,7 +153,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     if(findItem(order_id,items[i][j].getId())){
                         ContentValues values = new ContentValues();
                         values.put("quantity",items[i][j].getQuantity());
-                        long k = db.update("items", values , "order_id = ? and product_id = ?", new String[]{String.valueOf(order_id), String.valueOf(items[i][j].getId())});
+                        db.update("items", values , "order_id = ? and product_id = ?", new String[]{String.valueOf(order_id), String.valueOf(items[i][j].getId())});
                     }
                     else{
                         ContentValues values = new ContentValues();
@@ -293,7 +289,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("order_id", order_id);
-        values.put("date", order.getDate().toString());
+        values.put("date", order.getDate());
         values.put("total_price", order.getTotalPrice());
         values.put("document_path", order.getDocumentPath());
         values.put("completed", String.valueOf(order.isCompleted()));

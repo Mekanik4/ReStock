@@ -166,16 +166,12 @@ public class ItemsRecyclerAdapter extends RecyclerView.Adapter<ItemsRecyclerAdap
     public void onBindViewHolder(ItemsRecyclerAdapter.ViewHolder holder, int position) {
         holder.quantity.setText(String.valueOf(items[category][position].getQuantity()));
         holder.itemName.setText(items[category][position].getName());
-        holder.price.setText((items[category][position].getPrice().toString()).concat("\u20ac"));
+        holder.price.setText(String.valueOf(items[category][position].getPrice()).concat("\u20ac"));
     }
 
     @Override
     public int getItemCount() {
         return items[category].length;
-    }
-
-    public double getTotal(){
-        return total;
     }
 
     public void updateTotal(){

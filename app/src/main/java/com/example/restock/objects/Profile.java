@@ -32,13 +32,61 @@ public class Profile {
         this.signedIn = signedIn;
     }
 
-    public void setProfileID(int id) {this.profileID = id;}
-    public void setPhone(String phone) {this.phone = phone;}
-    public void setAfm(String afm) {this.afm = afm;}
-    public void setOwnership(String name) {this.ownership = name;}
-    public void setAddress(String street) {this.address = street;}
-    public void setEmail(String email) {this.email = email;}
-    public void setPassword(String password) {this.password = password;}
+    public int getProfileID() {
+        return profileID;
+    }
+
+    public void setProfileID(int profileID) {
+        this.profileID = profileID;
+    }
+
+    public String getOwnership() {
+        return ownership;
+    }
+
+    public void setOwnership(String ownership) {
+        this.ownership = ownership;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAfm() {
+        return afm;
+    }
+
+    public void setAfm(String afm) {
+        this.afm = afm;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public boolean isSignedIn() {
         return signedIn;
@@ -47,13 +95,4 @@ public class Profile {
     public void setSignedIn(boolean signedIn) {
         this.signedIn = signedIn;
     }
-
-    public int getProfileID() {return profileID;}
-    public String getPhone() {return phone;}
-    public String getAfm() {return afm;}
-    public String getOwnership() {return ownership;}
-    public String getAddress() {return address;}
-    public String getEmail() {return  email;}
-    public String getPassword() {return password;}
-
 }

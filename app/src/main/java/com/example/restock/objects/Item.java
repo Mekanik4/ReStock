@@ -15,12 +15,28 @@ public class Item {
         this.quantity = 0;
     }
 
-    public Item(String name, Double price, int quantity, int id, int category_id){
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
         this.price = price;
-        this.category_id = category_id;
-        this.quantity = quantity;
     }
 
     public int getCategory_id() {
@@ -31,36 +47,11 @@ public class Item {
         this.category_id = category_id;
     }
 
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
+    public int getQuantity() {
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
 }

@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
-import com.example.restock.objects.Profile;
 
 public class MainActivity extends AppCompatActivity {
 

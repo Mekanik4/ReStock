@@ -34,7 +34,6 @@ public class CategoriesRecyclerAdapter extends RecyclerView.Adapter<CategoriesRe
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    int position = getAdapterPosition();
                     notifyItemChanged(selectedPos);
                     selectedPos = getLayoutPosition();
                     notifyItemChanged(selectedPos);

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +71,7 @@ public class SuppliersAdapter extends RecyclerView.Adapter<SuppliersAdapter.View
                     body += "Thank you in advance,\n" + dbHandler.getUser(data.getInt("user_id")).getOwnership() + "\n" + dbHandler.getUser(data.getInt("user_id")).getAddress() + ", "
                             + dbHandler.getUser(data.getInt("user_id")).getPhone() + "\nTax reg. number: " +dbHandler.getUser(data.getInt("user_id")).getAfm();
                 Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"georgetsak1999@gmail.com"}); //replace 2nd filed with new String[]{suppliersNeeded.get(position).getEmail()}
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{suppliersNeeded.get(position).getEmail()}); //replace 2nd filed with new String[]{suppliersNeeded.get(position).getEmail()}
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Order submission for: " + dbHandler.getUser(data.getInt("user_id")).getOwnership());
                 intent.putExtra(Intent.EXTRA_TEXT, body);
                 intent.setType("message/rfc822");

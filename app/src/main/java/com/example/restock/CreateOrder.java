@@ -8,8 +8,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,7 +38,6 @@ public class CreateOrder extends AppCompatActivity {
     TextView total;
     TextView orderNumber;
     double totalPrice = 0;
-    private int selectedCategory = 0;
     Item[][] items;
     Order order;
     private boolean newOrderFlag = true;
