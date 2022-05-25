@@ -27,7 +27,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        // // Getting if there is a "Keep me signed in" user
+        // Getting if there is a "Keep me signed in" user
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
         Profile user;
         user = dbHandler.getSignedInUser();
@@ -87,8 +87,10 @@ public class SignInActivity extends AppCompatActivity {
                         dbHandler.updateProfile(finalUser);
                         intent.putExtra("check", true);
                     }
-                    else
+                    else{
                         intent.putExtra("check",false);
+                    }
+
                     intent.putExtra("user_id", finalUser.getProfileID());
                     startActivity(intent);
                     finish();

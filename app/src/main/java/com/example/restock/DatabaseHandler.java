@@ -285,7 +285,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("completed", String.valueOf(order.isCompleted()));
 
         long i = db.insert("orders", null , values);
-        Log.d("orders", "       "+i);
         db.close();
         addItems(order_id, order.getItems());
         return i != -1;
@@ -301,9 +300,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("total_price", order.getTotalPrice());
         values.put("document_path", order.getDocumentPath());
         values.put("completed", String.valueOf(order.isCompleted()));
-        Log.d("orders",""+order.isCompleted());
-        long i = db.update("orders", values , "order_id = "+order.getOrderNumber(), null);
-        Log.d("db", ""+i);
+
+        db.update("orders", values , "order_id = ?", new String[]{String.valueOf(order_id)});
+
         updateItems(order_id, order.getItems());
     }
 
@@ -317,7 +316,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(order_id)});
         Order order = new Order();
         if (cursor.moveToFirst()) {
-            Log.d("db",String.valueOf(cursor.getCount()));
             order.setOrderNumber(cursor.getInt(0) - (user_id * 1000000));
             order.setDate(cursor.getString(1));
             order.setTotalPrice(Double.parseDouble(cursor.getString(2)));
@@ -344,7 +342,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 orders[i].setDate(cursor.getString(1));
                 orders[i].setTotalPrice(Double.parseDouble(cursor.getString(2)));
                 orders[i].setDocumentPath(cursor.getString(3));
-                Log.d("db","      "+(cursor.getInt(0)));
                 orders[i].setCompleted(Boolean.parseBoolean(cursor.getString(4)));
                 try{
                     cursor.moveToNext();
@@ -352,7 +349,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     cursor.close();
                 }
             }
-
         }
         else {
             orders = null;
@@ -471,7 +467,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("signedIn", String.valueOf(profile.isSignedIn()));
 
         db.update("user", values, "user_id = ?", new String[]{String.valueOf(profile.getProfileID())});
-        Log.d("db", "update");
         db.close();
     }
 

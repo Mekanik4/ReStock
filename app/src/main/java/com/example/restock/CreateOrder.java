@@ -57,6 +57,7 @@ public class CreateOrder extends AppCompatActivity {
         categoriesLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoriesRecyclerView.setLayoutManager(categoriesLayoutManager);
 
+        //Categories to display
         String[] categories = {"Soft Drinks", "Alcoholic Drinks", "Energy Drinks", "Juices", "Waters", "Snacks", "Sandwich", "Chocolates", "Biscuits", "Croissants", "Ice Cream", "Cigars & Tobacco", "Tobacco Essentials"};
 
         //Set my Adapter for the RecyclerView
@@ -76,10 +77,12 @@ public class CreateOrder extends AppCompatActivity {
         save = findViewById(R.id.save_order);
         complete = findViewById(R.id.complete_order);
 
+        //Fill items array with products
         items = new Item[13][];
         for(int i=0; i<categories.length; i++)
             items[i] = dbHandler.getProducts(categories[i]);
 
+        //Old order for edit
         Bundle data = getIntent().getExtras();
         if(data != null){
             newOrderFlag = false;
@@ -91,6 +94,7 @@ public class CreateOrder extends AppCompatActivity {
             }
             orderNumber.setText(String.valueOf(order.getOrderNumber()));
         }
+        //New order
         else{
             Order[] orders = dbHandler.getAllOrders();
             int lastId = 0;
@@ -107,10 +111,12 @@ public class CreateOrder extends AppCompatActivity {
                 Date date = new Date();
                 String today = dateFormat.format(date);
                 Order newOrder = new Order(Integer.parseInt(orderNumber.getText().toString()), today, totalPrice, items, "",false);
+                //add new order in database
                 if(newOrderFlag){
                     newOrderFlag = false;
                     dbHandler.addOrder(newOrder);
                 }
+                //update order
                 else{
                     Log.d("orders",String.valueOf(newOrder.getOrderNumber()));
                     dbHandler.updateOrder(newOrder);
@@ -129,15 +135,17 @@ public class CreateOrder extends AppCompatActivity {
                     Date date = new Date();
                     String today = dateFormat.format(date);
                     Order newOrder = new Order(Integer.parseInt(orderNumber.getText().toString()), today, totalPrice, items, "",false);
+                    //create new order in database
                     if(order == null){
                         intent.putExtra("order_id",newOrder.getOrderNumber());
                         if(dbHandler.addOrder(newOrder))
-                            Log.d("db", "mpikeeee");
+                            Log.d("db", "added new order");
                         else
-                            Log.d("db", "den mpikeeee");
+                            Log.d("db", "error adding new order");
                     }
+                    //update order
                     else if(!newOrderFlag){
-                        Log.d("orders","trxei");
+                        Log.d("orders","order updated on complete clicked");
                         dbHandler.updateOrder(newOrder);
                         intent.putExtra("order_id",order.getOrderNumber());
                     }
@@ -160,6 +168,7 @@ public class CreateOrder extends AppCompatActivity {
     }
 
     public void setSelectedCategory(int c){
+        //change "page", choose category
         itemsAdapter = new ItemsRecyclerAdapter(items, c, totalPrice, this);
         itemsRecyclerView.setAdapter(itemsAdapter);
     }
@@ -181,6 +190,7 @@ public class CreateOrder extends AppCompatActivity {
         return item;
     }
 
+    //check if order is empty
     public boolean itemsCheck(Item[][] items){
         for(int i=0; i<items.length; i++){
             for(int j=0; j<items[i].length; j++){

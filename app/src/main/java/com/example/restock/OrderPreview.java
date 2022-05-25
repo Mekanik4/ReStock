@@ -44,14 +44,19 @@ public class OrderPreview extends AppCompatActivity {
         Bundle data = getIntent().getExtras();
         Log.d("order",""+data.getInt("order_id"));
         order = new Order();
+        //get order to review
         if(data != null)
             order = dbHandler.getOrder(data.getInt("order_id"));
         int[][] quantities = dbHandler.getItems(order.getOrderNumber());
         int[] numberOfItemsPerCategory = new int[13];
+
+        //find number of items in each category
         for(int j=0; j<quantities.length; j++){
             Item item = dbHandler.findProduct(quantities[j][0]);
             numberOfItemsPerCategory[item.getCategory_id()] += 1;
         }
+
+        //create items
         items = new Item[13][];
         for(int k=0; k<numberOfItemsPerCategory.length; k++){
             items[k] = new Item[numberOfItemsPerCategory[k]];
@@ -59,6 +64,7 @@ public class OrderPreview extends AppCompatActivity {
                 items[k][p] = new Item();
         }
 
+        //update items according to database
         for(int i=0; i<quantities.length; i++){
             Item item = dbHandler.findProduct(quantities[i][0]);
             item.setQuantity(quantities[i][1]);

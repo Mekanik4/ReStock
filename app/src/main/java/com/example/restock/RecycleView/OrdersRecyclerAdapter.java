@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
@@ -82,7 +83,7 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
                 mContext.startActivity(intent);
             }
         });
-
+        Log.d("db","order status "+orders[position].isCompleted());
         if(orders[position].isCompleted()) {
             holder.status.setText("Completed");
             holder.editOrder.setVisibility(View.GONE);

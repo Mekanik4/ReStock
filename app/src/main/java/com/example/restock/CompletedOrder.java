@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -162,7 +163,8 @@ public class CompletedOrder extends AppCompatActivity {
         //create object of Document class
         Document mDoc = new Document();
         //pdf file name
-        String mFileName = "Order no. : " + String.valueOf(order.getOrderNumber());
+        Log.d("db","order no : "+ order.getOrderNumber());
+        String mFileName = "Order no. : " + (dbHandler.getSignedInUser().getProfileID() * 1000000+ (order.getOrderNumber()));
         //pdf file path
         String mFilePath = this.getExternalFilesDir("Orders") + "/" + mFileName + ".pdf";
 
