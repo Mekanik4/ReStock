@@ -17,7 +17,6 @@ import com.example.restock.objects.Profile;
 
 public class SignInActivity extends AppCompatActivity {
     private Button signIn;
-    private Button signUp;
     private EditText email;
     private EditText password;
     private CheckBox signedIn;
@@ -41,14 +40,12 @@ public class SignInActivity extends AppCompatActivity {
         }
 
         email = findViewById(R.id.editTextTextEmailAddress);
-
         password = findViewById(R.id.editTextTextPassword);
-
         signIn = findViewById(R.id.signIn_button);
-
-        signUp = findViewById(R.id.signUp_button);
-
+        Button signUp = findViewById(R.id.signUp_button);
         signedIn = findViewById(R.id.signedIn_signIn);
+
+        signIn.setEnabled(false);
 
         email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -66,14 +63,11 @@ public class SignInActivity extends AppCompatActivity {
 
                 boolean valid = android.util.Patterns.EMAIL_ADDRESS.
                         matcher(email.getText().toString()).matches();
-                if (email.getText().toString().equals(null)) {
-                    email.setError("Invalid Email Address");
-                    signIn.setEnabled(false);
-                } else if (!valid) {
-                    email.setError("Invalid Email Address");
-                    signIn.setEnabled(false);
+                if (valid) {
+                    signIn.setEnabled(!password.getText().toString().equals("") && !email.getText().toString().equals(""));
                 } else {
-                    signIn.setEnabled(true);
+                    email.setError("Invalid Email Address");
+                    signIn.setEnabled(false);
                 }
             }
         });
