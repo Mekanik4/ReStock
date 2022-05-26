@@ -87,10 +87,6 @@ public class SignInActivity extends AppCompatActivity {
                     if(signedIn.isChecked()) {
                         finalUser.setSignedIn(signedIn.isChecked());
                         dbHandler.updateProfile(finalUser);
-                        intent.putExtra("check", true);
-                    }
-                    else{
-                        intent.putExtra("check",false);
                     }
 
                     intent.putExtra("user_id", finalUser.getProfileID());

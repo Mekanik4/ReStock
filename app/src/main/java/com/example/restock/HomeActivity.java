@@ -33,10 +33,6 @@ public class HomeActivity extends AppCompatActivity {
         user = new Profile();
         if(data != null){
             user = dbHandler.getUser(data.getInt("user_id"));
-            if(!data.getBoolean("check")){
-                user.setSignedIn(true);
-                dbHandler.updateProfile(user);
-            }
         }
 
 
@@ -133,11 +129,6 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(!data.getBoolean("check")){
-            DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
-            user.setSignedIn(false);
-            dbHandler.updateProfile(user);
-        }
         finishAffinity();
     }
 }

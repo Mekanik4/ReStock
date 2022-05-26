@@ -234,7 +234,6 @@ public class SignUpActivity extends AppCompatActivity{
                             phone.getText().toString(), afm.getText().toString(), pass.getText().toString(), signedIn.isChecked());
                     if (dbHandler.addProfile(user)) {
                         Intent intent = new Intent(view.getContext(), HomeActivity.class);
-                        intent.putExtra("check", signedIn.isChecked());
                         intent.putExtra("user_id", user.getProfileID());
                         startActivity(intent);
                         finish();
