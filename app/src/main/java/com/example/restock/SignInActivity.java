@@ -55,7 +55,6 @@ public class SignInActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -64,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
                 boolean valid = android.util.Patterns.EMAIL_ADDRESS.
                         matcher(email.getText().toString()).matches();
                 if (valid) {
-                    signIn.setEnabled(!password.getText().toString().equals("") && !email.getText().toString().equals(""));
+                    signIn.setEnabled(true);
                 } else {
                     email.setError("Invalid Email Address");
                     signIn.setEnabled(false);
