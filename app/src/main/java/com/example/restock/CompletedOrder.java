@@ -2,6 +2,7 @@ package com.example.restock;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -108,7 +109,7 @@ public class CompletedOrder extends AppCompatActivity {
                             PackageManager.PERMISSION_DENIED){
                         //permission was not granted, request it
                         String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                        requestPermissions(permissions, STORAGE_CODE);
+                        ActivityCompat.requestPermissions(CompletedOrder.this, permissions, STORAGE_CODE);
                     }
                     else {
                         //permission already granted, call save pdf method
@@ -123,7 +124,6 @@ public class CompletedOrder extends AppCompatActivity {
                         dbHandler.updateOrder(order, data.getInt("user_id"));
                         Intent intent = new Intent(v.getContext(), HomeActivity.class);
                         intent.putExtra("user_id", data.getInt("user_id"));
-//                        intent.putExtra("user_id",dbHandler.getSignedInUser().getProfileID());
                         startActivity(intent);
                     }
                 });
@@ -166,7 +166,6 @@ public class CompletedOrder extends AppCompatActivity {
         Document mDoc = new Document();
         //pdf file name
         Log.d("db","order no : "+ order.getOrderNumber());
-//        String mFileName = "Order no. : " + (dbHandler.getSignedInUser().getProfileID() * 1000000+ (order.getOrderNumber()));
         String mFileName = "Order no. : " + (data.getInt("user_id") * 1000000 + order.getOrderNumber());
         //pdf file path
         String mFilePath = this.getExternalFilesDir("Orders") + "/" + mFileName + ".pdf";
