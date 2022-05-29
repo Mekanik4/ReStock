@@ -20,11 +20,15 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
             //system OS >= Marshmallow(6.0), check if permission is enabled or not
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                    PackageManager.PERMISSION_DENIED){
+                    PackageManager.PERMISSION_DENIED)
                 //permission was not granted, request it
-                String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                ActivityCompat.requestPermissions(this, permissions, STORAGE_CODE);
-            }
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_CODE);
+
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_CODE);
+
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE}, STORAGE_CODE);
         }
 
         Intent intent = new Intent(this, SignInActivity.class);
