@@ -13,6 +13,9 @@ import android.widget.EditText;
 
 import com.example.restock.objects.Profile;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class EditProfileActivity extends AppCompatActivity{
     private EditText afm;
     private EditText phone;
@@ -65,18 +68,34 @@ public class EditProfileActivity extends AppCompatActivity{
 
             @Override
             public void afterTextChanged(Editable editable) {
-                int length = phone.getText().length();
                 String number = phone.getText().toString();
 
-                if(length < 10) {
-                    phone.setError("Invalid phone number");
-                    save.setEnabled(false);
-                } else if ((number.matches("(2310|2311|69).*"))){
-                    save.setEnabled(true);
+                if (phone.getText().length() == 10){
+                    if(validateNumber(number)) {
+                        save.setEnabled(!afm.getText().toString().equals("") && !ownership.getText().toString().equals("")
+                                && !phone.getText().toString().equals("") && !address.getText().toString().equals("")
+                                && !email.getText().toString().equals(""));
+                    } else {
+                        phone.setError("Invalid phone number");
+                    }
                 } else {
                     phone.setError("Invalid phone number");
                     save.setEnabled(false);
                 }
+            }
+
+            boolean validateNumber(String input) {
+                Matcher matcher;
+                if (input.matches("(2).*")) {
+                    Pattern lineNumber = Pattern.compile("[2][1-8][0-9]{8}");
+                    matcher = lineNumber.matcher(input);
+                } else if (input.matches("(6).*")) {
+                    Pattern mobiles = Pattern.compile("[6][9][0-1, 3-9][0-9]{7}");
+                    matcher = mobiles.matcher(input);
+                } else {
+                    return false;
+                }
+                return matcher.matches();
             }
         });
 
@@ -95,11 +114,13 @@ public class EditProfileActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable editable) {
                 int length = afm.getText().length();
-                if (length < 9){
+                if (length != 9){
                     afm.setError("Invalid VAT number");
                     save.setEnabled(false);
                 } else {
-                    save.setEnabled(true);
+                    save.setEnabled(!afm.getText().toString().equals("") && !ownership.getText().toString().equals("")
+                            && !phone.getText().toString().equals("") && !address.getText().toString().equals("")
+                            && !email.getText().toString().equals(""));
                 }
             }
         });
@@ -121,14 +142,14 @@ public class EditProfileActivity extends AppCompatActivity{
 
                 boolean valid = android.util.Patterns.EMAIL_ADDRESS.
                         matcher(email.getText().toString()).matches();
-                if (email.getText().toString().equals(null)) {
-                    email.setError("Invalid Email Address");
-                    save.setEnabled(false);
-                } else if (!valid) {
-                    email.setError("Invalid Email Address");
-                    save.setEnabled(false);
+                if (valid) {
+                    save.setEnabled(!afm.getText().toString().equals("") && !ownership.getText().toString().equals("")
+                            && !phone.getText().toString().equals("") && !address.getText().toString().equals("")
+                            && !email.getText().toString().equals(""));
+
                 } else {
-                    save.setEnabled(true);
+                    email.setError("Invalid Email Address");
+                    save.setEnabled(false);
                 }
             }
         });
@@ -151,7 +172,9 @@ public class EditProfileActivity extends AppCompatActivity{
                     ownership.setError("Invalid name");
                     save.setEnabled(false);
                 } else {
-                    save.setEnabled(true);
+                    save.setEnabled(!afm.getText().toString().equals("") && !ownership.getText().toString().equals("")
+                            && !phone.getText().toString().equals("") && !address.getText().toString().equals("")
+                            && !email.getText().toString().equals(""));
                 }
             }
         });
@@ -174,7 +197,9 @@ public class EditProfileActivity extends AppCompatActivity{
                     address.setError("Invalid address");
                     save.setEnabled(false);
                 } else {
-                    save.setEnabled(true);
+                    save.setEnabled(!afm.getText().toString().equals("") && !ownership.getText().toString().equals("")
+                            && !phone.getText().toString().equals("") && !address.getText().toString().equals("")
+                            && !email.getText().toString().equals(""));
                 }
             }
         });

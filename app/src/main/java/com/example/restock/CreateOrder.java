@@ -118,7 +118,7 @@ public class CreateOrder extends AppCompatActivity {
                     Log.d("orders",String.valueOf(newOrder.getOrderNumber()));
                     dbHandler.updateOrder(newOrder, data.getInt("user_id"));
                 }
-
+                Toast.makeText(getApplicationContext(), "Order successfully saved.", Toast.LENGTH_SHORT).show();
             }
         });
 
