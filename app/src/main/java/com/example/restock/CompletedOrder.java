@@ -2,16 +2,13 @@ package com.example.restock;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +27,6 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class CompletedOrder extends AppCompatActivity {
-    private static final int STORAGE_CODE = 1000;
     Button finishOrderButton;
     RecyclerView suppliersRecyclerView;
     LinearLayoutManager linearLayoutManager;
@@ -39,6 +35,7 @@ public class CompletedOrder extends AppCompatActivity {
 
     private ArrayList<Supplier> suppliersNeeded;
     private Order order;
+    private static final int STORAGE_CODE = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,24 +99,7 @@ public class CompletedOrder extends AppCompatActivity {
                 builder.setPositiveButton("I've sent them!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which){
-                                        //we need to handle runtime permission for devices with marshmallow and above
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-                    //system OS >= Marshmallow(6.0), check if permission is enabled or not
-                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                            PackageManager.PERMISSION_DENIED){
-                        //permission was not granted, request it
-                        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                        ActivityCompat.requestPermissions(CompletedOrder.this, permissions, STORAGE_CODE);
-                    }
-                    else {
-                        //permission already granted, call save pdf method
                         savePdf();
-                    }
-                }
-                else {
-                    //system OS < Marshmallow, call save pdf method
-                    savePdf();
-                }
                         order.setCompleted(true);
                         dbHandler.updateOrder(order, data.getInt("user_id"));
                         Intent intent = new Intent(v.getContext(), HomeActivity.class);
@@ -159,6 +139,7 @@ public class CompletedOrder extends AppCompatActivity {
             }
         }
     }
+
 
     private void savePdf() {
         DatabaseHandler dbHandler = new DatabaseHandler(this, null, null, 1);
