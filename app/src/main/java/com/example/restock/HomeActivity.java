@@ -122,7 +122,6 @@ public class HomeActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         DatabaseHandler dbHandler = new DatabaseHandler(this,null,null,1);
-//        user = dbHandler.getSignedInUser();
         user = dbHandler.getUser(data.getInt("user_id"));
         ownerName.setText(user.getOwnership());
     }
