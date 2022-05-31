@@ -477,14 +477,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    public int getNumberOfOrdersInDB(int user_id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM orders WHERE order_id LIKE '" + user_id + "%'", null);
-        cursor.moveToFirst();
-        db.close();
-        return cursor.getInt(0);
-    }
-
     public Supplier getSupplierFromCategoryId(int categoryId) {
         Supplier supplier;
         SQLiteDatabase db = this.getWritableDatabase();
